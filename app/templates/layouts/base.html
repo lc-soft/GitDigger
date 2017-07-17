@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  {% block head %}
+  <title>{% block title %}{% endblock %} - codewatch</title>
+  {% endblock %}
+</head>
+<body>
+  <div id="content">{% block content %}{% endblock %}</div>
+  <div id="footer">
+    {% block footer %}
+    &copy; Copyright 2017 by <a href="https://lc-soft.io">lc-soft</a>.
+    {% endblock %}
+  </div>
+</body>
+</html>
