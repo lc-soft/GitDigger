@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 def Database():
     path = os.path.abspath(os.path.join(__file__, '..', '..'))
@@ -12,6 +13,10 @@ def Database():
     return db
 
 app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 db = Database()
 migrate = Migrate(app, db, directory='db/migrate')
 
