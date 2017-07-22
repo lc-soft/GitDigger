@@ -109,7 +109,8 @@ def settings():
 @users.route('/settings/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    form = ProfileForm(request.form)
+    user = current_user
+    form = ProfileForm(request.form, name=user.name, bio=user.bio)
     if request.method == 'POST' and form.validate_on_submit():
         current_user.name = form.name.data
         current_user.bio = form.bio.data
