@@ -1,6 +1,7 @@
 *.py[cod]
-config/github.py
+config/*.py
 db/database.db
+db/migrate/versions
 
 # C extensions
 *.so
@@ -20,6 +21,9 @@ develop-eggs
 lib
 lib64
 __pycache__
+
+# Private key
+*.pem
 
 # Installer logs
 pip-log.txt
