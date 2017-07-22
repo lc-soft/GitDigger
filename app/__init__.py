@@ -1,23 +1,19 @@
-import os
+import config
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
-def Database():
-    path = os.path.abspath(os.path.join(__file__, '..', '..'))
-    path = os.path.join(path, 'db', 'database.db')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + path
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db = SQLAlchemy(app)
-    return db
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
-
+config.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-db = Database()
+csrf = CSRFProtect()
+csrf.init_app(app)
+
+db = SQLAlchemy(app)
 migrate = Migrate(app, db, directory='db/migrate')
 
 from app import models

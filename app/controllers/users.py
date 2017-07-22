@@ -1,61 +1,122 @@
 from config import github
-from app import app, login_manager
 from app.models.user import User
-import flask, flask_login, flask_github
+from app import app, db, login_manager
+from flask import jsonify, request, redirect, flash
+from flask import Blueprint, url_for, render_template
+from wtforms import BooleanField, TextField, PasswordField, validators
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import logout_user, login_required, login_user
+from flask_wtf import FlaskForm as Form
+import flask_github
 
-users = flask.Blueprint('users', __name__)
-
-# setup github-flask
-app.config['GITHUB_CLIENT_ID'] = github.config['id']
-app.config['GITHUB_CLIENT_SECRET'] = github.config['secret']
+users = Blueprint('users', __name__)
 github = flask_github.GitHub(app)
+login_manager.login_view = 'users.login'
 
-@users.route('/<string:username>', methods=['GET'])
-def get(username):
-    user = User.query.filter_by(username=username).first()
-    if user:
-        return flask.jsonify(status=0, user=user)
-    return flask.jsonify(status=404)
+class RegistrationForm(Form):
+    username = TextField('Username', [validators.Length(min=4, max=32)])
+    email = TextField('Email Address', [validators.Length(min=6, max=32)])
+    password = PasswordField('New Password', [
+        validators.Required(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
+    def validate(self):
+        if not Form.validate(self):
+            return False
+        if User.query.filter_by(username=self.username.data).first():
+            self.username.errors.append('Username is already taken')
+            return False
+        if User.query.filter_by(username=self.email.data).first():
+            self.email.errors.append('Email is already taken')
+            return False
+        return True
+
+class LoginForm(Form):
+    user = None
+    login = TextField('Username or email address', [
+        validators.Required(),
+        validators.Length(min=4, max=32)
+    ])
+    password = PasswordField('Password', [
+        validators.Required()
+    ])
+    def validate(self):
+        print 'validate'
+        if not Form.validate(self):
+            print 'validate False'
+            return False
+        login = self.login.data
+        if login[1:-1].find('@') >= 0:
+            user = User.query.filter_by(email=login).first()
+            login_type = 'email'
+        else:
+            user = User.query.filter_by(username=login).first()
+            login_type = 'username'
+        print user, login_type
+        if user is None:
+            self.login.errors.append('Unknown %s' % login_type)
+            return False
+        if not check_password_hash(user.password, self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+        self.user = user
+        return True
 
 @users.route('/join', methods=['GET', 'POST'])
 def join():
-    if flask.request.method == 'GET':
-        return flask.render_template('join.html')
-    return 'join'
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        pw_hash = generate_password_hash(form.password.data)
+        user = User(form.username.data, form.email.data, pw_hash)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for registering')
+        return redirect(url_for('users.login'))
+    return render_template('join.html', form=form)
 
-@users.route('/login')
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)
+
+@users.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@users.route('/login', methods=['GET', 'POST'])
 def login():
-    if flask.request.method == 'GET':
-        return flask.render_template('login.html')
-    user = flask.request.form.get('user')
-    login = user['login']
-    password = user['password']
-    if login[1:-1].find('@') >= 0:
-        user = User.query.filter_by(email=login, password=password).first()
-    else:
-        user = User.query.filter_by(username=login, password=password).first()
-    if user is None:
-        return flask.redirect(flask.url_for('users.login'))
-    flask_login.login_user(user)
-    flask.flash('Logged in successfully.')
-    next = flask.request.args.get('next')
-    return flask.redirect(next or flask.url_for('home.dashboard'))
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate_on_submit():
+        login_user(form.user)
+        flash("Logged in successfully")
+        next = request.args.get('next')
+        return redirect(next or url_for('index'))
+    return render_template("login.html", form=form)
 
 @users.route('/auth/github')
 def auth_github():
     return github.authorize()
 
-@users.route('/user')
+@users.route('/api/auth/github')
+@github.authorized_handler
+def authorized(access_token):
+    next_url = request.args.get('next') or url_for('index')
+    if access_token is None:
+        return redirect(next_url)
+    print access_token
+    return redirect(next_url)
+
+@users.route('/api/user')
 def user():
     return str(github.get('user'))
 
-@users.route('/api/authorizations/github')
-@github.authorized_handler
-def authorized(access_token):
-    next_url = flask.request.args.get('next') or flask.url_for('index')
-    if access_token is None:
-        return flask.redirect(next_url)
-    print access_token
-    return flask.redirect(next_url)
+@users.route('/api/users/<string:username>', methods=['GET'])
+def get(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return jsonify(status=0, user=user)
+    return jsonify(status=404)
 
 app.register_blueprint(users)

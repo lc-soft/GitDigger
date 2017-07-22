@@ -2,10 +2,19 @@
 <html lang="zh-cn">
 <head>
   {% block head %}
-  <title>{% block title %}{% endblock %} - codewatch</title>
+  <title>{% block title %}{% endblock %} - GitDigger</title>
   {% endblock %}
 </head>
 <body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
   <div id="content">{% block content %}{% endblock %}</div>
   <div id="footer">
     {% block footer %}

@@ -2,5 +2,15 @@
 {% block title %}join{% endblock %}
 {% block content %}
   <h1>Sign in</h1>
+  {% from "_formhelpers.html" import render_field %}
+  <form method="post" action="/login">
+    {{ form.csrf_token }} 
+    <dl>
+      {{ render_field(form.login) }}
+      {{ render_field(form.password) }}
+    </dl>
+    <p><input type="submit" value="Sign in"></p>
+  </form>
+  <p>New to GitDigger? <a href="{{ url_for("users.join") }}">Create an account</a>.</p>
   <a href="{{ url_for("users.auth_github") }}">Sign in with GitHub</a>
 {% endblock %}

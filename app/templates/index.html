@@ -2,7 +2,12 @@
 {% block title %}GitDigger{% endblock %}
 {% block content %}
   <h1>GitDigger</h1>
-  <a href="{{ url_for("users.login") }}">Sign in</a>
-    or 
-  <a href="{{ url_for("users.join") }}">Sign up</a>
+  {% if current_user.is_authenticated %}
+    Hi {{ current_user.name }}!
+    <a href="{{ url_for('users.logout') }}">Sign out</a>
+  {% else %}
+    <a href="{{ url_for('users.login') }}">Sign in</a>
+      or 
+    <a href="{{ url_for('users.join') }}">Sign up</a>
+  {% endif %}
 {% endblock %}

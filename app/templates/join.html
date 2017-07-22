@@ -1,5 +1,16 @@
 {% extends "layouts/base.html" %}
-{% block title %}join{% endblock %}
+{% block title %}Join{% endblock %}
 {% block content %}
   <h1>Join</h1>
+  {% from "_formhelpers.html" import render_field %}
+  <form method="post" action="/join">
+    {{ form.csrf_token }} 
+    <dl>
+      {{ render_field(form.username) }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.confirm) }}
+    </dl>
+    <p><input type="submit" value="Sign up for GitDigger"></p>
+  </form>
 {% endblock %}
