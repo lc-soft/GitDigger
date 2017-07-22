@@ -5,6 +5,11 @@
   {% if current_user.is_authenticated %}
     Hi {{ current_user.name }}!
     <a href="{{ url_for('users.logout') }}">Sign out</a>
+    <ul>
+      <li>
+        <a href="{{ url_for('users.settings') }}">Settings</a>
+      </li>
+    </ul>
   {% else %}
     <a href="{{ url_for('users.login') }}">Sign in</a>
       or 

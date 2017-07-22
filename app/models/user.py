@@ -7,6 +7,7 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
+    bio = db.Column(db.String(180))
     github_token = db.Column(db.String(300), unique=True)
     password = db.Column(db.String(300))
     created_at = db.Column(db.DateTime)

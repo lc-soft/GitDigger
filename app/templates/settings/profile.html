@@ -1,0 +1,14 @@
+{% extends "layouts/settings.html" %}
+{% block title %}Your Profile{% endblock %}
+{% block settings_content %}
+  <h1>Public profile</h1>
+  {% from "_formhelpers.html" import render_field %}
+  <form method="post" action="{{ url_for('users.profile') }}">
+    {{ form.csrf_token }} 
+    <dl>
+      {{ render_field(form.name) }}
+      {{ render_field(form.bio) }}
+    </dl>
+    <p><input type="submit" value="Update profile"></p>
+  </form>
+{% endblock %}

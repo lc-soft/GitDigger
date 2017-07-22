@@ -1,0 +1,8 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+  <nav>
+    <h3>Personal settings</h3>
+    <a href="{{ url_for('users.profile') }}">Profile</a>
+  </nav>
+  {% block settings_content %}{% endblock %}
+{% endblock %}

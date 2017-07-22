@@ -3,9 +3,9 @@ from app.models.user import User
 from app import app, db, login_manager
 from flask import jsonify, request, redirect, flash
 from flask import Blueprint, url_for, render_template
-from wtforms import BooleanField, TextField, PasswordField, validators
+from wtforms import TextField, TextAreaField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import logout_user, login_required, login_user
+from flask_login import logout_user, login_required, login_user, current_user
 from flask_wtf import FlaskForm as Form
 import flask_github
 
@@ -21,6 +21,7 @@ class RegistrationForm(Form):
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
+
     def validate(self):
         if not Form.validate(self):
             return False
@@ -41,6 +42,7 @@ class LoginForm(Form):
     password = PasswordField('Password', [
         validators.Required()
     ])
+
     def validate(self):
         print 'validate'
         if not Form.validate(self):
@@ -63,6 +65,10 @@ class LoginForm(Form):
         self.user = user
         return True
 
+class ProfileForm(Form):
+    name = TextField('Name', [validators.Length(max=32)])
+    bio = TextAreaField('Bio', [validators.Length(max=160)])
+
 @users.route('/join', methods=['GET', 'POST'])
 def join():
     form = RegistrationForm(request.form)
@@ -77,7 +83,7 @@ def join():
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.query.get(userid)
+    return User.query.get(int(userid))
 
 @users.route('/logout')
 @login_required
@@ -90,10 +96,26 @@ def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         login_user(form.user)
-        flash("Logged in successfully")
+        flash('Logged in successfully')
         next = request.args.get('next')
         return redirect(next or url_for('index'))
-    return render_template("login.html", form=form)
+    return render_template('login.html', form=form)
+
+@users.route('/settings')
+@login_required
+def settings():
+    return redirect(url_for('users.profile'))
+
+@users.route('/settings/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    form = ProfileForm(request.form)
+    if request.method == 'POST' and form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        flash('Profile updated successfully')
+    return render_template('settings/profile.html', form=form)
 
 @users.route('/auth/github')
 def auth_github():
