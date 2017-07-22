@@ -118,6 +118,21 @@ def profile():
         flash('Profile updated successfully')
     return render_template('settings/profile.html', form=form)
 
+@users.route('/settings/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    return render_template('settings/account.html')
+
+@users.route('/settings/repositories', methods=['GET', 'POST'])
+@login_required
+def repositories():
+    return render_template('settings/repositories.html')
+
+@users.route('/settings/github', methods=['GET', 'POST'])
+@login_required
+def user_github():
+    return render_template('settings/github.html')
+
 @users.route('/auth/github')
 def auth_github():
     return github.authorize()

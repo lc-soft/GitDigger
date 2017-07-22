@@ -3,6 +3,9 @@
   <nav>
     <h3>Personal settings</h3>
     <a href="{{ url_for('users.profile') }}">Profile</a>
+    <a href="{{ url_for('users.account') }}">Account</a>
+    <a href="{{ url_for('users.user_github') }}">GitHub</a>
+    <a href="{{ url_for('users.repositories') }}">Repositories</a>
   </nav>
   {% block settings_content %}{% endblock %}
 {% endblock %}
