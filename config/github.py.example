@@ -1,0 +1,4 @@
+config = {
+    'id': 'GitHub Client ID',
+    'secret': 'GitHub Client secret'
+}
