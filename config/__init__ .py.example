@@ -8,5 +8,7 @@ def init_app(app):
     # setup secret key 
     app.config['SECRET_KEY'] = 'secret key'
     # setup github-flask
+    app.config['GITHUB_APP_ID'] = github.config['app_id']
+    app.config['GITHUB_APP_NAME'] = github.config['app_name']
     app.config['GITHUB_CLIENT_ID'] = github.config['id']
     app.config['GITHUB_CLIENT_SECRET'] = github.config['secret']

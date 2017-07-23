@@ -13,6 +13,12 @@ users = Blueprint('users', __name__)
 github = flask_github.GitHub(app)
 login_manager.login_view = 'users.login'
 
+def github_get(url):
+    headers = {
+        'Accept': 'application/vnd.github.machine-man-preview+json'
+    }
+    return github.get(url, headers=headers)
+
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=32)])
     email = TextField('Email Address', [validators.Length(min=6, max=32)])
@@ -128,22 +134,32 @@ def account():
 def repositories():
     return render_template('settings/repositories.html')
 
+def get_github_integration():
+    try:
+        data = github_get('user/installations')
+    except Exception as e:
+        return None
+    if data['total_count'] < 1:
+        return None
+    installations = data.get('integration_installations')
+    if installations is None:
+        return None
+    app_id = app.config['GITHUB_APP_ID']
+    for installation in installations:
+        if installation['app_id'] == app_id:
+            return installation
+    return None
+
 @users.route('/settings/github', methods=['GET', 'POST'])
 @login_required
 def user_github():
     account = None
-    integration = None
-    app_id = app.config['GITHUB_APP_ID']
     if request.method == 'POST':
         action = request.form.get('action')
-        print action, action == 'unlink'
         if action == 'unlink':
             current_user.github_token = ''
             db.session.commit()
-    try:
-        integration = github.get('app/installations/%s', app_id)
-    except Exception as e:
-        pass
+    integration = get_github_integration()
     if current_user.github_token:
         try:
             account = github.get('user')
@@ -151,6 +167,16 @@ def user_github():
             pass
     return render_template('settings/github.html',
                             integration=integration, account=account)
+
+@users.route('/settings/github/install', methods=['GET', 'POST'])
+@login_required
+def user_github_install():
+    integration = get_github_integration()
+    if integration:
+        return redirect(url_for('users.user_github'))
+    app_url = 'https://github.com/apps/'
+    app_url += app.config['GITHUB_APP_NAME']
+    return redirect(app_url)
 
 @users.route('/auth/github')
 def auth_github():
