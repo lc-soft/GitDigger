@@ -12,14 +12,14 @@ topics = db.Table('RepoTopics',
 
 class Repository(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
+    name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(1024))
     html_url = db.Column(db.String(1024))
     homepage = db.Column(db.String(256))
     pushed_at = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime)
-    imported_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
+    imported_at = db.Column(db.DateTime, default=datetime.utcnow)
     owner_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     owner = db.relationship(User, uselist=False)
     topics = db.relationship('Topic', secondary=topics,
@@ -34,7 +34,6 @@ class Repository(db.Model):
         self.created_at = datetime_from_utc(data['created_at'])
         self.updated_at = datetime_from_utc(data['updated_at'])
         self.pushed_at = datetime_from_utc(data['pushed_at'])
-        self.imported_at = datetime.now()
         for name in data['topics']:
             topic = Topic.query.filter_by(name=name).first()
             if topic is None:
