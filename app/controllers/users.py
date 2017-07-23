@@ -1,8 +1,8 @@
 from config import github
 from app.models.user import User
 from app import app, db, login_manager
-from flask import jsonify, request, redirect, flash
 from flask import Blueprint, url_for, render_template
+from flask import jsonify, request, redirect, flash, session
 from wtforms import TextField, TextAreaField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import logout_user, login_required, login_user, current_user
@@ -131,24 +131,52 @@ def repositories():
 @users.route('/settings/github', methods=['GET', 'POST'])
 @login_required
 def user_github():
-    return render_template('settings/github.html')
+    account = None
+    integration = None
+    app_id = app.config['GITHUB_APP_ID']
+    if request.method == 'POST':
+        action = request.form.get('action')
+        print action, action == 'unlink'
+        if action == 'unlink':
+            current_user.github_token = ''
+            db.session.commit()
+    try:
+        integration = github.get('app/installations/%s', app_id)
+    except Exception as e:
+        pass
+    if current_user.github_token:
+        try:
+            account = github.get('user')
+        except Exception as e:
+            pass
+    return render_template('settings/github.html',
+                            integration=integration, account=account)
 
 @users.route('/auth/github')
 def auth_github():
+    session['next_url'] = request.args.get('next')
     return github.authorize()
 
-@users.route('/api/auth/github')
+@users.route('/auth/github/callback')
 @github.authorized_handler
 def authorized(access_token):
-    next_url = request.args.get('next') or url_for('index')
+    next_url = session.get('next_url')
+    if next_url is None:
+        next_url = url_for('index')
+    else:
+        session.pop('next_url')
     if access_token is None:
         return redirect(next_url)
     print access_token
+    if current_user:
+        current_user.github_token = access_token
+        db.session.commit()
     return redirect(next_url)
 
-@users.route('/api/user')
-def user():
-    return str(github.get('user'))
+@github.access_token_getter
+def token_getter():
+    if current_user is not None:
+        return current_user.github_token
 
 @users.route('/api/users/<string:username>', methods=['GET'])
 def get(username):

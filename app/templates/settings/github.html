@@ -5,5 +5,35 @@
   <h3>Repositories</h3>
   <h3>Integration</h3>
   <h3>Account</h3>
-  <h3>Danger Zone</h3>
+  {% if account %}
+    <p>Your GitHub account <b>{{ account['login'] }}</b> is connected to GitBook to authenticate and link your organizations.
+We will never do anything on GitHub without your permission.</p>
+    <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}">
+      Reconnect GitHub
+    </a>
+  {% else %}
+    <p>Connect your GitHub account to authenticate and link your GitBook organizations with GitHub organizations.
+We will never do anything on GitHub without your permission.</p>
+    <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}">
+      Connect GitHub
+    </a>
+  {% endif %}
+  {% if integration or account %}
+    <h3>Danger Zone</h3>
+    {% if integration %}
+      <a href="https://github.com/settings/installations/{{ integration['app_id'] }}">
+        Uninstall GitHub integration
+      </a>
+      <p>Uninstall GitDigger from the <b>{{ integration['account']['login'] }}</b> GitHub account.</p>
+      <p>You will not be able to edit your books linked to GitHub repositories anymore.</p>
+    {% endif %}
+    {% if account %}
+      <form method="post" action="{{ url_for('users.user_github') }}">
+        <input type="hidden" name="action" value="unlink">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button>Unlink GitHub account</button>
+        <p>This action is not recommended when some of your books are linked to GitHub repositories.</p>
+      </form>
+    {% endif %}
+  {% endif %}
 {% endblock %}

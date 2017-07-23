@@ -1,4 +1,5 @@
 config = {
-    'id': 'GitHub Client ID',
-    'secret': 'GitHub Client secret'
+    'app_id': 'GitHub App ID',
+    'client_id': 'GitHub Client ID',
+    'client_secret': 'GitHub Client secret'
 }
