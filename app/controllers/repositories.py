@@ -1,4 +1,3 @@
-from config import github
 from app.helpers.github import github
 from app.models.repository import Repository
 from app import app, db, login_manager
@@ -14,7 +13,11 @@ class RepositoryForm(Form):
     full_name = SelectField('Repository')
 
 def create(data):
-    repo = Repository.query.filter_by(owner_id=current_user.id).first()
+    name = data['full_name'].split('/')[1]
+    repo = Repository.query.filter_by(
+        owner_id=current_user.id, 
+        name=name
+    ).first()
     if repo is not None:
         flash('Repository already exists')
         return
