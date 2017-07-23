@@ -1,4 +1,3 @@
-from config import github
 from app.models.user import User
 from app.helpers.github import github
 from app import app, db, login_manager

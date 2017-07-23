@@ -18,4 +18,11 @@
       or 
     <a href="{{ url_for('users.join') }}">Sign up</a>
   {% endif %}
+  <p>
+    Topics:
+    <a href="{{ url_for('index') }}">All</a>
+    {% for topic in topics %}
+      <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
+    {% endfor %}
+  </p>
 {% endblock %}
