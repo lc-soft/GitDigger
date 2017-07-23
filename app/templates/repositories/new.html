@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block title %}Import a new repository{% endblock %}
+{% block content %}
+  <h1>Import a new repository</h1>
+  {% if form %}
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post" action="{{ url_for('repos.new') }}">
+      {{ form.csrf_token }} 
+      <dl>
+        {{ render_field(form.full_name) }}
+      </dl>
+      <p><input type="submit" value="Import Repository"></p>
+    </form>
+  {% else %}
+    <p>Please <a href="{{ url_for('users.user_github') }}">connect GitHub account</a> to continue.</p>
+  {% endif %}
+{% endblock %}

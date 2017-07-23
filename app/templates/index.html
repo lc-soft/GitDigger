@@ -9,6 +9,9 @@
       <li>
         <a href="{{ url_for('users.settings') }}">Settings</a>
       </li>
+      <li>
+        <a href="{{ url_for('repos.new') }}">Import repository</a>
+      </li>
     </ul>
   {% else %}
     <a href="{{ url_for('users.login') }}">Sign in</a>
