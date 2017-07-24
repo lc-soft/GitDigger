@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm as Form
 from wtforms import SelectField, validators
 
 repos = Blueprint('repos', __name__)
+repo_path = '/<string:username>/<string:name>'
 
 class RepositoryForm(Form):
     full_name = SelectField('Repository')
@@ -36,12 +37,26 @@ def get_repo(username, name):
         return None
     return repo
 
-@repos.route('/<string:username>/<string:name>', methods=['GET'])
+@repos.route(repo_path, methods=['GET'])
 def show(username, name):
     repo = get_repo(username, name)
     if repo is None:
         return abort(404)
     return render_template('repositories/show.html', repo=repo)
+
+@repos.route(repo_path + '/settings', methods=['GET'])
+def settings(username, name):
+    repo = get_repo(username, name)
+    if repo is None:
+        return abort(404)
+    return render_template('repositories/settings/index.html', repo=repo)
+
+@repos.route(repo_path + '/settings/github', methods=['GET'])
+def repo_github(username, name):
+    repo = get_repo(username, name)
+    if repo is None:
+        return abort(404)
+    return render_template('repositories/settings/github.html', repo=repo)
 
 @repos.route('/new', methods=['GET', 'POST'])
 @login_required

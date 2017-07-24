@@ -1,0 +1,9 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+  <nav>
+    <h3>Settings</h3>
+    <a href="{{ url_for('repos.settings', username=repo.owner.username, name=repo.name) }}">Options</a>
+    <a href="{{ url_for('repos.repo_github', username=repo.owner.username, name=repo.name) }}">GitHub</a>
+  </nav>
+  {% block settings_content %}{% endblock %}
+{% endblock %}
