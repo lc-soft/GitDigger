@@ -1,7 +1,8 @@
-from app.helpers.github import github
-from app.models.repository import Repository
 from app import app, db, login_manager
-from flask import request, redirect, flash
+from app.models.user import User
+from app.models.repository import Repository
+from app.helpers.github import github
+from flask import request, redirect, flash, abort
 from flask import Blueprint, url_for, render_template
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm as Form
@@ -25,6 +26,22 @@ def create(data):
     db.session.add(repo)
     db.session.commit()
     flash('Repository created successfully')
+
+def get_repo(username, name):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return None
+    repo = Repository.query.filter_by(owner_id=user.id, name=name).first()
+    if repo is None:
+        return None
+    return repo
+
+@repos.route('/<string:username>/<string:name>', methods=['GET'])
+def show(username, name):
+    repo = get_repo(username, name)
+    if repo is None:
+        return abort(404)
+    return render_template('repositories/show.html', repo=repo)
 
 @repos.route('/new', methods=['GET', 'POST'])
 @login_required

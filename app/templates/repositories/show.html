@@ -1,0 +1,6 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{ repo.owner.username }}/{{ repo.name }}{% endblock %}
+{% block content %}
+  <h1>{{ repo.owner.username }}/{{ repo.name }}</h1>
+  <p>{{ repo.description }}</p>
+{% endblock %}
