@@ -4,6 +4,6 @@
   <h1>{{ repo.owner.username }}/{{ repo.name }}</h1>
   <p>{{ repo.description }}</p>
   {% if current_user.id == repo.owner_id %}
-    <a href="{{ url_for('repos.settings', username=repo.owner.username, name=repo.name) }}">Settings</a>
+    <a href="{{ url_for_repo_settings }}">Settings</a>
   {% endif %}
 {% endblock %}

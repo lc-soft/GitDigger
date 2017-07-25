@@ -41,5 +41,5 @@ class Repository(db.Model):
             self.topics.append(topic)
 
     def __repr__(self):
-        return '<Repository %r>' % self.full_name
+        return '<Repository %r>' % self.name
 
