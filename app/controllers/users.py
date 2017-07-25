@@ -1,6 +1,6 @@
 from app.models.user import User
-from app.helpers.github import github
 from app import app, db, login_manager
+from app.helpers.github_helper import GitHubHelper
 from flask import Blueprint, url_for, render_template
 from flask import jsonify, request, redirect, flash, session
 from wtforms import TextField, TextAreaField, PasswordField, validators
@@ -9,6 +9,7 @@ from flask_login import logout_user, login_required, login_user, current_user
 from flask_wtf import FlaskForm as Form
 
 users = Blueprint('users', __name__)
+github_helper = GitHubHelper(app)
 login_manager.login_view = 'users.login'
 
 class RegistrationForm(Form):
@@ -135,11 +136,10 @@ def user_github():
         if action == 'unlink':
             current_user.github_token = ''
             db.session.commit()
-    integration = github.get_integration()
-    #current_user.repositories
+    integration = github_helper.get_integration()
     if current_user.github_token:
         try:
-            account = github.get('user')
+            account = github_helper.get('user')
         except Exception as e:
             pass
     return render_template('settings/github.html',
@@ -148,7 +148,7 @@ def user_github():
 @users.route('/settings/github/install', methods=['GET', 'POST'])
 @login_required
 def user_github_install():
-    integration = github.get_integration()
+    integration = github_helper.get_integration()
     if integration:
         return redirect(url_for('users.user_github'))
     app_url = 'https://github.com/apps/'
@@ -158,10 +158,10 @@ def user_github_install():
 @users.route('/auth/github')
 def auth_github():
     session['next_url'] = request.args.get('next')
-    return github.authorize()
+    return github_helper.authorize()
 
 @users.route('/auth/github/callback')
-@github.authorized_handler
+@github_helper.authorized_handler
 def authorized(access_token):
     next_url = session.get('next_url')
     if next_url is None:
@@ -176,7 +176,7 @@ def authorized(access_token):
         db.session.commit()
     return redirect(next_url)
 
-@github.access_token_getter
+@github_helper.access_token_getter
 def token_getter():
     if current_user is not None:
         return current_user.github_token

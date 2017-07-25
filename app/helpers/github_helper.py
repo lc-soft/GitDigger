@@ -1,7 +1,6 @@
-from app import app
 import flask_github
 
-class GitHub(flask_github.GitHub):
+class GitHubHelper(flask_github.GitHub):
     cache = {}
 
     def get_user(self, cache=False):
@@ -48,10 +47,8 @@ class GitHub(flask_github.GitHub):
         installations = data.get('integration_installations')
         if installations is None:
             return None
-        app_id = app.config['GITHUB_APP_ID']
+        app_id = self.app.config['GITHUB_APP_ID']
         for installation in installations:
             if installation['app_id'] == app_id:
                 return installation
         return None
-
-github = GitHub(app)
