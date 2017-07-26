@@ -1,9 +1,10 @@
 from app import app, db, login_manager
 from app.models.user import User
 from app.models.repository import Repository
+from app.helpers.application_helper import flash
 from app.helpers.github_helper import GitHubHelper
 from app.helpers.repositories_helper import RepositoriesHelper
-from flask import request, redirect, flash, abort
+from flask import request, redirect, abort
 from flask import Blueprint, url_for, render_template
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm as Form

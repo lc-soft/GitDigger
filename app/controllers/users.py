@@ -1,8 +1,9 @@
 from app.models.user import User
 from app import app, db, login_manager
 from app.helpers.github_helper import GitHubHelper
+from app.helpers.application_helper import flash
 from flask import Blueprint, url_for, render_template
-from flask import jsonify, request, redirect, flash, session
+from flask import jsonify, request, redirect, session
 from wtforms import TextField, TextAreaField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import logout_user, login_required, login_user, current_user
@@ -171,9 +172,17 @@ def authorized(access_token):
     if access_token is None:
         return redirect(next_url)
     print access_token
-    if current_user:
-        current_user.github_token = access_token
-        db.session.commit()
+    for i in [0]:
+        print current_user
+        if current_user.is_authenticated:
+            current_user.github_token = access_token
+            db.session.commit()
+            break
+        user = User.query.filter_by(github_token=access_token).first()
+        print user
+        if user is None:
+            break
+        login_user(user)
     return redirect(next_url)
 
 @github_helper.access_token_getter
