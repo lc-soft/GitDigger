@@ -2,8 +2,10 @@
 config/*.py
 db/database.db
 db/migrate/versions
+node_modules
 .sass-cache
 static/stylesheets/
+static/javascripts/
 
 # C extensions
 *.so
