@@ -1,5 +1,5 @@
-import 'jquery/dist/jquery.slim.js'
-import 'tether/dist/js/tether.min.js'
-import 'tether/dist/css/tether.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import '../stylesheets/bootstrap.scss'
+require('jquery');
+require('tether');
+require('bootstrap/dist/js/bootstrap.min.js');
+require('tether/dist/css/tether.css');
+require('../stylesheets/bootstrap.scss');
