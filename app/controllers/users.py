@@ -136,17 +136,16 @@ def repositories():
 @login_required
 def user_github():
     account = None
-    if request.method == 'POST':
+    if request.method == 'POST' and current_user.is_authenticated:
         action = request.form.get('action')
         if action == 'unlink':
-            current_user.github_token = ''
+            current_user.github_id = None
+            current_user.github_token = None
+            current_user.github_username = None
             db.session.commit()
     integration = github_helper.get_integration()
     if current_user.github_token:
-        try:
-            account = github_helper.get('user')
-        except Exception as e:
-            pass
+        account = github_helper.get_user()
     return render_template('settings/github.html',
                             integration=integration, account=account)
 
@@ -175,24 +174,24 @@ def authorized(access_token):
         session.pop('next_url')
     if access_token is None:
         return redirect(next_url)
-    print access_token
-    for i in [0]:
-        print current_user
-        if current_user.is_authenticated:
-            current_user.github_token = access_token
-            db.session.commit()
-            break
-        user = User.query.filter_by(github_token=access_token).first()
-        print user
-        if user is None:
-            break
+    session['github_token'] = access_token
+    user = github_helper.get_user()
+    if user is None:
+        return redirect(next_url)
+    if current_user.is_authenticated:
+        current_user.github_id = user['id']
+        current_user.github_token = access_token
+        current_user.github_username = user['login']
+        db.session.commit()
+        return redirect(next_url)
+    user = User.query.filter_by(github_id=user['id']).first()
+    if user is not None:
         login_user(user)
     return redirect(next_url)
 
 @github_helper.access_token_getter
 def token_getter():
-    if current_user is not None:
-        return current_user.github_token
+    return session.get('github_token')
 
 @users.route('/api/users/<string:username>', methods=['GET'])
 def get(username):

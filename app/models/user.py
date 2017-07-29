@@ -8,6 +8,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
     bio = db.Column(db.String(180))
+    github_id = db.Column(db.Integer, unique=True)
+    github_username = db.Column(db.String(64), unique=True)
     github_token = db.Column(db.String(300), unique=True)
     password = db.Column(db.String(300))
     created_at = db.Column(db.DateTime)
@@ -22,14 +24,9 @@ class User(db.Model):
             self.name = name
         self.created_at = datetime.now()
 
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
+    is_authenticated = True
+    is_anonymous =  False
+    is_active = True
 
     def get_id(self):
         return unicode(self.id)
