@@ -1,5 +1,6 @@
-from app.models.user import User
 from app import app, db, login_manager
+from app.models.user import User
+from app.models.repository import Repository
 from app.helpers.github_helper import GitHubHelper
 from app.helpers.application_helper import flash
 from flask import Blueprint, url_for, render_template
@@ -143,11 +144,16 @@ def user_github():
             current_user.github_token = None
             current_user.github_username = None
             db.session.commit()
+    repos = Repository.query.filter_by(
+        owner_id=current_user.id,
+        imported_from='GitHub'
+    ).order_by(Repository.name).all()
     integration = github_helper.get_integration()
     if current_user.github_token:
         account = github_helper.get_user()
     return render_template('settings/github.html',
-                            integration=integration, account=account)
+                            integration=integration,
+                            account=account, repos=repos)
 
 @users.route('/settings/github/install', methods=['GET', 'POST'])
 @login_required

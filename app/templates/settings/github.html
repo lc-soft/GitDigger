@@ -3,7 +3,23 @@
 {% block settings_content %}
   <div class="card mb-3">
     <div class="card-header">Repositories</div>
-    <div class="card-block"></div>
+    {% if repos %}
+    <div class="card-block">
+      <div class="repo-list">
+      {% for repo in repos %}
+        <div class="repo-list-item">
+          <b><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a></b>
+          <p class="text-muted">{{ repo.html_url | replace('https://', '') | replace('http://', '') }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="card-block text-center">
+      <p class="card-text">{{ site_name }} is ready to sync your repositores with GitHub.</p>
+      <a href="{{ url_for('repos.new') }}" class="btn btn-primary">Create a repository from GitHub</a>
+    </div>
+    {% endif %}
   </div>
   <div class="card mb-3">
     <div class="card-header">
@@ -14,10 +30,10 @@
     </div>
     <div class="card-block">
     {% if integration %}
-      <p class="card-text">Installed on your <b>{{ integration['account']['login'] }}</b> GitHub account to host and edit your books on GitHub.</p>
+      <p class="card-text">Installed on your <b>{{ integration['account']['login'] }}</b> GitHub account to host and edit your repositories on GitHub.</p>
     {% else %}
       <form method="get" action="{{ url_for('users.auth_github') }}">
-        <p>Install our GitHub integration to host and edit your books on GitHub.
+        <p>Install our GitHub integration to host and edit your repositories on GitHub.
           This will also connect your GitHub account.</p>
         <input type="hidden" name="next" value="{{ url_for('users.user_github_install') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -60,7 +76,7 @@
         </a>
       </p>
       <p class="card-text">Uninstall {{ site_name }} from the <b>{{ integration['account']['login'] }}</b> GitHub account.</p>
-      <p class="card-text">You will not be able to edit your books linked to GitHub repositories anymore.</p>
+      <p class="card-text">You will not be able to edit your repositories linked to GitHub repositories anymore.</p>
     </div>
     {% endif %}
     {% if account %}
@@ -71,7 +87,7 @@
         <p>
           <button class="btn btn-danger">Unlink GitHub account</button>
         </p>
-        <p class="card-text">This action is not recommended when some of your books are linked to GitHub repositories.</p>
+        <p class="card-text">This action is not recommended when some of your repositories are linked to GitHub repositories.</p>
       </form>
     {% endif %}
     </div>

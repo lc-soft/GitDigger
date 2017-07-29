@@ -24,9 +24,10 @@ def create(data):
         name=name
     ).first()
     if repo is not None:
-        flash('Repository already exists')
+        flash('Repository already exists', 'warning')
         return
     repo = Repository(current_user.id, data)
+    repo.imported_from = 'GitHub'
     db.session.add(repo)
     db.session.commit()
     flash('Repository created successfully')
@@ -35,12 +36,29 @@ def create(data):
 def show(ctx):
     return ctx.render('show.html')
 
-@repos_helper.route('/settings', methods=['GET'])
+def delete(ctx):
+    try:
+        ctx.repo.topics = []
+        db.session.delete(ctx.repo)
+        db.session.commit()
+        flash('Repository deleted successfully')
+        return redirect(url_for('index'))
+    except:
+        db.session.rollback()
+        flash('Repository deletion failed', 'danger')
+        ctx.render('settings/index.html')
+
+@repos_helper.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings(ctx):
+    action = request.form.get('action')
+    if request.method == 'POST' and action == 'delete':
+        return delete(ctx)
     return ctx.render('settings/index.html')
 
 @repos_helper.route('/settings/github', methods=['GET'])
-def repo_github(ctx):
+@login_required
+def github(ctx):
     return ctx.render('settings/github.html')
 
 @github_helper.access_token_getter
@@ -52,8 +70,7 @@ def token_getter():
 @login_required
 def new():
     choices = []
-    name = current_user.github_username
-    repos = github_helper.get_public_repos(name)
+    repos = github_helper.get_public_repos(current_user.github_username)
     if repos is None:
         return render_template('repositories/new.html', form=None)
     form = RepositoryForm(request.form)
@@ -68,7 +85,7 @@ def new():
                 create(repo)
                 break
         else:
-            flash('Repository does not exist')
+            flash('Repository does not exist', 'warning')
     return render_template('repositories/new.html', form=form)
 
 app.register_blueprint(repos)

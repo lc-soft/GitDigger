@@ -20,6 +20,7 @@ class Repository(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     imported_at = db.Column(db.DateTime, default=datetime.utcnow)
+    imported_from = db.Column(db.String(16))
     owner_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     owner = db.relationship(User, uselist=False)
     topics = db.relationship('Topic', secondary=topics,
