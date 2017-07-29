@@ -4,3 +4,9 @@ config = {
     'client_id': 'GitHub Client ID',
     'client_secret': 'GitHub Client secret'
 }
+
+def init_app(app):
+    app.config['GITHUB_APP_ID'] = config['app_id']
+    app.config['GITHUB_APP_NAME'] = config['app_name']
+    app.config['GITHUB_CLIENT_ID'] = config['client_id']
+    app.config['GITHUB_CLIENT_SECRET'] = config['client_secret']
