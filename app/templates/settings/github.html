@@ -1,50 +1,80 @@
 {% extends "layouts/settings.html" %}
 {% block title %}GitHub{% endblock %}
 {% block settings_content %}
-  <h1>GitHub</h1>
-  <h3>Repositories</h3>
-  <h3>Integration</h3>
-  {% if integration %}
-    <p>Installed on your <b>{{ integration['account']['login'] }}</b> GitHub account to host and edit your books on GitHub.</p>
-  {% else %}
-    <form method="get" action="{{ url_for('users.auth_github') }}">
-      <p>Install our GitHub integration to host and edit your books on GitHub.
-        This will also connect your GitHub account.</p>
-      <input type="hidden" name="next" value="{{ url_for('users.user_github_install') }}">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button>Install GitHub integration on this account</button>
-    </form>
-  {% endif %}
-  <h3>Account</h3>
-  {% if account %}
-    <p>Your GitHub account <b>{{ account['login'] }}</b> is connected to GitDiggerto authenticate and link your organizations.
-We will never do anything on GitHub without your permission.</p>
-    <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}">
-      Reconnect GitHub
-    </a>
-  {% else %}
-    <p>Connect your GitHub account to authenticate and link your GitDiggerorganizations with GitHub organizations.
-We will never do anything on GitHub without your permission.</p>
-    <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}">
-      Connect GitHub
-    </a>
-  {% endif %}
-  {% if integration or account %}
-    <h3>Danger Zone</h3>
+  <div class="card mb-3">
+    <div class="card-header">Repositories</div>
+    <div class="card-block"></div>
+  </div>
+  <div class="card mb-3">
+    <div class="card-header">
+      Integration
+      {% if integration %}
+      <span class="label label-success">INSTALLED</span>
+      {% endif %}
+    </div>
+    <div class="card-block">
     {% if integration %}
-      <a href="{{ integration['html_url'] }}">
-        Uninstall GitHub integration
+      <p class="card-text">Installed on your <b>{{ integration['account']['login'] }}</b> GitHub account to host and edit your books on GitHub.</p>
+    {% else %}
+      <form method="get" action="{{ url_for('users.auth_github') }}">
+        <p>Install our GitHub integration to host and edit your books on GitHub.
+          This will also connect your GitHub account.</p>
+        <input type="hidden" name="next" value="{{ url_for('users.user_github_install') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button class="btn btn-primary">Install GitHub integration on this account</button>
+      </form>
+    {% endif %}
+    </div>
+  </div>
+  <div class="card mb-3">
+    <div class="card-header">
+      Account
+      {% if account %}
+      <span class="label label-success">CONNECTED</span>
+      {% endif %}
+    </div>
+    <div class="card-block">
+    {% if account %}
+      <p class="card-text">Your GitHub account <b>{{ account['login'] }}</b> is connected to {{ site_name }} to authenticate and link your organizations.
+  We will never do anything on GitHub without your permission.</p>
+      <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}" class="btn btn-secondary">
+        Reconnect GitHub
       </a>
-      <p>Uninstall GitDigger from the <b>{{ integration['account']['login'] }}</b> GitHub account.</p>
-      <p>You will not be able to edit your books linked to GitHub repositories anymore.</p>
+    {% else %}
+      <p class="card-text">Connect your GitHub account to authenticate and link your {{ site_name }} organizations with GitHub organizations.
+  We will never do anything on GitHub without your permission.</p>
+      <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}" class="btn btn-primary">
+        Connect GitHub
+      </a>
+    {% endif %}
+    </div>
+  </div>
+  {% if integration or account %}
+  <div class="card card-auto-divider mb-3">
+    <div class="card-header">Danger Zone</div>
+    <div class="card-block">
+    {% if integration %}
+      <p>
+        <a href="{{ integration['html_url'] }}" class="btn btn-danger">
+          Uninstall GitHub integration
+        </a>
+      </p>
+      <p class="card-text">Uninstall {{ site_name }} from the <b>{{ integration['account']['login'] }}</b> GitHub account.</p>
+      <p class="card-text">You will not be able to edit your books linked to GitHub repositories anymore.</p>
+    </div>
     {% endif %}
     {% if account %}
+    <div class="card-block">
       <form method="post" action="{{ url_for('users.user_github') }}">
         <input type="hidden" name="action" value="unlink">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <button>Unlink GitHub account</button>
-        <p>This action is not recommended when some of your books are linked to GitHub repositories.</p>
+        <p>
+          <button class="btn btn-danger">Unlink GitHub account</button>
+        </p>
+        <p class="card-text">This action is not recommended when some of your books are linked to GitHub repositories.</p>
       </form>
     {% endif %}
+    </div>
+  </div>
   {% endif %}
 {% endblock %}

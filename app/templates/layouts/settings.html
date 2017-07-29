@@ -1,11 +1,19 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-  <nav>
-    <h3>Personal settings</h3>
-    <a href="{{ url_for('users.profile') }}">Profile</a>
-    <a href="{{ url_for('users.account') }}">Account</a>
-    <a href="{{ url_for('users.user_github') }}">GitHub</a>
-    <a href="{{ url_for('users.repositories') }}">Repositories</a>
-  </nav>
-  {% block settings_content %}{% endblock %}
+  <div class="page-content">
+    <div class="row">
+      <div class="col-md-3">
+        <nav class="list-group">
+          <div class="list-group-item">Personal settings</div>
+          <a href="{{ url_for('users.profile') }}" class="list-group-item list-group-item-action">Profile</a>
+          <a href="{{ url_for('users.account') }}" class="list-group-item list-group-item-action">Account</a>
+          <a href="{{ url_for('users.user_github') }}" class="list-group-item list-group-item-action">GitHub</a>
+          <a href="{{ url_for('users.repositories') }}" class="list-group-item list-group-item-action">Repositories</a>
+        </nav>
+      </div>
+      <div class="col-md-9">
+        {% block settings_content %}{% endblock %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

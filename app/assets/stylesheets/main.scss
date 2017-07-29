@@ -16,3 +16,42 @@
 #site-content {
   background: #ecf0f1;
 }
+.page-content {
+    padding: 20px 0;
+}
+.card-auto-divider {
+  .card-block {
+    &:after {
+      content: '';
+      display: block;
+      bottom: -20px;
+      position: relative;
+      bottom: -$card-spacer-x;
+      border-top: 1px solid $hr-border-color;
+    }
+  }
+  &:last-child {
+    &:after {
+      display: none;
+    }
+  }
+}
+.label {
+    display: inline-block;
+    margin: 0;
+    padding: 3px 4px 4px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 11px;
+    vertical-align: middle;
+    border-radius: 3px;
+    color: #666;
+    background-color: #eee;
+}
+$color-light-green: #2ed886;
+
+.label.label-success {
+  color: $color-light-green;
+  border-color: $color-light-green;
+  background-color: rgba($color-light-green, .1);
+}
