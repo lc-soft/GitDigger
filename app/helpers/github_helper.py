@@ -9,7 +9,8 @@ class GitHubHelper(flask_github.GitHub):
         return user
 
     def get_public_repos(self, username):
-        repos = []
+        if not username:
+            return None
         url = '%susers/%s/repos' % (self.BASE_URL, username)
         try:
             response = self.session.request('GET', url, headers={

@@ -52,7 +52,8 @@ def token_getter():
 @login_required
 def new():
     choices = []
-    repos = github_helper.get_public_repos(True)
+    name = current_user.github_username
+    repos = github_helper.get_public_repos(name)
     if repos is None:
         return render_template('repositories/new.html', form=None)
     form = RepositoryForm(request.form)

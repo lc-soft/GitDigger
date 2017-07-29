@@ -191,7 +191,11 @@ def authorized(access_token):
 
 @github_helper.access_token_getter
 def token_getter():
-    return session.get('github_token')
+    token = session.get('github_token')
+    if token is not None:
+        return token
+    if current_user.github_token:
+        return current_user.github_token
 
 @users.route('/api/users/<string:username>', methods=['GET'])
 def get(username):
