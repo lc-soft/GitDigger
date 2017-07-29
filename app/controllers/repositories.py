@@ -56,11 +56,6 @@ def settings(ctx):
         return delete(ctx)
     return ctx.render('settings/index.html')
 
-@repos_helper.route('/settings/github', methods=['GET'])
-@login_required
-def github(ctx):
-    return ctx.render('settings/github.html')
-
 @github_helper.access_token_getter
 def token_getter():
     if current_user is not None:
