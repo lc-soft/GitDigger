@@ -4,9 +4,11 @@
   {% block head %}
   <title>{% block title %}{% endblock %} - GitDigger</title>
   {% endblock %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
 </head>
 <body>
+  {% include 'layouts/_header.html' %}
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <div class="flashes">
@@ -23,17 +25,15 @@
       </ul>
     {% endif %}
   {% endwith %}
-  <div id="content">
+  <div id="site-content">
     <div class="container">
       {% block content %}{% endblock %}
     </div>
+    <script src="{{ url_for('static', filename='javascripts/vendor.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
   </div>
-  <div id="footer">
-    <div class="container">
-      {% block footer %}
-      &copy; Copyright 2017 by <a href="https://lc-soft.io">lc-soft</a>.
-      {% endblock %}
-    </div>
-  </div>
+  {% block footer %}
+    {% include 'layouts/_footer.html' %}
+  {% endblock %}
 </body>
 </html>

@@ -1,0 +1,26 @@
+<div id="site-footer">
+  <div class="container">
+    {% block footer %}
+      <div class="row">
+        <div class="col">
+          <b>{{ site_name }}</b>
+          <div class="text-muted">Dig open source project news.</div>
+        </div>
+        <div class="col col-auto">
+          <b>{{ get_repos_count() }}</b>
+          <div>repositories connected</div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-5 site-more-links">
+          <a class="muted-link" href="{{ github_url }}">GitHub</a>&emsp;
+          <a class="muted-link" href="{{ blog_url }}">Blog</a>
+        </div>
+        <div class="col-7 site-copyright">
+          &copy; {{ get_copyright_year() }} <a class="muted-link" href="{{ owner_url }}">{{ owner_name }}</a>
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+</div>

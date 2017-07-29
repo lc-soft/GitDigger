@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block title %}Topics{% endblock %}
 {% block content %}
-    {% for topic in topics %}
-      <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
-    {% endfor %}
+  {% for topic in topics %}
+    <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
+  {% endfor %}
 {% endblock %}

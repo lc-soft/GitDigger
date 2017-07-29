@@ -1,23 +1,13 @@
 {% extends "layouts/base.html" %}
 {% block title %}GitDigger{% endblock %}
+{% block secondary_navbar %}
+  <nav class="navbar navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Filters</a>
+    </div>
+  </nav>
+{% endblock %}
 {% block content %}
-  <h1>GitDigger</h1>
-  {% if current_user.is_authenticated %}
-    Hi {{ current_user.name }}!
-    <a href="{{ url_for('users.logout') }}">Sign out</a>
-    <ul>
-      <li>
-        <a href="{{ url_for('users.settings') }}">Settings</a>
-      </li>
-      <li>
-        <a href="{{ url_for('repos.new') }}">Import repository</a>
-      </li>
-    </ul>
-  {% else %}
-    <a href="{{ url_for('users.login') }}">Sign in</a>
-      or 
-    <a href="{{ url_for('users.join') }}">Sign up</a>
-  {% endif %}
   <p>
     Topics:
     <a href="{{ url_for('index') }}">All</a>

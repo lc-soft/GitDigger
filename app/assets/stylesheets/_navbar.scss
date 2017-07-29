@@ -1,0 +1,14 @@
+#site-navbar {
+    background: #2c3e50;
+}
+#site-header {
+    background: #fff;
+}
+.nav-link.text-white {
+    &:hover {
+        opacity: .8;
+    }
+    &:active {
+        opacity: .6;
+    }
+}

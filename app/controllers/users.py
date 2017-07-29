@@ -101,6 +101,10 @@ def login():
         return redirect(next or url_for('index'))
     return render_template('login.html', form=form)
 
+@users.route('/<string:username>')
+def show(username):
+    pass
+
 @users.route('/settings')
 @login_required
 def settings():

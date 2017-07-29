@@ -1,0 +1,18 @@
+@import "~bootstrap/scss/variables";
+@import "bootstrap-custom";
+@import "navbar";
+@import "footer";
+
+.muted-link {
+  color: $text-muted;
+  
+  &:hover {
+    color: $link-hover-color;
+  }
+  &:active {
+    color: $link-color;
+  }
+}
+#site-content {
+  background: #ecf0f1;
+}
