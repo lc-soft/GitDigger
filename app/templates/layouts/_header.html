@@ -1,15 +1,26 @@
 <header id="site-header">
   <nav id="site-navbar" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
     <div class="container">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#site-navbar-content" aria-controls="site-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="/">GitDigger</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a class="navbar-brand" href="/">{{ site_name }}</a>
+      <div class="collapse navbar-collapse" id="site-navbar-content">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Stories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Activities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Repositories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Topics</a>
           </li>
         </ul>
         <span class="nav navbar-nav pull-md-right">
@@ -29,7 +40,7 @@
             {% else %}
               <li class="nav-item">
                 <a class="nav-link text-white" href="{{ url_for('users.login') }}">Sign in</a>
-              </li>
+              </li>                                                                                 
               <li class="nav-item">
                 <span class="navbar-text">or</span>
               </li>
