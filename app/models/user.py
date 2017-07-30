@@ -8,6 +8,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
     bio = db.Column(db.String(180))
+    avatar_url = db.Column(db.String(256))
+    owner = db.Column(db.String(32), nullable=False, default='user')
     github_id = db.Column(db.Integer, unique=True)
     github_username = db.Column(db.String(64), unique=True)
     github_token = db.Column(db.String(300), unique=True)
