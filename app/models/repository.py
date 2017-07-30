@@ -37,12 +37,21 @@ class Repository(db.Model):
         self.pushed_at = datetime_from_utc(data['pushed_at'])
         self.owner_id = owner.id
         self.owner = owner
-        if data['language']:
-            data['topics'].append(data['language'])
-        for name in data['topics']:
+        language = data['language']
+        has_language_topic = False
+        for name in data['topics']: 
             topic = Topic.query.filter_by(name=name).first()
             if topic is None:
                 topic = Topic(name)
+                if language and name == language:
+                    topic.group = 'language'
+                    has_language_topic = True
+                topic.repositories_count = 1
+            self.topics.append(topic)
+        if language and not has_language_topic:
+            topic = Topic.query.filter_by(name=language).first()
+            if topic is None:
+                topic = Topic(language, 'language')
                 topic.repositories_count = 1
             self.topics.append(topic)
 
