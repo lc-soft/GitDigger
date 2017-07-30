@@ -38,6 +38,12 @@ class RepositoriesHelper:
             return None
         return repo
 
+    def get_repo_by_id(self, origin_id, imported_from='GitHub'):
+        return Repository.query.filter_by(
+            origin_id=origin_id,
+            imported_from=imported_from
+        ).first()
+
     def route(self, rule, **options):
         app = self.app
         url_map = self.url_map

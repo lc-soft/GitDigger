@@ -3,6 +3,7 @@ from app.models.user import User
 from app.models.repository import Repository
 from app.helpers.application_helper import flash
 from app.helpers.github_helper import GitHubHelper
+from app.helpers.topics_helper import TopicsHelper
 from app.helpers.repositories_helper import RepositoriesHelper
 from flask import request, redirect, abort
 from flask import Blueprint, url_for, render_template
@@ -13,6 +14,7 @@ from wtforms import SelectField, validators
 repos = Blueprint('repos', __name__)
 repos_helper = RepositoriesHelper(repos)
 github_helper = GitHubHelper(app)
+topics_helper = TopicsHelper()
 
 class RepositoryForm(Form):
     full_name = SelectField('Repository')
@@ -26,11 +28,22 @@ def create(data):
     if repo is not None:
         flash('Repository already exists', 'warning')
         return
-    repo = Repository(current_user.id, data)
-    repo.imported_from = 'GitHub'
-    db.session.add(repo)
-    db.session.commit()
-    flash('Repository created successfully')
+    try:
+        repo = Repository(current_user, data)
+        repo.imported_from = 'GitHub'
+        db.session.add(repo)
+        db.session.commit()
+        flash('Repository created successfully')
+    except Exception as e:
+        db.session.rollback()
+        flash('Repository creation failed', 'danger')
+        return
+    try:
+        for topic in repo.topics:
+            topics_helper.update_repos_count(topic)
+        db.session.commit()
+    except:
+        db.session.rollback()
 
 @repos_helper.route('/', methods=['GET'])
 def show(ctx):
