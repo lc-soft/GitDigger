@@ -1,7 +1,6 @@
 from app import db
 from app.models import issue
 from app.models import repository
-from app.models.topic import Topic
 
 class TopicsHelper:
     def update_issues_count(self, topic):
