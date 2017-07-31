@@ -15,4 +15,30 @@
       <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
     {% endfor %}
   </p>
+  <ul class="list-group issue-list-group">
+    {% for issue in issues %}
+    <li class="list-group-item">
+      <a class="muted-link" href="">{{ issue.title }}</a>
+      {% if issue.topics.count > 0 %}
+      &nbsp;
+      <span class="issue-topics">
+        {% for topic in issue_main_topics(issue) %}
+        <a href="" class="label label-primary">{{ topic.name }}</a>
+        {%endfor %}
+      </span>
+      {% endif %}
+      <small class="w-100 text-muted">
+        {{ issue.comments_count }} comments
+        •
+        <abbr title="{{ issue.updated_at }}">
+          {{ issue.updated_at | timesince }}
+        </abbr>
+        from
+        <a href="">{{ issue.user.name }}</a>
+        at
+        <a href="">{{ issue.user.username }}/{{ issue.repository.name }}</a>
+      </small>
+    </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

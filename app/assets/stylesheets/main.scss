@@ -7,10 +7,10 @@
   color: $text-muted;
   
   &:hover {
-    color: $link-hover-color;
+    color: $link-color;
   }
   &:active {
-    color: $link-color;
+    color: $link-hover-color;
   }
 }
 #site-content {
@@ -54,4 +54,17 @@ $color-light-green: #2ed886;
   color: $color-light-green;
   border-color: $color-light-green;
   background-color: rgba($color-light-green, .1);
+}
+.label.label-primary {
+  color: $brand-primary;
+  border-color: $brand-primary;
+  background-color: rgba($brand-primary, .1);
+}
+a.label.label-primary{
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    background-color: $brand-primary;
+  }
 }
