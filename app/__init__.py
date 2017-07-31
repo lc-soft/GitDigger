@@ -19,3 +19,4 @@ migrate = Migrate(app, db, directory='db/migrate')
 from app import models
 from app import controllers
 from app import services
+from app import helpers

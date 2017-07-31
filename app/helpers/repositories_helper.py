@@ -1,7 +1,11 @@
-from functools import wraps
+from app import app
 from app.models.user import User
 from app.models.repository import Repository
+from werkzeug.contrib.cache import SimpleCache
 from flask import abort, render_template
+from functools import wraps
+
+cache = SimpleCache()
 
 URL_PREFIX = '/<string:username>/<string:name>'
 TEMPLATE_PREFIX = 'repositories/'
@@ -61,3 +65,12 @@ class RepositoriesHelper:
                 return func(ctx, *args, **kw)
             return wrapper
         return decorator
+
+@app.template_global()
+def get_repos_count():
+    count = cache.get('repos_count')
+    if count is not None:
+        return count
+    count = Repository.query.count()
+    cache.set('repos_count', count, 600)
+    return count
