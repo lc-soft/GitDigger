@@ -18,26 +18,31 @@
   <ul class="list-group issue-list-group">
     {% for issue in issues %}
     <li class="list-group-item">
-      <a class="link-gray-dark" href="">{{ issue.title }}</a>
-      {% if issue.topics.count > 0 %}
-      &nbsp;
-      <span class="issue-topics">
-        {% for topic in issue_main_topics(issue) %}
-        <a href="" class="label label-primary">{{ topic.name }}</a>
-        {%endfor %}
-      </span>
-      {% endif %}
-      <small class="w-100 text-muted">
-        {{ issue.comments_count }} comments
-        •
-        <abbr title="{{ issue.updated_at }}">
-          {{ issue.updated_at | timesince }}
-        </abbr>
-        from
-        <a href="">{{ issue.user.name }}</a>
-        at
-        <a href="">{{ issue.user.username }}/{{ issue.repository.name }}</a>
-      </small>
+      <div class="issue-image">
+        {{ user_avatar_tag(issue.user) }}
+      </div>
+      <div class="issue-content">
+        <a class="link-gray-dark" href="">{{ issue.title }}</a>
+        {% if issue.topics.count > 0 %}
+        &nbsp;
+        <span class="issue-topics">
+          {% for topic in issue_main_topics(issue) %}
+          <a href="" class="label label-primary">{{ topic.name }}</a>
+          {%endfor %}
+        </span>
+        {% endif %}
+        <div class="issue-description text-muted">
+          {{ issue.comments_count }} comments
+          •
+          <abbr title="{{ issue.updated_at }}">
+            {{ issue.updated_at | timesince }}
+          </abbr>
+          from
+          <a href="">{{ issue.user.name }}</a>
+          at
+          <a href="">{{ issue.repository.owner.username }}/{{ issue.repository.name }}</a>
+        </div>
+      </div>
     </li>
     {% endfor %}
   </ul>
