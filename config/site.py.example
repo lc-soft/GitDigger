@@ -1,0 +1,8 @@
+config = {
+    'site_name': 'GitDigger',
+    'owner_name': 'LC\'s Software',
+    'owner_url': 'https://lc-soft.io',
+    'github_url': '',
+    'blog_url': '',
+    'domain': 'gitdigger.com'
+}
