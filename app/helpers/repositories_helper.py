@@ -1,6 +1,6 @@
 from app import app
-from app.models.user import User
 from app.models.repository import Repository
+from app.services import repositories_service as repos_service
 from werkzeug.contrib.cache import SimpleCache
 from flask import abort, render_template
 from functools import wraps
@@ -33,32 +33,16 @@ class RepositoriesHelper:
         self.app = app
         self.url_map = {}
     
-    def get_repo(self, username, name):
-        user = User.query.filter_by(username=username).first()
-        if user is None:
-            return None
-        repo = Repository.query.filter_by(owner_id=user.id, name=name).first()
-        if repo is None:
-            return None
-        return repo
-
-    def get_repo_by_id(self, origin_id, imported_from='GitHub'):
-        return Repository.query.filter_by(
-            origin_id=origin_id,
-            imported_from=imported_from
-        ).first()
-
     def route(self, rule, **options):
         app = self.app
         url_map = self.url_map
-        get_repo = self.get_repo
         url_map[URL_PREFIX + rule] = True
 
         def decorator(func):
             @app.route(URL_PREFIX + rule, **options)
             @wraps(func)
             def wrapper(username, name, *args, **kw):
-                repo = get_repo(username, name)
+                repo = repos_service.get(username, name)
                 if repo is None:
                     return abort(404)
                 ctx = RepositoryContext(url_map, repo)

@@ -2,10 +2,6 @@ from app import app
 
 @app.template_global()
 def issue_main_topics(issue):
-    topics = []
-    for topic in issue.topics:
-        if topic.group == 'language':
-            topics.insert(0, topic)
-        else:
-            topics.append(topic)
-    return topics[:4]
+    topics = sorted(issue.topics, key=lambda t: t.repositories_count)
+    topics = sorted(topics, key=lambda t: t.group != 'language')
+    return topics[:3]
