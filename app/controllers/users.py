@@ -136,7 +136,6 @@ def repositories():
 @users.route('/settings/github', methods=['GET', 'POST'])
 @login_required
 def user_github():
-    account = None
     if request.method == 'POST' and current_user.is_authenticated:
         action = request.form.get('action')
         if action == 'unlink':
@@ -149,11 +148,8 @@ def user_github():
         imported_from='GitHub'
     ).order_by(Repository.name).all()
     integration = github_helper.get_integration()
-    if current_user.github_token:
-        account = github_helper.get_user()
     return render_template('settings/github.html',
-                            integration=integration,
-                            account=account, repos=repos)
+                            integration=integration, repos=repos)
 
 @users.route('/settings/github/install', methods=['GET', 'POST'])
 @login_required
@@ -188,6 +184,8 @@ def authorized(access_token):
         current_user.github_id = user['id']
         current_user.github_token = access_token
         current_user.github_username = user['login']
+        if not current_user.avatar_url:
+            current_user.avatar_url = user['avatar_url']
         db.session.commit()
         return redirect(next_url)
     user = User.query.filter_by(github_id=user['id']).first()

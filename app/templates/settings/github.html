@@ -45,13 +45,13 @@
   <div class="card mb-3">
     <div class="card-header">
       Account
-      {% if account %}
+      {% if current_user.github_username %}
       <span class="label label-success">CONNECTED</span>
       {% endif %}
     </div>
     <div class="card-block">
-    {% if account %}
-      <p class="card-text">Your GitHub account <b>{{ account['login'] }}</b> is connected to {{ site_name }} to authenticate and link your organizations.
+    {% if current_user.github_username %}
+      <p class="card-text">Your GitHub account <b>{{ current_user.github_username }}</b> is connected to {{ site_name }} to authenticate and link your organizations.
   We will never do anything on GitHub without your permission.</p>
       <a href="{{ url_for('users.auth_github', next=url_for('users.user_github')) }}" class="btn btn-secondary">
         Reconnect GitHub
@@ -65,7 +65,7 @@
     {% endif %}
     </div>
   </div>
-  {% if integration or account %}
+  {% if integration or current_user.github_username %}
   <div class="card card-auto-divider mb-3">
     <div class="card-header">Danger Zone</div>
     <div class="card-block">
@@ -79,7 +79,7 @@
       <p class="card-text">You will not be able to edit your repositories linked to GitHub repositories anymore.</p>
     </div>
     {% endif %}
-    {% if account %}
+    {% if current_user.github_username %}
     <div class="card-block">
       <form method="post" action="{{ url_for('users.user_github') }}">
         <input type="hidden" name="action" value="unlink">
