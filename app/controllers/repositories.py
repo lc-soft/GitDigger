@@ -2,19 +2,20 @@ from app import app, db, login_manager
 from app.models.user import User
 from app.models.repository import Repository
 from app.helpers.github_helper import GitHubHelper
-from app.helpers.topics_helper import TopicsHelper
 from app.helpers.repositories_helper import RepositoriesHelper
 from app.helpers.application_helper import flash
+from app.services import issues_service
+from app.services import topics_service
 from flask import request, redirect, abort
 from flask import Blueprint, url_for, render_template
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm as Form
 from wtforms import SelectField, validators
+import requests
 
 repos = Blueprint('repos', __name__)
 repos_helper = RepositoriesHelper(repos)
 github_helper = GitHubHelper(app)
-topics_helper = TopicsHelper()
 
 class RepositoryForm(Form):
     full_name = SelectField('Repository')
@@ -40,7 +41,7 @@ def create(data):
         return
     try:
         for topic in repo.topics:
-            topics_helper.update_repos_count(topic)
+            topics_service.update_repos_count(topic)
         db.session.commit()
     except:
         db.session.rollback()
@@ -61,6 +62,45 @@ def delete(ctx):
         flash('Repository deletion failed', 'danger')
         ctx.render('settings/index.html')
 
+def import_issues(repo):
+    count = 0
+    params = { 'state': 'all', 'page': 1 }
+    url = 'https://api.github.com/repos/%s/%s/issues'
+    url = url %(repo.owner.github_username, repo.name)
+    while True:
+        try:
+            result = requests.get(url, params=params, timeout=10)
+        except:
+            flash('Issues import failed', 'danger')
+            return False
+        issues = result.json()
+        if len(issues) < 1:
+            break
+        for data in issues:
+            if data.get('pull_request'):
+                continue
+            issue = issues_service.get(data['id'])
+            if issue is None:
+                issue = issues_service.create(data, repo)
+                if issue is None:
+                    return False
+                db.session.add(issue)
+                continue
+            issues_service.update(issue, data)
+            count += 1
+        params['page'] += 1
+    try:
+        db.session.commit()
+        flash('%d issues imported successfully' % count, 'success')
+    except:
+        db.session.rollback()
+        flash('Issues import failed', 'danger')
+        return False
+    return True
+
+def import_pull_requests(repo):
+    pass
+
 @repos_helper.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings(ctx):
@@ -68,6 +108,17 @@ def settings(ctx):
     if request.method == 'POST' and action == 'delete':
         return delete(ctx)
     return ctx.render('settings/index.html')
+
+@repos_helper.route('/settings/github', methods=['GET', 'POST'])
+@login_required
+def github(ctx):
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'import-issues':
+            import_issues(ctx.repo)
+        elif action == 'import-pulls':
+            import_pull_requests(ctx.repo)
+    return ctx.render('settings/github.html')
 
 @github_helper.access_token_getter
 def token_getter():
