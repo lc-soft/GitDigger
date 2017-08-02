@@ -1,11 +1,35 @@
 {% extends "layouts/base.html" %}
 {% block title %}GitDigger{% endblock %}
 {% block secondary_navbar %}
-  <nav class="navbar navbar-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">Filters</a>
-    </div>
-  </nav>
+<nav class="navbar">
+  <div class="container">
+    <ul class="nav nav-light">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Top</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Today</a>
+          <a class="dropdown-item" href="#">Week</a>
+          <a class="dropdown-item" href="#">Month</a>
+          <a class="dropdown-item" href="#">Year</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Recent</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Starred</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Issues</a>
+          <a class="dropdown-item" href="#">Pull Requests</a>
+          <a class="dropdown-item" href="#">Releases</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 {% endblock %}
 {% block content %}
   <p>

@@ -1,57 +1,48 @@
-<header id="site-header">
-  <nav id="site-navbar" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
-    <div class="container">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#site-navbar-content" aria-controls="site-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="/">{{ site_name }}</a>
-      <div class="collapse navbar-collapse" id="site-navbar-content">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Stories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Activities</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Repositories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Users</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Topics</a>
-          </li>
-        </ul>
-        <span class="nav navbar-nav pull-md-right">
-          <ul class="nav navbar-nav">
-            {% if current_user.is_authenticated %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbar-user-dropdown" href="{{ url_for('users.show', username=current_user.username) }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ current_user.name }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-user-dropdown">
-                  <a class="dropdown-item" href="{{ url_for('repos.new') }}">Import repository</a>
-                  <a class="dropdown-item" href="{{ url_for('users.settings') }}">Settings</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ url_for('users.logout') }}">Sign out</a>
-                </div>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('users.login') }}">Sign in</a>
-              </li>                                                                                 
-              <li class="nav-item">
-                <span class="navbar-text">or</span>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('users.join') }}">Sign up</a>
-              </li>
-            {% endif %}
-          </span>
+<nav id="site-navbar" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#site-navbar-content" aria-controls="site-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">{{ site_name }}</a>
+    <div class="collapse navbar-collapse" id="site-navbar-content">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Stories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Topics</a>
+        </li>
+      </ul>
+      <span class="nav navbar-nav pull-md-right">
+        <ul class="nav navbar-nav">
+          {% if current_user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbar-user-dropdown" href="{{ url_for('users.show', username=current_user.username) }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ current_user.name }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-user-dropdown">
+                <a class="dropdown-item" href="{{ url_for('repos.new') }}">Import repository</a>
+                <a class="dropdown-item" href="{{ url_for('users.settings') }}">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url_for('users.logout') }}">Sign out</a>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{{ url_for('users.login') }}">Sign in</a>
+            </li>                                                                                 
+            <li class="nav-item">
+              <span class="navbar-text">or</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{{ url_for('users.join') }}">Sign up</a>
+            </li>
+          {% endif %}
         </span>
-      </div>
+      </span>
     </div>
-  </nav>
-  {% block secondary_navbar %}{% endblock %}
-</header>
+  </div>
+</nav>

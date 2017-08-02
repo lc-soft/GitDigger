@@ -1,14 +1,42 @@
 #site-navbar {
-    background: #2c3e50;
+  background: #2c3e50;
 }
 #site-header {
-    background: #fff;
+  background: #fff;
 }
 .nav-link.text-white {
+  &:hover {
+    opacity: .8;
+  }
+  &:active {
+    opacity: .6;
+  }
+}
+.nav-light {
+  .nav-link {
+    color: $gray-light;
+    border-radius: .25rem;
+    
     &:hover {
-        opacity: .8;
+      color: $link-color;
     }
     &:active {
-        opacity: .6;
+      color: $link-hover-color;
     }
+    &.active {
+      color: $link-color;
+    }
+  }
+}
+.header-fixed-top {
+  #site-header {
+    top: -56px;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+  }
+  #site-content {
+    margin-top: 112px;
+  }
 }

@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
 </head>
 <body>
+  <header id="site-header">
   {% include 'layouts/_header.html' %}
+  {% block secondary_navbar %}{% endblock %}
+  </header>
   <div id="site-content">
     {% include 'layouts/_flashes.html' %}
     <div class="page-content">
