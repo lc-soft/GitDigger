@@ -1,0 +1,30 @@
+.label {
+  margin: 0;
+  color: #666;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 11px;
+  padding: 3px 4px 4px;
+  vertical-align: middle;
+  border-radius: 3px;
+  display: inline-block;
+  background-color: #eee;
+}
+.label.label-success {
+  color: $color-light-green;
+  border-color: $color-light-green;
+  background-color: rgba($color-light-green, .1);
+}
+.label.label-primary {
+  color: $brand-primary;
+  border-color: $brand-primary;
+  background-color: rgba($brand-primary, .1);
+}
+a.label.label-primary {
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    background-color: $brand-primary;
+  }
+}

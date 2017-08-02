@@ -1,0 +1,20 @@
+.link-muted {
+  color: $text-muted;
+  
+  &:hover {
+    color: $link-color;
+  }
+  &:active {
+    color: $link-hover-color;
+  }
+}
+.link-gray-dark {
+  color: $gray-dark;
+  
+  &:hover {
+    color: $link-color;
+  }
+  &:active {
+    color: $link-hover-color;
+  }
+}

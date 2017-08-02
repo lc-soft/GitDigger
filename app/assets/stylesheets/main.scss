@@ -1,28 +1,11 @@
 @import "~bootstrap/scss/variables";
 @import "bootstrap-custom";
+@import "variables";
 @import "navbar";
+@import "label";;
+@import "link";
 @import "footer";
 
-.link-muted {
-  color: $text-muted;
-  
-  &:hover {
-    color: $link-color;
-  }
-  &:active {
-    color: $link-hover-color;
-  }
-}
-.link-gray-dark {
-  color: $gray-dark;
-  
-  &:hover {
-    color: $link-color;
-  }
-  &:active {
-    color: $link-hover-color;
-  }
-}
 #site-content {
   background: #ecf0f1;
 }
@@ -44,38 +27,6 @@
     &:after {
       display: none;
     }
-  }
-}
-.label {
-    display: inline-block;
-    margin: 0;
-    padding: 3px 4px 4px;
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 11px;
-    vertical-align: middle;
-    border-radius: 3px;
-    color: #666;
-    background-color: #eee;
-}
-$color-light-green: #2ed886;
-
-.label.label-success {
-  color: $color-light-green;
-  border-color: $color-light-green;
-  background-color: rgba($color-light-green, .1);
-}
-.label.label-primary {
-  color: $brand-primary;
-  border-color: $brand-primary;
-  background-color: rgba($brand-primary, .1);
-}
-a.label.label-primary{
-  text-decoration: none;
-
-  &:hover {
-    color: #fff;
-    background-color: $brand-primary;
   }
 }
 .issue-list-group {
