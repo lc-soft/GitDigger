@@ -5,7 +5,7 @@
   <div class="container">
     <ul class="nav nav-light">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Top</a>
+        <a class="nav-link dropdown-toggle {{ 'active ' if secondary_navbar_active == 'top' }}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Top</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Today</a>
           <a class="dropdown-item" href="#">Week</a>
@@ -20,7 +20,7 @@
         <a class="nav-link" href="#">Starred</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
+        <a class="nav-link dropdown-toggle {{ 'active ' if secondary_navbar_active == 'type' }}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Issues</a>
           <a class="dropdown-item" href="#">Pull Requests</a>

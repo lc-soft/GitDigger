@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="site-navbar-content">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Stories</a>
+          <a class="nav-link {{ 'active' if navbar_active == 'stories' }}" href="/">Stories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Explore</a>
+          <a class="nav-link {{ 'active' if navbar_active == 'explore' }}" href="/">Explore</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Topics</a>
+          <a class="nav-link {{ 'active' if navbar_active == 'topics' }}" href="/">Topics</a>
         </li>
       </ul>
       <span class="nav navbar-nav pull-md-right">
