@@ -7,5 +7,5 @@ class UsersHelper(object):
 
 @app.template_global()
 def user_avatar_tag(user):
-    return  Markup('<img class="user-avatar" alt="%s" src="%s">' %
-                   (user.username, user.avatar_url))
+    return  Markup('<img class="user-avatar" title="%s" alt="%s" src="%s">' %
+                   (user.username, user.username, user.avatar_url))

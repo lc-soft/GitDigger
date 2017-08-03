@@ -46,6 +46,9 @@
         <li class="list-group-item">
           <div class="issue-image">
             {{ user_avatar_tag(issue.user) }}
+            {% if issue.user.id != issue.repository.owner.id %}
+              {{ repo_logo_tag(issue.repository) }}
+            {% endif %}
           </div>
           <div class="issue-content">
             <a class="link-gray-dark" href="">{{ issue.title }}</a>

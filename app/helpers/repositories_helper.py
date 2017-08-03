@@ -2,7 +2,7 @@ from app import app
 from app.models.repository import Repository
 from app.services import repositories_service as repos_service
 from werkzeug.contrib.cache import SimpleCache
-from flask import abort, render_template
+from flask import abort, render_template, Markup
 from functools import wraps
 
 cache = SimpleCache()
@@ -58,3 +58,15 @@ def get_repos_count():
     count = Repository.query.count()
     cache.set('repos_count', count, 600)
     return count
+
+class UsersHelper(object):
+    def __init__(self, app):
+        self.app = app
+
+@app.template_global()
+def repo_logo_tag(repo):
+    url = repo.logo_url
+    if not url:
+        url = repo.owner.avatar_url
+    return  Markup('<img class="repo-logo" title="%s" alt="%s" src="%s">' %
+                   (repo.name, repo.name, url))
