@@ -20,9 +20,15 @@
   border-color: $brand-primary;
   background-color: rgba($brand-primary, .1);
 }
-a.label.label-primary {
+a.label {
   text-decoration: none;
+  opacity: .8;
 
+  &:hover {
+    opacity: 1;
+  }
+}
+a.label.label-primary {
   &:hover {
     color: #fff;
     background-color: $brand-primary;

@@ -30,6 +30,9 @@
   }
 }
 .issue-list-group {
+  .list-group-item {
+    flex-flow: row;
+  }
   .issue-image img {
     width: 44px;
     height: 44px;
@@ -40,5 +43,8 @@
   }
   .issue-description {
     font-size: small;
+  }
+  .issue-topics {
+    display: inline-block;
   }
 }
