@@ -1,4 +1,4 @@
-.link-muted {
+.link-muted, .links-muted a {
   color: $text-muted;
   
   &:hover {
@@ -8,7 +8,7 @@
     color: $link-hover-color;
   }
 }
-.link-gray-dark {
+.link-gray-dark, .links-gray-dark a {
   color: $gray-dark;
   
   &:hover {

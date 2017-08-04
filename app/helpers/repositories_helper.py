@@ -59,9 +59,11 @@ def get_repos_count():
     cache.set('repos_count', count, 600)
     return count
 
-class UsersHelper(object):
-    def __init__(self, app):
-        self.app = app
+@app.template_global()
+def repo_link_tag(repo):
+    return Markup('<a href="%s" class="repo-link">%s/%s</a>' % (
+        repo.html_url, repo.owner.username, repo.name
+    ))
 
 @app.template_global()
 def repo_logo_tag(repo):

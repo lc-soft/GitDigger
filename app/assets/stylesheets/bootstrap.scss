@@ -1,7 +1,7 @@
 // Core variables and mixins
+@import "bootstrap-custom";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import "bootstrap-custom";
 
 // Reset and dependencies
 @import "~bootstrap/scss/normalize";
@@ -45,3 +45,7 @@
 
 // Utility classes
 @import "~bootstrap/scss/utilities";
+
+html, body {
+  font-size: 15px;
+}

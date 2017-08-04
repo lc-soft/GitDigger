@@ -6,9 +6,9 @@ from flask import render_template
 @app.route('/')
 def index():
     topics = Topic.query.limit(20).all()
-    issues = Issue.query.all()
+    feeds = Issue.query.all()
     ctx = {
         'navbar_active': 'stories',
         'secondary_navbar_active': 'top'
     }
-    return render_template('index.html', topics=topics, issues=issues, **ctx)
+    return render_template('index.html', topics=topics, feeds=feeds, **ctx)

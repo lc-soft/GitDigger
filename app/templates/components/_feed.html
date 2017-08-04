@@ -1,0 +1,40 @@
+<div class="feed">
+  <div class="meta links-gray-dark clearfix">
+    <div class="image">
+      {{ user_avatar_tag(feed.user) }}
+    </div>
+    <div class="content">
+      <div class="source">
+        <a href="">{{ feed.user.name }}</a>
+        <b>&gt;</b>
+        {{ repo_link_tag(feed.repository) }}
+      </div>
+      <div class="description">Opened issue at {{ feed.created_at | timesince }}
+      {% if feed.topics | length > 0 %}
+        •
+        <div class="topics">
+          {% set topics = topics_sorted(feed.topics) %}
+          <a href="{{ url_for_topic(topic) }}" class="label" style="{{ topic_color_style(topics[0]) }}">{{ topics[0].name }}</a>
+          {% if feed.topics | length > 1 %}
+          <a data-toggle="dropdown">+{{ topics | length - 1 }}</a>
+          <div class="dropdown-menu">
+          {% for topic in topics[1:] %}
+            <a href="{{ url_for_topic(topic) }}" class="dropdown-item">{{ topic.name }}</a>
+          {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="header">
+    <a class="link-gray-dark" href="">{{ feed.title }}</a>
+  </div>
+  <div class="content">
+    {{ feed.body | safe }}
+  </div>
+  <div class="extra content">
+    
+  </div>
+</div>
