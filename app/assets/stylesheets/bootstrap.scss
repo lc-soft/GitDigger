@@ -49,3 +49,11 @@
 html, body {
   font-size: 15px;
 }
+@font-face {
+  font-family: "octicons";
+  src: url("/static/fonts/octicons.eot?#iefix") format("embedded-opentype"),
+  url("/static/fonts/octicons.woff") format("woff"),
+  url("/static/fonts/octicons.woff2") format("woff2"),
+  url("/static/fonts/octicons.ttf") format("truetype"),
+  url("/static/fonts/octicons.svg#octicons") format("svg");
+}

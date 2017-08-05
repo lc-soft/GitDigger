@@ -6,6 +6,7 @@ node_modules
 .sass-cache
 static/stylesheets/
 static/javascripts/
+static/fonts/
 
 # C extensions
 *.so

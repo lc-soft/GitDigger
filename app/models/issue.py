@@ -14,6 +14,7 @@ class Issue(db.Model):
     state = db.Column(db.String(32), nullable=False, default='open')
     title = db.Column(db.String(256), nullable=False)
     body = db.Column(db.String(4096), default='')
+    body_html = db.Column(db.String(4096), default='')
     repository = db.relationship('Repository', uselist=False)
     repository_id = db.Column(db.Integer, db.ForeignKey('repository.id'),
                               nullable=False)

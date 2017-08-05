@@ -25,9 +25,12 @@
     "css-loader": "^0.28.4",
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^3.0.0",
+    "fontgen-loader": "^0.2.1",
     "node-sass": "^4.5.3",
+    "octicons": "^5.0.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "webfonts-loader": "^2.0.2",
     "webpack": "^3.4.1"
   },
   "dependencies": {

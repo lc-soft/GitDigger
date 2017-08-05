@@ -1,0 +1,60 @@
+.feed-card {
+  position: relative;
+  background: #fff;
+  padding: 16px 18px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+.feed {
+  .user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+  }
+  .repo-link {
+    color: $green !important;
+
+    &:hover {
+      color: darken($green, 15%) !important;
+    }
+  }
+  .meta {
+    font-weight: 500;
+    margin-bottom: 8px;
+
+    .image {
+      float: left;
+    }
+    .content {
+      margin-left: 54px;
+    }
+    .description {
+      color: $gray-light;
+      line-height: 20px;
+      font-size: small;
+    }
+    .topics {
+      display: inline-block;
+    }
+  }
+  .header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+
+    .label {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      font-size: 1em;  
+      line-height: 24px;
+      text-align: center;
+      border-radius: 4px;
+      display: inline-block;
+    }
+  }
+  > .content {
+    margin-bottom: 8px;
+  }
+}

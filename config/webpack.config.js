@@ -46,6 +46,14 @@ module.exports = {
       }, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      }, {
+        test: /\.font\.js/,
+        loader: ExtractTextPlugin.extract({
+          use: [
+            'css-loader',
+            'webfonts-loader'
+          ]
+        })
       }
     ]
   },

@@ -9,6 +9,20 @@ def flash(message, category='info'):
 def get_copyright_year():
     return datetime.now().year
 
+@app.template_global()
+def feed_icon(feed):
+    label_class = 'label'
+    icon_class = 'octicon'
+    if feed.state == 'open':
+        icon_class += ' octicon-issue-opened'
+        label_class += ' label-green'
+    else:
+        icon_class += ' octicon-issue-closed'
+        label_class += ' label-red'
+    return flask.Markup('''<span class="%s">
+      <i class="%s"></i>
+    </span>''' % (label_class, icon_class))
+
 @app.template_filter()
 def timesince(dt, default='just now'):
     """

@@ -5,10 +5,13 @@ from flask import render_template
 
 @app.route('/')
 def index():
-    topics = Topic.query.limit(20).all()
+    topics = Topic.query.order_by(
+        Topic.group.desc(),
+        Topic.issues_count.desc()
+    ).limit(10).all()
     feeds = Issue.query.all()
     ctx = {
         'navbar_active': 'stories',
-        'secondary_navbar_active': 'top'
+        'feeds_sort_active': 'top'
     }
     return render_template('index.html', topics=topics, feeds=feeds, **ctx)

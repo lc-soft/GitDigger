@@ -5,9 +5,10 @@
 @import "label";;
 @import "link";
 @import "footer";
+@import "feed";
 
 #site-content {
-  background: #ecf0f1;
+  background: $body-bg-color;
 }
 .page-content {
     padding: 20px 0;
@@ -29,65 +30,69 @@
     }
   }
 }
-.issue-list-group {
-  .list-group-item {
-    flex-flow: row;
-  }
-  .issue-image {
-    position: relative;
-  }
-  .issue-content {
-    margin-left: 1.25rem;
-  }
-  .issue-description {
-    font-size: small;
-  }
-  .issue-topics {
-    display: inline-block;
-  }
+.octicon {
+  display: inline-block;
 }
-.feed-card {
-    position: relative;
-    background: #fff;
-    padding: 16px 18px;
-    margin-bottom: 8px;
-    border-radius: 2px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+.text-faded {
+  color: #ccc;
 }
-.feed {
-  .user-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 4px;
-  }
-  .repo-link {
-    color: $green !important;
-
-    &:hover {
-      color: darken($green, 15%) !important;
-    }
-  }
-  .meta {
-    font-weight: 500;
-    margin-bottom: 4px;
-
-    .image {
-      float: left;
-    }
-    .content {
-      margin-left: 54px;
-    }
-    .description {
-      color: $gray-light;
-      line-height: 20px;
-      font-size: small;
-    }
-    .topics {
-      display: inline-block;
-    }
-  }
-  .header {
+.section-header {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $hr-border-color;
+}
+.home-sidebar {
+  h3 {
+    font-size: 1em;
     font-weight: bold;
-    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $hr-border-color;
   }
+  .nav {
+    margin-bottom: 1rem;
+
+    .nav-link.active {
+      color: #000;
+      background-color: darken($body-bg-color, 7);
+    }
+  }
+}
+.markdown-body {
+  img {
+    max-width: 100%;
+  }
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+  }
+}
+.btn-primary-light {
+  cursor: pointer;
+  color: mix($brand-primary, #fff, 80);
+  background-color: mix($brand-primary, #fff, 10);
+  border-color: mix($brand-primary, #fff, 20);
+
+  &:hover {
+    color: $brand-primary;
+    border-color: mix($brand-primary, #fff, 80);
+  }
+  &:active {
+    border-color: mix($brand-primary, #fff, 70);
+  }
+}
+.btn-flat {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+@media (min-width: 1200px) {
+.container {
+    width: 960px;
+}
 }

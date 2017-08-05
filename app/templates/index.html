@@ -1,46 +1,33 @@
 {% extends "layouts/base.html" %}
 {% block title %}GitDigger{% endblock %}
-{% block secondary_navbar %}
-<nav class="navbar">
-  <div class="container">
-    <ul class="nav nav-light">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle {{ 'active ' if secondary_navbar_active == 'top' }}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Top</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Today</a>
-          <a class="dropdown-item" href="#">Week</a>
-          <a class="dropdown-item" href="#">Month</a>
-          <a class="dropdown-item" href="#">Year</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Recent</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Starred</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle {{ 'active ' if secondary_navbar_active == 'type' }}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Issues</a>
-          <a class="dropdown-item" href="#">Pull Requests</a>
-          <a class="dropdown-item" href="#">Releases</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-{% endblock %}
 {% block content %}
   <div class="row">
-    <div class="col col-md-8">
-      <p>
-        Topics:
-        <a href="{{ url_for('index') }}">All</a>
-        {% for topic in topics %}
-          <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
-        {% endfor %}
-      </p>
+    <div class="col col-md-3">
+      <div class="home-sidebar">
+        <h3>Feeds</h3>
+        <ul class="nav nav-pills links-muted flex-column">
+          <a class="nav-link{{ ' active' if feeds_sort_active == 'top' }}" href="/">Top Stories</a>
+          <a class="nav-link{{ ' active' if feeds_sort_active == 'recent' }}" href="/">Recent Stories</a>
+        </ul>
+        <h3>Topics</h3>
+        <ul class="nav nav-pills links-muted topics-nav flex-column">
+          {% for topic in topics %}
+          <a href="{{ url_for_topic(topic) }}" class="nav-link">
+            <span class="label label-circular" style="{{ topic_color_style(topic) }}"></span>
+            {{ topic.name }}
+          </a>
+          {% endfor %}
+          <a href="/" class="nav-link">More...</a>
+        </ul>
+      </div>
+    </div>
+    <div class="col col-md-9">
+      <div class="section-header">
+        <span class="label label-red">
+          <i class="octicon octicon-flame"></i>
+        </span>
+        Top Stories To Watch
+      </div>
       <div class="feed-list">
         {% for feed in feeds %}
           <div class="feed-card">
@@ -48,9 +35,6 @@
           </div>
         {% endfor %}
       </div>
-    </div>
-    <div class="col col-md-4">
-
     </div>
   </div>
 {% endblock %}
