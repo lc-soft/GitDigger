@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/common.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
 </head>
-<body>
+<body class="{{ body_class if body_class }}">
+  {% block header %}
   <header id="site-header">
   {% include 'layouts/_header.html' %}
-  {% block secondary_navbar %}{% endblock %}
   </header>
+  {% endblock %}
   <div id="site-content">
     {% include 'layouts/_flashes.html' %}
     <div class="page-content">

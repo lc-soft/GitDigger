@@ -17,11 +17,7 @@ login_manager.login_view = 'users.login'
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=32)])
     email = TextField('Email Address', [validators.Length(min=6, max=32)])
-    password = PasswordField('New Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
+    password = PasswordField('Password', [validators.Required()])
 
     def validate(self):
         if not Form.validate(self):

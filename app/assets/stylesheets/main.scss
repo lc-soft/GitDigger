@@ -59,6 +59,20 @@
     }
   }
 }
+.auth-form {
+  max-width: 340px;
+  margin: 0 auto;
+}
+.auth-form-header {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+.signin {
+  background: $body-bg-color;
+}
 .markdown-body {
   img {
     max-width: 100%;
