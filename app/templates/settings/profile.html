@@ -1,18 +1,41 @@
 {% extends "layouts/settings.html" %}
 {% block title %}Your Profile{% endblock %}
 {% block settings_content %}
-  <div class="card">
-    <div class="card-header">Public profile</div>
-    <div class="card-block">
-      {% from "_formhelpers.html" import render_field %}
-      <form method="post" action="{{ url_for('users.profile') }}">
-        {{ form.csrf_token }} 
-        <div class="form-group">
-          {{ render_field(form.name) }}
-          {{ render_field(form.bio) }}
-          <p><input class="btn btn-primary" type="submit" value="Update profile"></p>
-        </div>
-      </form>
-    </div>
+<div class="card mb-3">
+  <div class="card-header">Public profile</div>
+  <div class="card-block">
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post" action="{{ url_for('users.profile') }}">
+      {{ form.csrf_token }} 
+      <div class="form-group">
+        {{ render_field(form.name) }}
+        {{ render_field(form.bio) }}
+        <p><input class="btn btn-primary" type="submit" value="Update profile"></p>
+      </div>
+    </form>
   </div>
+</div>
+<div class="card">
+  <div class="card-header">Points</div>
+  <div class="card-block">
+    <p class="card-text">You have <b>{{current_user.points}}</b> points.</p>
+    <p class="card-text"><b>History</b></p>
+    <table class="table table-bordered">
+      <thead>
+        <th>Time</th>
+        <th>Points</th>
+        <th>Reason</th>
+      </thead>
+      <tbody>
+        {% for log in point_logs %}
+        <tr>
+          <td>{{ log.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+          <td>{{ log.points }}</td>
+          <td>{{ log.reason }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

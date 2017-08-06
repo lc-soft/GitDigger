@@ -130,23 +130,26 @@ def settings():
 @login_required
 def profile():
     user = current_user
+    point_logs = PointLog.query.order_by('created_at DESC').limit(20)
     form = ProfileForm(request.form, name=user.name, bio=user.bio)
     if request.method == 'POST' and form.validate_on_submit():
         current_user.name = form.name.data
         current_user.bio = form.bio.data
         db.session.commit()
         flash('Profile updated successfully')
-    return render_template('settings/profile.html', form=form)
+    return render_template('settings/profile.html', form=form,
+                            sidebar_active='profile', point_logs=point_logs)
 
 @users.route('/settings/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('settings/account.html')
+    return render_template('settings/account.html', sidebar_active='account')
 
 @users.route('/settings/repositories', methods=['GET', 'POST'])
 @login_required
 def repositories():
-    return render_template('settings/repositories.html')
+    return render_template('settings/repositories.html',
+                            sidebar_active='repositories')
 
 @users.route('/settings/github', methods=['GET', 'POST'])
 @login_required
@@ -163,8 +166,8 @@ def user_github():
         imported_from='GitHub'
     ).order_by(Repository.name).all()
     integration = github_helper.get_integration()
-    return render_template('settings/github.html',
-                            integration=integration, repos=repos)
+    return render_template('settings/github.html', integration=integration,
+                            repos=repos, sidebar_active='github')
 
 @users.route('/settings/github/install', methods=['GET', 'POST'])
 @login_required
