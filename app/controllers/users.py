@@ -1,10 +1,13 @@
+from config import points
+from datetime import datetime
 from app import app, db, login_manager
 from app.models.user import User
+from app.models.point_log import PointLog
 from app.models.repository import Repository
 from app.helpers.github_helper import GitHubHelper
 from app.helpers.application_helper import flash
 from flask import Blueprint, url_for, render_template
-from flask import jsonify, request, redirect, session
+from flask import jsonify, request, redirect, session, abort
 from wtforms import TextField, TextAreaField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import logout_user, login_required, login_user, current_user
@@ -66,6 +69,16 @@ class ProfileForm(Form):
     name = TextField('Name', [validators.Length(max=32)])
     bio = TextAreaField('Bio', [validators.Length(max=160)])
 
+def get_login_reward(user):
+    now = datetime.now()
+    if now.date() == user.last_login_reward_at.date():
+        return False
+    log = PointLog('login_reward', points.LOGIN_REWARD, None, user)
+    user.points += points.LOGIN_REWARD
+    user.last_login_reward_at = now
+    db.session.add(log)
+    return True
+
 @users.route('/join', methods=['GET', 'POST'])
 def join():
     form = RegistrationForm(request.form)
@@ -80,7 +93,13 @@ def join():
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.query.get(int(userid))
+    user = User.query.get(int(userid))
+    if user and get_login_reward(user):
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+    return user
 
 @users.route('/logout')
 @login_required
@@ -100,7 +119,7 @@ def login():
 
 @users.route('/<string:username>')
 def show(username):
-    pass
+    return abort(404)
 
 @users.route('/settings')
 @login_required

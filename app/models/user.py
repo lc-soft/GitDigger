@@ -8,6 +8,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
     bio = db.Column(db.String(180))
+    points = db.Column(db.Integer, default=5)
     avatar_url = db.Column(db.String(256))
     owner = db.Column(db.String(32), nullable=False, default='user')
     github_id = db.Column(db.Integer, unique=True)
@@ -15,6 +16,7 @@ class User(db.Model):
     github_token = db.Column(db.String(300), unique=True)
     password = db.Column(db.String(300))
     created_at = db.Column(db.DateTime)
+    last_login_reward_at = db.Column(db.DateTime)
 
     def __init__(self, username, email, password, name=None):
         self.email = email

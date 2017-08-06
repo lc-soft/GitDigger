@@ -1,0 +1,2 @@
+LOGIN_REWARD = 5
+VOTE = -1
