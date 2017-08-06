@@ -6,6 +6,7 @@ module.exports = {
   context: path.join(__dirname, '../app/assets/javascripts'),
   entry: {
     vendor: './vendor.js',
+    common: './common.js',
     app: './main.coffee'
   },
 
