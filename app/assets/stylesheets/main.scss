@@ -23,10 +23,10 @@
       bottom: -$card-spacer-x;
       border-top: 1px solid $hr-border-color;
     }
-  }
-  &:last-child {
-    &:after {
-      display: none;
+    &:last-child {
+      &:after {
+        display: none;
+      }
     }
   }
 }
@@ -70,6 +70,14 @@
   margin-bottom: 1rem;
   letter-spacing: -0.5px;
 }
+.card {
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+.card-header {
+  border-color: #eee;
+}
+
 .signin {
   background: $body-bg-color;
 }
