@@ -2,6 +2,7 @@
   <div class="meta links-gray-dark clearfix">
     <div class="image">
       {{ user_avatar_tag(feed.user) }}
+      {{ feed_icon(feed) }}
     </div>
     <div class="content">
       {% if feed.topics | length > 0 %}
@@ -32,10 +33,9 @@
     </div>
   </div>
   <div class="header">
-    {{ feed_icon(feed) }}
     <a class="link-gray-dark" href="{{ feed.html_url }}" target="_blank">{{ feed.title }}</a>
   </div>
-  <div class="content markdown-body">
+  <div class="content">
     {{ feed.body_html | striptags | truncate }}
   </div>
   <div class="extra-content">
