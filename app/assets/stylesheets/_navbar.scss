@@ -2,7 +2,24 @@
   background: #2c3e50;
 }
 #site-header {
-  background: #fff;
+  .user-avatar {
+    width: 38px;
+    height: 38px;
+  }
+  .nav-link .user-avatar {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #454a50;
+  }
+  .user-name {
+    display: block;
+  }
+  .user-info {
+    margin-left: 50px;
+  }
+  .dropdown-header .user-avatar {
+    float: left;
+  }
 }
 .nav-link.text-white {
   &:hover {
@@ -26,17 +43,5 @@
     &.active {
       color: $link-color;
     }
-  }
-}
-.header-fixed-top {
-  #site-header {
-    top: -56px;
-    width: 100%;
-    z-index: 100;
-    position: fixed;
-    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
-  }
-  #site-content {
-    margin-top: 112px;
   }
 }
