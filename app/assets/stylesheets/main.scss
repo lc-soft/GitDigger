@@ -70,14 +70,9 @@
   margin-bottom: 1rem;
   letter-spacing: -0.5px;
 }
-.card {
-  border: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+.user-avatar {
+  border-radius: 4px;
 }
-.card-header {
-  border-color: #eee;
-}
-
 .signin {
   background: $body-bg-color;
 }
@@ -96,8 +91,8 @@
 }
 .btn-primary-light {
   cursor: pointer;
-  color: mix($brand-primary, #fff, 80);
-  background-color: mix($brand-primary, #fff, 10);
+  color: mix($brand-primary, #fff, 70);
+  background-color: mix($brand-primary, #fff, 8);
   border-color: mix($brand-primary, #fff, 20);
 
   &:hover {
