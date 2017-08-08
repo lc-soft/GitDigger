@@ -1,16 +1,6 @@
-config = {
-    'app_id': 'GitHub App ID',
-    'app_name': 'GitHub App Name',
-    'client_id': 'GitHub Client ID',
-    'client_secret': 'GitHub Client secret',
-    'webhook_secret': 'Webhook secret (optional)',
-    'webhook_url': 'Webhook URL (default: /api/webhook)'
-}
-
-def init_app(app):
-    app.config['GITHUB_APP_ID'] = config['app_id']
-    app.config['GITHUB_APP_NAME'] = config['app_name']
-    app.config['GITHUB_CLIENT_ID'] = config['client_id']
-    app.config['GITHUB_CLIENT_SECRET'] = config['client_secret']
-    app.config['GITHUB_WEBHOOK_SECRET'] = config['webhook_secret']
-    app.config['GITHUB_WEBHOOK_URL'] = config['webhook_url']
+GITHUB_APP_ID = 12345
+GITHUB_APP_NAME = 'GitHub App Name'
+GITHUB_CLIENT_ID = 'GitHub Client ID'
+GITHUB_CLIENT_SECRET = 'GitHub Client secret'
+GITHUB_WEBHOOK_SECRET = 'Webhook secret (optional)'
+GITHUB_WEBHOOK_URL = 'Webhook URL (default: /api/webhook)'

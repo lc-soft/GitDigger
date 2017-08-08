@@ -1,4 +1,4 @@
-def init_app(app):
+def get_datebase_uri():
     config = {
         'user': 'gitdigger',
         'pw': '123456',
@@ -6,6 +6,7 @@ def init_app(app):
         'host': 'localhost',
         'port': '5432'
     }
-    uri = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % config
-    app.config['SQLALCHEMY_DATABASE_URI'] = uri
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    return 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % config
+
+SQLALCHEMY_DATABASE_URI = get_datebase_uri()
+SQLALCHEMY_TRACK_MODIFICATIONS = True
