@@ -8,7 +8,6 @@ def get(github_id):
 
 def create(data):
     pw = generate_password_hash(str(random()))
-    print data
     email = 'github_%s@%s' % (data['login'], site.config['domain'])
     user = User(data['login'], email, pw, data.get('name'))
     user.github_id = data['id']

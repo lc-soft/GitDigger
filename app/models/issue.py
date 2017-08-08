@@ -22,6 +22,8 @@ class Issue(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     html_url = db.Column(db.String(256), nullable=False)
     comments_count = db.Column(db.Integer, default=0)
+    score = db.Column(db.Integer, default=1)
+    points = db.Column(db.Integer, default=1)
     topics = db.relationship('Topic', secondary=topics,
                              backref=db.backref('issue', lazy='dynamic'))
     created_at = db.Column(db.DateTime)
