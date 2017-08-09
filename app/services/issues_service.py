@@ -5,7 +5,10 @@ from app.services import users_service
 from app.services import topics_service
 from app.services import repositories_service as repos_service
 
-def get(origin_id):
+def get(issue_id):
+    return Issue.query.get(issue_id)
+
+def get_by_origin_id(origin_id):
     return Issue.query.filter_by(origin_id=origin_id).first()
 
 def create(data, repo):

@@ -6,6 +6,9 @@ from werkzeug.security import generate_password_hash
 def get(github_id):
     return User.query.filter_by(github_id=github_id).first()
 
+def get_by_username(username):
+    return User.query.filter_by(username=username).first()
+
 def create(data):
     pw = generate_password_hash(str(random()))
     email = 'github_%s@%s' % (data['login'], site.config['domain'])

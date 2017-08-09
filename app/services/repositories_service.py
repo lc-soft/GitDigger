@@ -10,7 +10,7 @@ def get(username, name):
         return None
     return repo
 
-def get_by_id(origin_id, imported_from='GitHub'):
+def get_by_origin_id(origin_id, imported_from='GitHub'):
     return Repository.query.filter_by(
         origin_id=origin_id,
         imported_from=imported_from
