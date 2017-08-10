@@ -39,8 +39,12 @@
     {{ feed.body_html | striptags | truncate }}
   </div>
   <div class="extra-content">
-    <button type="button" class="btn btn-flat btn-primary-light">Upvote</button>
-    <a class="link-muted ml-4" href="{{ feed.html_url }}">
+    <button type="button" class="btn btn-vote btn-flat btn-primary-light"
+      data-action="upvote" data-vote-url="{{ url_for_vote(feed) }}"
+      data-vote-count="{{ feed.points }}" data-text-upvoted="Upvoted" data-voted="0">
+      <span class="text">Upvote</span> | <b class="count">{{ feed.points }}</b>
+    </button>
+    <a class="link-muted ml-3" href="{{ feed.html_url }}">
       <i class="octicon octicon-comment-discussion"></i> {{ feed.comments_count }} comments
     </a>
   </div>

@@ -9,7 +9,7 @@ def index():
         Topic.group.desc(),
         Topic.issues_count.desc()
     ).limit(10).all()
-    feeds = Issue.query.order_by('score DESC').all()
+    feeds = Issue.query.order_by(Issue.score.desc()).all()
     ctx = {
         'navbar_active': 'stories',
         'feeds_sort_active': 'top'

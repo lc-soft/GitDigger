@@ -1,6 +1,7 @@
 import flask
 from app import app
 from datetime import datetime
+from flask_login import current_user
 
 def flash(message, category='info'):
     flask.flash(message, category)
@@ -22,6 +23,16 @@ def feed_icon(feed):
     return flask.Markup('''<span class="%s">
       <i class="%s"></i>
     </span>''' % (label_class, icon_class))
+
+@app.template_global()
+def url_for_vote(target):
+    if not current_user.is_authenticated:
+        return ''
+    print target.__tablename__
+    if target.__tablename__ == 'issue':
+        return flask.url_for('api.issue_voters', issue_id=target.id,
+                            username=current_user.username)
+    return ''
 
 @app.template_filter()
 def timesince(dt, default='just now'):

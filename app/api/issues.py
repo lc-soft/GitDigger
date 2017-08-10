@@ -46,4 +46,5 @@ class IssueVoters(Resource):
         return voter
 
 api.add_resource(IssueVoters, '/api/issues/<string:issue_id>'
-                              '/voters/<string:username>')
+                              '/voters/<string:username>',
+                              endpoint='api.issue_voters')
