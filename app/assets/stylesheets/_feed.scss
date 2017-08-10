@@ -71,6 +71,13 @@
     }
   }
   > .content {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .extra-content {
+    font-size: small;
+
+    .btn {
+      vertical-align: baseline;
+    }
   }
 }

@@ -93,7 +93,7 @@
   cursor: pointer;
   color: mix($brand-primary, #fff, 70);
   background-color: mix($brand-primary, #fff, 8);
-  border-color: mix($brand-primary, #fff, 20);
+  border-color: mix($brand-primary, #fff, 25);
 
   &:hover {
     color: $brand-primary;
@@ -102,11 +102,14 @@
   &:active {
     border-color: mix($brand-primary, #fff, 70);
   }
+  &[disabled] {
+    color: mix($brand-primary, #fff, 70);
+    border-color: mix($brand-primary, #fff, 25);
+  }
 }
 .btn-flat {
-  font-size: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  font-size: 13px;
+  padding: 5px 8px;
 }
 @media (min-width: 1200px) {
 .container {
