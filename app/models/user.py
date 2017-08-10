@@ -1,5 +1,4 @@
 from app import db
-from flask import Flask
 from datetime import datetime
 
 class User(db.Model):
@@ -15,8 +14,9 @@ class User(db.Model):
     github_username = db.Column(db.String(64), unique=True)
     github_token = db.Column(db.String(300), unique=True)
     password = db.Column(db.String(300))
-    created_at = db.Column(db.DateTime)
-    last_login_reward_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_active_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_login_reward_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, username, email, password, name=None):
         self.email = email
@@ -26,7 +26,6 @@ class User(db.Model):
             self.name = username
         else:
             self.name = name
-        self.created_at = datetime.now()
 
     is_authenticated = True
     is_anonymous =  False

@@ -94,6 +94,7 @@ def join():
 @login_manager.user_loader
 def load_user(userid):
     user = User.query.get(int(userid))
+    user.last_active_at = datetime.now()
     if user and get_login_reward(user):
         try:
             db.session.commit()
