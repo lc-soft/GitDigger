@@ -28,6 +28,8 @@
     "fontgen-loader": "^0.2.1",
     "node-sass": "^4.5.3",
     "octicons": "^5.0.1",
+    "postcss-loader": "^2.0.6",
+    "precss": "^2.0.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webfonts-loader": "^2.0.2",
