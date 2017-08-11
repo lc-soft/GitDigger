@@ -107,9 +107,12 @@
     border-color: mix($brand-primary, #fff, 25);
   }
 }
-.btn-flat {
-  font-size: 13px;
-  padding: 5px 8px;
+.topics-dropdown {
+  display: inline-block;
+
+  .dropdown-toggle:after {
+    display: none;
+  }
 }
 @media (min-width: 1200px) {
 .container {

@@ -1,5 +1,11 @@
 {% extends "layouts/base.html" %}
-{% block title %}GitDigger{% endblock %}
+{% block full_title %}
+  {% if current_user.is_authenticated %}
+    Stories - {{ site_name }}
+  {% else %}
+    {{ site_name }} - A place to digg open source project stories.
+  {% endif %}
+{% endblock %}
 {% block content %}
   <div class="row">
     <div class="col col-md-3">
@@ -10,10 +16,9 @@
           <a class="nav-link{{ ' active' if feeds_sort_active == 'recent' }}" href="/">Recent Stories</a>
         </ul>
         <h3>Topics</h3>
-        <ul class="nav nav-pills links-muted topics-nav flex-column">
+        <ul class="nav nav-pills links-muted flex-column">
           {% for topic in topics %}
           <a href="{{ url_for_topic(topic) }}" class="nav-link">
-            <span class="label label-circular" style="{{ topic_color_style(topic) }}"></span>
             {{ topic.name }}
           </a>
           {% endfor %}
@@ -34,7 +39,8 @@
         <span class="label label-red">
           <i class="octicon octicon-flame"></i>
         </span>
-        Top Stories To Watch
+        Top Stories
+        {% if current_user.is_authenticated %}To Watch{% endif %}
       </div>
       <div class="feed-list">
         {% for feed in feeds %}

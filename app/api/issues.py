@@ -22,7 +22,8 @@ class IssueVoters(Resource):
         if user is None:
             return abort(400, message='user not found')
         args = self.parser.parse_args()
-        action = args.get('action', 'upvote')
+        action = args.get('action')
+        action = 'upvote' if action is None else action
         value = -1 if action == 'downvote' else 1
         voter = voters_service.get(user, issue)
         if voter is None:

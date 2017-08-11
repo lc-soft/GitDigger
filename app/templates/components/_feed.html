@@ -5,22 +5,6 @@
       {{ feed_icon(feed) }}
     </div>
     <div class="content">
-      {% if feed.topics | length > 0 %}
-      <div class="topics float-right">
-        {% set topics = topics_sorted(feed.topics) %}
-        {% for topic in topics[:2] %}
-        <a href="{{ url_for_topic(topic) }}" class="label" style="{{ topic_color_style(topic) }}">{{ topic.name }}</a>
-        {% endfor %}
-        {% if feed.topics | length > 2 %}
-        <a data-toggle="dropdown" class="dropdown-toggle">+{{ topics | length - 2 }}</a>
-        <div class="dropdown-menu">
-        {% for topic in topics[2:] %}
-          <a href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
-        {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
       <div class="source">
         <a href="">{{ feed.user.name }}</a>
         <i class="octicon octicon-triangle-right text-faded"></i>
@@ -39,7 +23,27 @@
     {{ feed.body_html | striptags | truncate }}
   </div>
   <div class="extra-content">
-    <button type="button" class="btn btn-vote btn-flat btn-primary-light"
+    {% if feed.topics | length > 0 %}
+    <div class="topics float-right">
+      {% set topics = topics_sorted(feed.topics) %}
+      {% for topic in topics[:2] %}
+      <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>
+      {% endfor %}
+      {% if feed.topics | length > 2 %}
+      <div class="dropdown topics-dropdown">
+        <a data-toggle="dropdown" class="link-muted dropdown-toggle" href="#">
+          +{{ topics | length - 2 }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+        {% for topic in topics[2:] %}
+          <a class="dropdown-item" href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
+        {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    <button type="button" class="btn btn-sm btn-vote btn-primary-light"
       data-action="upvote" data-vote-url="{{ url_for_vote(feed) }}"
       data-vote-count="{{ feed.points }}" data-text-upvoted="Upvoted" data-voted="0">
       <span class="text">Upvote</span> | <b class="count">{{ feed.points }}</b>

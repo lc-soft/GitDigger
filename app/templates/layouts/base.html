@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
   {% block head %}
-  <title>{% block title %}{% endblock %} - GitDigger</title>
+  <title>{% block full_title %}{% block title %}{% endblock %} - GitDigger{% endblock %}</title>
   {% endblock %}
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/common.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">

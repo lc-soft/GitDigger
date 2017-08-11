@@ -25,4 +25,4 @@ $('.btn-vote').on 'click', ()->
       $btn.find('.count').text count
     error: (res)->
       $btn.prop 'disabled', false
-      alert res.message
+      alert(res.message) if res.message
