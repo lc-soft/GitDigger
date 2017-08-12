@@ -13,10 +13,12 @@ def index():
         Topic.issues_count.desc()
     ).limit(10).all()
     user_id = current_user.id if current_user.is_authenticated else 0
-    terms = Voter.target_id==Issue.id and Voter.target_type=='issue'
+    terms = db.and_(Voter.target_id==Issue.id, Voter.user_id==user_id)
     case = db.case([(Voter.user_id==user_id, True)], else_=False)
     query = db.session.query(Issue, case.label('has_voted'))
-    feeds = query.outerjoin(Voter, terms).order_by(Issue.score.desc()).all()
+    query = query.order_by(Issue.score.desc(), Issue.created_at.desc())
+    query = query.outerjoin(Voter, terms)
+    feeds = query.all()
     ctx = {
         'navbar_active': 'stories',
         'feeds_sort_active': 'top'
