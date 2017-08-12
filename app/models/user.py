@@ -7,7 +7,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
     bio = db.Column(db.String(180))
-    points = db.Column(db.Integer, default=5)
+    points = db.Column(db.Integer, default=0)
     avatar_url = db.Column(db.String(256))
     owner = db.Column(db.String(32), nullable=False, default='user')
     github_id = db.Column(db.Integer, unique=True)

@@ -27,8 +27,9 @@ class IssueVoters(Resource):
         value = -1 if action == 'downvote' else 1
         voter = voters_service.get(user, issue)
         if voter is None:
-            if current_user.points < points.VOTE:
+            if current_user.points - points.VOTE < 0:
                 return abort(403, message='points are not enough')
+            current_user.points -= points.VOTE
             log = PointLog(action, points.VOTE, user, issue)
             voter = Voter(user, issue)
             db.session.add(voter)

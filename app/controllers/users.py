@@ -87,6 +87,10 @@ def join():
         user = User(form.username.data, form.email.data, pw_hash)
         db.session.add(user)
         db.session.commit()
+        user.points = points.SIGNUP_REWARD
+        log = PointLog('SIGNUP_REWARD', points.SIGNUP_REWARD, None, user)
+        db.session.add(log)
+        db.session.commit()
         flash('Thanks for registering')
         return redirect(url_for('users.login'))
     return render_template('join.html', form=form)
@@ -131,7 +135,8 @@ def settings():
 @login_required
 def profile():
     user = current_user
-    point_logs = PointLog.query.order_by('created_at DESC').limit(20)
+    terms = PointLog.sender_id==user.id or PointLog.receiver_id==user.id
+    point_logs = PointLog.query.filter(terms).order_by('created_at DESC')
     form = ProfileForm(request.form, name=user.name, bio=user.bio)
     if request.method == 'POST' and form.validate_on_submit():
         current_user.name = form.name.data
@@ -139,7 +144,8 @@ def profile():
         db.session.commit()
         flash('Profile updated successfully')
     return render_template('settings/profile.html', form=form,
-                            sidebar_active='profile', point_logs=point_logs)
+                            sidebar_active='profile',
+                            point_logs=point_logs.limit(20))
 
 @users.route('/settings/account', methods=['GET', 'POST'])
 @login_required
