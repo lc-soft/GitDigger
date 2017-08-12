@@ -43,7 +43,7 @@
         {% if current_user.is_authenticated %}To Watch{% endif %}
       </div>
       <div class="feed-list">
-        {% for feed in feeds %}
+        {% for feed, has_voted in feeds %}
           <div class="feed-card">
             {% include "components/_feed.html" %}
           </div>

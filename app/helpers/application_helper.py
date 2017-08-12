@@ -28,7 +28,6 @@ def feed_icon(feed):
 def url_for_vote(target):
     if not current_user.is_authenticated:
         return ''
-    print target.__tablename__
     if target.__tablename__ == 'issue':
         return flask.url_for('api.issue_voters', issue_id=target.id,
                             username=current_user.username)

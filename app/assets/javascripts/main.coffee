@@ -23,6 +23,8 @@ $('.btn-vote').on 'click', ()->
       $btn.find('.text').text text
       $btn.data 'vote-count', ++count
       $btn.find('.count').text count
+      $btn.addClass('btn-secondary').removeClass('btn-primary-light')
     error: (res)->
+      res = res.responseJSON
       $btn.prop 'disabled', false
       alert(res.message) if res.message
