@@ -115,6 +115,17 @@
     display: none;
   }
 }
+.topic-card {
+  .card-title {
+    font-size: 1em;
+  }
+  .btn-follow-topic {
+    margin: -3.5px 0;
+  }
+}
+.text-red {
+  color: $red;
+}
 @media (min-width: 1200px) {
 .container {
     width: 960px;

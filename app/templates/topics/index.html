@@ -1,7 +1,32 @@
 {% extends "layouts/base.html" %}
 {% block title %}Topics{% endblock %}
 {% block content %}
-  {% for topic in topics %}
-    <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
-  {% endfor %}
+{% for group in groups %}
+<div class="row">
+  {% for topic in group %}
+  <div class="col-12 col-lg-4">
+    <div class="topic-card card mb-3">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
+        </h4>
+        <p class="card-text">
+          {% if topic.description %}
+          {{ topic.description }}
+          {% else %}
+          <span class="text-muted">No description.</span>
+          {% endif %}
+        </p>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-sm btn-primary-light btn-follow-topic float-right" data-following="0" data-text-follow="Follow" data-text-following="Following">Follow</button>
+        <small class="text-muted">
+          <b>{{ topic.issues_count }}</b> issues, <b>{{ topic.followers_count }}</b> followers
+        </small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}  
+</div>
+{% endfor %}  
 {% endblock %}

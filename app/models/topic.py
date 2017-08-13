@@ -7,6 +7,8 @@ class Topic(db.Model):
     group = db.Column(db.String(80))
     issues_count = db.Column(db.Integer, default=0)
     repositories_count = db.Column(db.Integer, default=0)
+    followers_count = db.Column(db.Integer, default=0)
+    description = db.Column(db.String(1024))
 
     def __init__(self, name, group='default'):
         self.name = name
