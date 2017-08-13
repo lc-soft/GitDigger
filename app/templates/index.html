@@ -12,8 +12,8 @@
       <div class="home-sidebar">
         <h3>Feeds</h3>
         <ul class="nav nav-pills links-gray-dark flex-column">
-          <a class="nav-link{{ ' active' if feeds_sort_active == 'top' }}" href="/">Top Stories</a>
-          <a class="nav-link{{ ' active' if feeds_sort_active == 'recent' }}" href="/">Recent Stories</a>
+          <a class="nav-link{{ ' active' if feeds_sort_active == 'top' }}" href="{{ url_for('index') }}">Top Stories</a>
+          <a class="nav-link{{ ' active' if feeds_sort_active == 'recent' }}" href="{{ url_for('index', sort='recent') }}">Recent Stories</a>
         </ul>
         <h3>Topics</h3>
         <ul class="nav nav-pills links-gray-dark flex-column">
@@ -36,11 +36,19 @@
     </div>
     <div class="col col-md-9">
       <div class="section-header">
-        <span class="label label-red">
-          <i class="octicon octicon-flame"></i>
-        </span>
-        Top Stories
-        {% if current_user.is_authenticated %}To Watch{% endif %}
+        {% if feeds_sort_active == 'top' %}
+          <span class="label label-sm label-red">
+            <i class="octicon octicon-flame"></i>
+          </span>
+          Top Stories
+          {% if current_user.is_authenticated %}To Watch{% endif %}
+        {% else %}
+          <span class="label label-sm label-orange">
+            <i class="octicon octicon-clock"></i>
+          </span>
+          Recent Stories
+          {% if current_user.is_authenticated %}To Watch{% endif %}
+        {% endif %}
       </div>
       <div class="feed-list">
         {% for feed, has_voted in feeds %}
