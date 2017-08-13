@@ -3,7 +3,7 @@
 {% block settings_content %}
 <div class="card mb-3">
   <div class="card-header">Public profile</div>
-  <div class="card-block">
+  <div class="card-body">
     {% from "_formhelpers.html" import render_field %}
     <form method="post" action="{{ url_for('users.profile') }}">
       {{ form.csrf_token }} 
@@ -17,10 +17,10 @@
 </div>
 <div class="card">
   <div class="card-header">Points</div>
-  <div class="card-block">
+  <div class="card-body">
     <p class="card-text">You have <b>{{current_user.points}}</b> points.</p>
     <p class="card-text"><b>History</b></p>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
       <thead>
         <th>Time</th>
         <th>Points</th>
@@ -30,7 +30,13 @@
         {% for log in point_logs %}
         <tr>
           <td>{{ log.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
-          <td>{{ log.points }}</td>
+          <td>
+            {% if log.sender_id == current_user.id %}
+              <span class="text-red">{{ -log.points }}</span>
+            {% else %}
+              +{{ log.points }}
+            {% endif %}
+          </td>
           <td>{{ log.reason }}</td>
         </tr>
         {% endfor %}

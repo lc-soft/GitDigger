@@ -1,5 +1,6 @@
-@import "~bootstrap/scss/variables";
 @import "bootstrap-custom";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 @import "variables";
 @import "navbar";
 @import "label";;
@@ -91,20 +92,20 @@
 }
 .btn-primary-light {
   cursor: pointer;
-  color: mix($brand-primary, #fff, 70);
-  background-color: mix($brand-primary, #fff, 8);
-  border-color: mix($brand-primary, #fff, 25);
+  color: mix(theme-color("primary"), #fff, 70);
+  background-color: mix(theme-color("primary"), #fff, 8);
+  border-color: mix(theme-color("primary"), #fff, 25);
 
   &:hover {
-    color: $brand-primary;
-    border-color: mix($brand-primary, #fff, 80);
+    color: theme-color("primary");
+    border-color: mix(theme-color("primary"), #fff, 80);
   }
   &:active {
-    border-color: mix($brand-primary, #fff, 70);
+    border-color: mix(theme-color("primary"), #fff, 70);
   }
   &[disabled] {
-    color: mix($brand-primary, #fff, 70);
-    border-color: mix($brand-primary, #fff, 25);
+    color: mix(theme-color("primary"), #fff, 70);
+    border-color: mix(theme-color("primary"), #fff, 25);
   }
 }
 .topics-dropdown {

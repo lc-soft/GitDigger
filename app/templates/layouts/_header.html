@@ -1,4 +1,4 @@
-<nav id="site-navbar" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+<nav id="site-navbar" class="navbar navbar-dark navbar-expand-md">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#site-navbar-content" aria-controls="site-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,7 @@
           <a class="nav-link {{ 'active' if navbar_active == 'explore' }}" href="/">Explore</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ 'active' if navbar_active == 'topics' }}" href="/">Topics</a>
+          <a class="nav-link {{ 'active' if navbar_active == 'topics' }}" href="{{ url_for('topics.index') }}">Topics</a>
         </li>
       </ul>
       <span class="nav navbar-nav pull-md-right">

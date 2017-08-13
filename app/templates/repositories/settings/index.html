@@ -3,12 +3,12 @@
 {% block settings_content %}
   <div class="card mb-3">
     <div class="card-header">Details</div>
-    <div class="card-block">
+    <div class="card-body">
     </div>
   </div>
   <div class="card mb-3">
     <div class="card-header">Danger Zone</div>
-    <div class="card-block">
+    <div class="card-body">
       <form method="post" action="{{ url_for_repo_settings }}">
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

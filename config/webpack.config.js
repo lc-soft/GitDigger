@@ -9,7 +9,6 @@ module.exports = {
     common: './common.js',
     app: './main.coffee'
   },
-
   output: {
     path: path.join(__dirname, '../static/javascripts'),
     filename: '[name].js'

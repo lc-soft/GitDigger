@@ -13,12 +13,12 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-5 site-more-links">
-          <a class="link-muted" href="{{ github_url }}">GitHub</a>&emsp;
-          <a class="link-muted" href="{{ blog_url }}">Blog</a>
+        <div class="col-5 site-more-links links-gray-dark">
+          <a href="{{ github_url }}">GitHub</a>&emsp;
+          <a href="{{ blog_url }}">Blog</a>
         </div>
         <div class="col-7 site-copyright">
-          &copy; {{ get_copyright_year() }} <a class="link-muted" href="{{ owner_url }}">{{ owner_name }}</a>
+          &copy; {{ get_copyright_year() }} <a class="link-gray-dark" href="{{ owner_url }}">{{ owner_name }}</a>
         </div>
       </div>
     {% endblock %}

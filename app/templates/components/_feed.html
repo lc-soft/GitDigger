@@ -43,7 +43,7 @@
       </div>
     </div>
     {% endif %}
-    <button type="button" class="btn btn-sm btn-vote {{ 'btn-secondary' if has_voted else 'btn-primary-light' }} "
+    <button type="button" class="btn btn-sm btn-vote {{ 'btn-outline-secondary' if has_voted else 'btn-primary-light' }} "
       data-action="upvote" data-vote-url="{{ url_for_vote(feed) }}"
       data-vote-count="{{ feed.points }}" data-text-upvoted="Upvoted" data-voted="{{ 1 if has_voted else 0 }}" {{ 'disabled' if has_voted }}>
       <span class="text">{{ 'Upvoted' if has_voted else 'Upvote' }}</span> | <b class="count">{{ feed.points }}</b>

@@ -14,9 +14,9 @@
   background-color: rgba($color-light-green, .1);
 }
 .label.label-primary {
-  color: $brand-primary;
-  border-color: $brand-primary;
-  background-color: rgba($brand-primary, .1);
+  color: theme-color("primary");
+  border-color: theme-color("primary");
+  background-color: rgba(theme-color("primary"), .1);
 }
 a.label {
   text-decoration: none;
@@ -29,7 +29,7 @@ a.label {
 a.label.label-primary {
   &:hover {
     color: #fff;
-    background-color: $brand-primary;
+    background-color: theme-color("primary");
   }
 }
 .label-green {

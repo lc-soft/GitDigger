@@ -1,4 +1,6 @@
+import Popper from 'popper.js';
+window.Popper = Popper;
+
 require('jquery');
 require('tether');
-require('bootstrap/dist/js/bootstrap.min.js');
-require('./octicons.font');
+require('bootstrap');
