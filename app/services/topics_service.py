@@ -1,6 +1,10 @@
 from app import db
 from app.models import issue
 from app.models import repository
+from app.models.topic import Topic
+
+def get(name):
+    return Topic.query.filter_by(name=name).first()
 
 def update_issues_count(topic):
     query = db.session.query(issue.topics)

@@ -2,7 +2,7 @@ from app import db
 from lib.utils import datetime_from_utc
 from datetime import datetime
 
-topics = db.Table('IssueTopics',
+topics = db.Table('issue_topics',
     db.Column('topic_id', db.Integer, db.ForeignKey('topic.id')),
     db.Column('issue_id', db.Integer, db.ForeignKey('issue.id'))
 )

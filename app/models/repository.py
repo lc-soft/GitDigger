@@ -3,7 +3,7 @@ from app.models.topic import Topic
 from lib.utils import datetime_from_utc
 from datetime import datetime
 
-topics = db.Table('RepoTopics',
+topics = db.Table('repository_topics',
     db.Column('topic_id', db.Integer, db.ForeignKey('topic.id')),
     db.Column('repo_id', db.Integer, db.ForeignKey('repository.id'))
 )

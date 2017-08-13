@@ -3,7 +3,7 @@
 {% block content %}
 {% for group in groups %}
 <div class="row">
-  {% for topic in group %}
+  {% for topic, has_following in group %}
   <div class="col-12 col-lg-4">
     <div class="topic-card card mb-3">
       <div class="card-body">
@@ -19,9 +19,19 @@
         </p>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-sm btn-primary-light btn-follow-topic float-right" data-following="0" data-text-follow="Follow" data-text-following="Following">Follow</button>
+        <button type="button" class="btn btn-sm btn-follow-topic float-right{{ ' btn-secondary' if has_following else ' btn-success' }}"
+        data-text-follow="Follow" data-text-following="Following"
+        data-followers-count="{{ topic.followers_count }}"  data-following="{{ 1 if has_following else 0 }}"
+        data-url="{{ url_for('api.user_topics', name=topic.name) }}">
+          {% if has_following %}
+          Following
+          {% else %}
+          Follow
+          {% endif %}
+        </button>
         <small class="text-muted">
-          <b>{{ topic.issues_count }}</b> issues, <b>{{ topic.followers_count }}</b> followers
+          <b>{{ topic.issues_count }}</b> issues,
+          <b class="followers-count">{{ topic.followers_count }}</b> followers
         </small>
       </div>
     </div>

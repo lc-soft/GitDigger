@@ -1,6 +1,11 @@
 from app import db
 from datetime import datetime
 
+topics = db.Table('user_topics',
+    db.Column('topic_id', db.Integer, db.ForeignKey('topic.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -17,6 +22,8 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_active_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login_reward_at = db.Column(db.DateTime, default=datetime.utcnow)
+    following_topics = db.relationship('Topic', secondary=topics,
+        backref=db.backref('user', lazy='dynamic'))
 
     def __init__(self, username, email, password, name=None):
         self.email = email
