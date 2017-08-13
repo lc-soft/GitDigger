@@ -4,7 +4,7 @@
 <div class="auth-form">
   <h1 class="auth-form-header text-center">Join {{ site_name }}</h1>
   <div class="card">
-    <div class="card-block">
+    <div class="card-body">
       {% from "_formhelpers.html" import render_field %}
       <form method="post" action="/join">
         {{ form.csrf_token }} 
