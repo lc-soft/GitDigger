@@ -31,6 +31,7 @@ $('.btn-vote').on 'click', ()->
 $('.btn-follow-topic').on 'click', ()->
   $btn = $(this)
   url = $btn.data 'url' 
+  from_ = $btn.data 'from'
   following = $btn.data 'following'
   count = $btn.data 'followers-count'
   if !url
@@ -51,15 +52,24 @@ $('.btn-follow-topic').on 'click', ()->
     url: url
     type: method
     success: (res)->
-      $btn.text text
-      $btn.prop 'disabled', false
       $btn.data 'following', following
       $btn.data 'followers-count', count
       $btn.parent().find('.followers-count').text count
-      if following
-        $btn.addClass('btn-secondary').removeClass('btn-success')
+      if from_ is 'feeds'
+        if following
+          $btn.addClass('btn-outline-secondary')
+          $btn.removeClass('btn-primary-light')
+        else
+          $btn.removeClass('btn-outline-secondary')
+          $btn.addClass('btn-primary-light')
+        $btn.find('.text').text text
       else
-        $btn.removeClass('btn-secondary').addClass('btn-success')
+        if following
+          $btn.addClass('btn-secondary').removeClass('btn-success')
+        else
+          $btn.removeClass('btn-secondary').addClass('btn-success')
+        $btn.text text
+      $btn.prop 'disabled', false
     error: (res)->
       res = res.responseJSON
       $btn.prop 'disabled', false

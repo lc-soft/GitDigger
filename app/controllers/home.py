@@ -8,8 +8,9 @@ from flask_login import current_user
 
 @app.route('/')
 def index():
+    topic = None
     sort = request.args.get('sort', 'top')
-    topic = request.args.get('topic')
+    topic_name = request.args.get('topic')
     if current_user.is_authenticated:
         user_id = current_user.id
         topics = current_user.following_topics
@@ -22,8 +23,17 @@ def index():
     terms = db.and_(Voter.target_id==Issue.id, Voter.user_id==user_id)
     case = db.case([(Voter.user_id==user_id, True)], else_=False)
     query = db.session.query(Issue, case.label('has_voted'))
+    if topic_name:
+        if user_id > 0:
+            for topic in current_user.following_topics:
+                if topic.name == topic_name:
+                    break
+            else:
+                topic = None
+        else:
+            topic = Topic.query.filter_by(name=topic_name).first()
     if topic:
-        query = query.filter(Issue.topics.any(Topic.name==topic))
+        query = query.filter(Issue.topics.any(Topic.name==topic_name))
     elif user_id > 0 and len(current_user.following_topics) > 0:
         topic_terms = []
         for t in current_user.following_topics:
@@ -39,6 +49,7 @@ def index():
         'feeds': feeds,
         'topics': topics,
         'navbar_active': 'stories',
+        'topic_name': topic_name,
         'topic': topic,
         'sort': sort
     }

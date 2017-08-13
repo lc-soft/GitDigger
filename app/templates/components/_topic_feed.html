@@ -1,0 +1,28 @@
+<div class="feed">
+  <div class="meta links-gray-dark clearfix">
+    <div class="source">
+      <b><a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a></b>
+    </div>
+    <div class="description">
+      {{ topic.issues_count }} issues,
+      {{ topic.repositories_count }} repositories
+    </div>
+  </div>
+  <div class="content">
+    {% if topic.description %}
+    {{ topic.description | striptags | truncate }}
+    {% else %}
+    <span class="text-muted">No description.</span>
+    {% endif %}
+  </div>
+  <div class="extra-content">
+    {% set has_following = True %}
+    <button type="button" class="btn btn-sm btn-follow-topic{{ ' btn-outline-secondary' if has_following else ' btn-primary-light' }}"
+    data-text-follow="Follow Topic" data-text-following="Following Topic"
+    data-followers-count="{{ topic.followers_count }}" data-following="{{ 1 if has_following else 0 }}"
+    data-url="{{ url_for('api.user_topics', name=topic.name) }}" data-from="feeds">
+      <span class="text">Following Topic</span>
+      | <b class="followers-count">{{ topic.followers_count }}</b>
+    </button>
+  </div>
+</div>

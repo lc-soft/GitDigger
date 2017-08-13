@@ -20,7 +20,7 @@
           {% if current_user.following_topics | length > 0 %}
           <ul class="nav nav-pills links-gray-dark flex-column">
             {% for t in topics %}
-            <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic }}">
+            <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
               {{ t.name }}
             </a>
             {% endfor %}
@@ -38,7 +38,7 @@
         {% else %}
         <ul class="nav nav-pills links-gray-dark flex-column">
           {% for t in topics %}
-          <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic }}">
+          <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
             {{ t.name }}
           </a>
           {% endfor %}
@@ -76,10 +76,15 @@
         {% endif %}
       </div>
       <div class="feed-list">
+        {% if topic %}
+        <div class="feed-card">
+          {% include "components/_topic_feed.html" %}
+        </div>
+        {% endif %}
         {% for feed, has_voted in feeds %}
-          <div class="feed-card">
-            {% include "components/_feed.html" %}
-          </div>
+        <div class="feed-card">
+          {% include "components/_feed.html" %}
+        </div>
         {% endfor %}
       </div>
     </div>

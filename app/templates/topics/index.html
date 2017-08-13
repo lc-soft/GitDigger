@@ -19,9 +19,9 @@
         </p>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-sm btn-follow-topic float-right{{ ' btn-secondary' if has_following else ' btn-success' }}"
+        <button type="button" class="btn btn-sm btn-follow-topic{{ ' btn-secondary' if has_following else ' btn-success' }}"
         data-text-follow="Follow" data-text-following="Following"
-        data-followers-count="{{ topic.followers_count }}"  data-following="{{ 1 if has_following else 0 }}"
+        data-followers-count="{{ topic.followers_count }}" data-following="{{ 1 if has_following else 0 }}"
         data-url="{{ url_for('api.user_topics', name=topic.name) }}">
           {% if has_following %}
           Following
