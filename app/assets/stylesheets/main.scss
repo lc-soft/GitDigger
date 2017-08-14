@@ -85,17 +85,9 @@
 .signin {
   background: $body-bg-color;
 }
-.markdown-body {
-  img {
-    max-width: 100%;
-  }
-  pre {
-    padding: 16px;
-    overflow: auto;
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: #f6f8fa;
-    border-radius: 3px;
+.home-jumbotron {
+  h1 {
+    font-size: 1.86667em;
   }
 }
 .btn-primary-light {

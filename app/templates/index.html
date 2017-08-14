@@ -6,87 +6,100 @@
     {{ site_name }} - A place to digg open source project stories.
   {% endif %}
 {% endblock %}
+{% block jumbotron %}
+{% if not current_user.is_authenticated %}
+<div class="jumbotron home-jumbotron">
+  <div class="container">
+    <h1>The community for modern developers.</h1>
+    <p class="lead">Dig interesting stories from open source projects, Share it with other people, Promote community development of open source projects.</p>
+    <p class="lead">
+      <a class="btn btn-success" href="{{ url_for('users.join') }}" role="button">Sign up</a>
+    </p>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
 {% block content %}
-  <div class="row">
-    <div class="col col-md-3">
-      <div class="home-sidebar">
-        <h3>Feeds</h3>
-        <ul class="nav nav-pills links-gray-dark flex-column">
-          <a class="nav-link{{ ' active' if sort == 'top' }}" href="{{ url_for('index') }}">Top Stories</a>
-          <a class="nav-link{{ ' active' if sort == 'recent' }}" href="{{ url_for('index', sort='recent') }}">Recent Stories</a>
-        </ul>
-        <h3>Topics</h3>
-        {% if current_user.is_authenticated %}
-          {% if current_user.following_topics | length > 0 %}
-          <ul class="nav nav-pills links-gray-dark flex-column">
-            {% for t in topics %}
-            <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
-              {{ t.name }}
-            </a>
-            {% endfor %}
-          </ul>
-          {% else %}
-          <div class="card mb-3">
-            <div class="card-body">
-              <p class="card-text">
-                You are not following any topic.
-              </p>
-              <a class="card-link" href="{{ url_for('topics.index') }}">Explore topics</a>
-            </div>
-          </div>
-          {% endif %}
-        {% else %}
+<div class="row">
+  <div class="col col-md-3">
+    <div class="home-sidebar">
+      <h3>Feeds</h3>
+      <ul class="nav nav-pills links-gray-dark flex-column">
+        <a class="nav-link{{ ' active' if sort == 'top' }}" href="{{ url_for('index') }}">Top Stories</a>
+        <a class="nav-link{{ ' active' if sort == 'recent' }}" href="{{ url_for('index', sort='recent') }}">Recent Stories</a>
+      </ul>
+      <h3>Topics</h3>
+      {% if current_user.is_authenticated %}
+        {% if current_user.following_topics | length > 0 %}
         <ul class="nav nav-pills links-gray-dark flex-column">
           {% for t in topics %}
           <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
             {{ t.name }}
           </a>
           {% endfor %}
-          <a href="{{ url_for('topics.index') }}" class="nav-link">More...</a>
         </ul>
-        {% endif %}
-        <h3>Credits</h3>
-        <div class="card">
+        {% else %}
+        <div class="card mb-3">
           <div class="card-body">
-            <a href="https://www.vultr.com/?ref=6890184">
-              <img src="https://www.vultr.com/media/badge_onwhite.svg">
-            </a>
+            <p class="card-text">
+              You are not following any topic.
+            </p>
+            <a class="card-link" href="{{ url_for('topics.index') }}">Explore topics</a>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col col-md-9">
-      <div class="section-header">
-        {% if sort == 'top' %}
-          <span class="label label-sm label-red">
-            <i class="octicon octicon-flame"></i>
-          </span>
-          Top Stories
-          {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
-          To Watch
-          {% endif %}
-        {% else %}
-          <span class="label label-sm label-orange">
-            <i class="octicon octicon-clock"></i>
-          </span>
-          Recent Stories
-          {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
-          To Watch
-          {% endif %}
         {% endif %}
-      </div>
-      <div class="feed-list">
-        {% if topic %}
-        <div class="feed-card">
-          {% include "components/_topic_feed.html" %}
-        </div>
-        {% endif %}
-        {% for feed, has_voted in feeds %}
-        <div class="feed-card">
-          {% include "components/_feed.html" %}
-        </div>
+      {% else %}
+      <ul class="nav nav-pills links-gray-dark flex-column">
+        {% for t in topics %}
+        <a href="{{ url_for('index', topic=t.name, sort=sort) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
+          {{ t.name }}
+        </a>
         {% endfor %}
+        <a href="{{ url_for('topics.index') }}" class="nav-link">More...</a>
+      </ul>
+      {% endif %}
+      <h3>Credits</h3>
+      <div class="card">
+        <div class="card-body">
+          <a href="https://www.vultr.com/?ref=6890184">
+            <img src="https://www.vultr.com/media/badge_onwhite.svg">
+          </a>
+        </div>
       </div>
     </div>
   </div>
+  <div class="col col-md-9">
+    <div class="section-header">
+      {% if sort == 'top' %}
+        <span class="label label-sm label-red">
+          <i class="octicon octicon-flame"></i>
+        </span>
+        Top Stories
+        {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+        To Watch
+        {% endif %}
+      {% else %}
+        <span class="label label-sm label-orange">
+          <i class="octicon octicon-clock"></i>
+        </span>
+        Recent Stories
+        {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+        To Watch
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="feed-list">
+      {% if topic %}
+      <div class="feed-card">
+        {% include "components/_topic_feed.html" %}
+      </div>
+      {% endif %}
+      {% for feed, has_voted in feeds %}
+      <div class="feed-card">
+        {% include "components/_feed.html" %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}
