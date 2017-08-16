@@ -38,7 +38,6 @@ Linux 用户可以直接运行 setup.sh 脚本安装这些依赖：
 
 config 目录下存放着配置文件，其中以下文件需要你按照实际情况来配置：
 
-- site.py - 整个网站的相关信息
 - github.py - GitHub 应用信息配置
 - database.py - 数据库配置
 
