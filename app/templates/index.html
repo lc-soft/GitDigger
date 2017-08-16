@@ -71,6 +71,12 @@
   <div class="col col-md-9">
     <div class="section-header">
       {% if sort == 'top' %}
+        <nav class="nav float-right links-muted">
+          <a class="nav-link{{ ' active' if timeframe == 'today' }}" href="{{ url_for('index', timeframe='today') }}">Today</a>
+          <a class="nav-link{{ ' active' if timeframe == 'week' }}" href="{{ url_for('index', timeframe='week') }}">Week</a>
+          <a class="nav-link{{ ' active' if timeframe == 'month' }}" href="{{ url_for('index', timeframe='month') }}">Month</a>
+          <a class="nav-link{{ ' active' if timeframe == 'year' }}" href="{{ url_for('index', timeframe='year') }}">Year</a>
+        </nav>
         <span class="label label-sm label-red">
           <i class="octicon octicon-flame"></i>
         </span>
@@ -88,6 +94,16 @@
         {% endif %}
       {% endif %}
     </div>
+    {% if feeds | length < 1 %}
+    <div class="card">
+      <div class="card-body text-center">
+        <h1 class="text-muted">
+          <i class="octicon octicon-issue-opened"></i>
+        </h1>
+        <p class="card-text">Oops! there was no story in this timeframe.</p>
+      </div>
+    </div>
+    {% else %}
     <div class="feed-list">
       {% if topic %}
       <div class="feed-card">
@@ -100,6 +116,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

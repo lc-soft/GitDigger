@@ -49,6 +49,14 @@
     text-align: center;
     vertical-align: text-top;
   }
+  .nav {
+    font-size: small;
+    margin-top: -0.35rem;
+
+    .nav-link.active {
+      border-bottom: 2px solid;
+    }
+  }
 }
 .home-sidebar {
   h3 {
@@ -86,6 +94,10 @@
   background: $body-bg-color;
 }
 .home-jumbotron {
+  color: #fff;
+  border-radius: 0;
+  background: #34495e;
+
   h1 {
     font-size: 1.86667em;
   }
@@ -131,4 +143,14 @@
 .container {
     width: 960px;
 }
+}
+
+.site-repos-stats-box {
+  .octicon {
+    font-size: 40px;
+    margin-right: .5rem;
+  }
+  .site-repos-stats {
+    display: inline-block;
+  }
 }

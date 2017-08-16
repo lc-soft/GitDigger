@@ -6,9 +6,12 @@
           <b>{{ site_name }}</b>
           <div class="text-muted">Dig open source project stories.</div>
         </div>
-        <div class="col col-auto">
-          <b>{{ get_repos_count() }}</b>
-          <div>repositories connected</div>
+        <div class="col col-auto site-repos-stats-box">
+          <i class="octicon octicon-repo text-muted"></i>
+          <div class="site-repos-stats">
+            <b>{{ get_repos_count() }}</b>
+            <div>repositories connected</div>
+          </div>
         </div>
       </div>
       <hr>

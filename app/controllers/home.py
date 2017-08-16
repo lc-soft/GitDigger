@@ -5,10 +5,12 @@ from app.models.voter import Voter
 from app.models.user import User
 from flask import render_template, request
 from flask_login import current_user
+from datetime import datetime, timedelta
 
 @app.route('/')
 def index():
     topic = None
+    timeframe = None
     sort = request.args.get('sort', 'top')
     topic_name = request.args.get('topic')
     if current_user.is_authenticated:
@@ -40,6 +42,19 @@ def index():
             topic_terms.append(Issue.topics.any(Topic.name==t.name))
         query = query.filter(db.or_(*topic_terms))
     if sort == 'top':
+        days = {
+            'today': 0,
+            'week': 7,
+            'month': 30,
+            'year': 365
+        }
+        now = datetime.now()
+        time = datetime(now.year, now.month, now.day)
+        timeframe = request.args.get('timeframe')
+        if days.get(timeframe) is None:
+            timeframe = 'year'
+        time -= timedelta(days=days[timeframe])
+        query = query.filter(Issue.created_at > time)
         query = query.order_by(Issue.score.desc(), Issue.created_at.desc())
     else:
         query = query.order_by(Issue.created_at.desc())
@@ -48,6 +63,7 @@ def index():
     ctx = {
         'feeds': feeds,
         'topics': topics,
+        'timeframe': timeframe,
         'navbar_active': 'stories',
         'topic_name': topic_name,
         'topic': topic,

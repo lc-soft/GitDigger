@@ -7,6 +7,9 @@
   &:active {
     color: $link-hover-color;
   }
+  &.active {
+    color: $link-color;
+  }
 }
 .link-gray-dark, .links-gray-dark a {
   color: $gray-900;
