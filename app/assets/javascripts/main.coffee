@@ -1,4 +1,8 @@
 require '../stylesheets/main.scss'
-Home = require './views/Home.coffee'
 
-Home.init()
+routes =
+  'index': require './views/Index.coffee'
+  'topics.show': require './views/TopicsShow.coffee'
+
+view = routes[endpoint]
+view.init() if view

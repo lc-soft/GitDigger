@@ -134,7 +134,12 @@
     text-align: center;
     background: rgba(255,255,255,.8);
   }
-  &.has-error .error-cover {
-    display: block;
-  }
+}
+.has-error .feed .error-cover {
+  display: block;
+}
+.feed-list > .feed {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 1rem;
 }

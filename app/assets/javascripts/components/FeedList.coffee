@@ -1,12 +1,11 @@
-VoteButton = require '../components/VoteButton.coffee'
-FollowTopicButton = require '../components/FollowTopicButton.coffee'
+VoteButton = require './VoteButton.coffee'
 
-init = ()->
-  $feeds = $('#home-feeds')
+init = (el)->
+  $feeds = $(el)
   $btnReload = $('#btn-reload-feeds')
   $tipLoading = $('#feeds-loading-tip')
   $tipLoaded = $('#feeds-loaded-tip')
-  pages = $feeds.data 'pages'
+  pages = parseInt $feeds.data('pages')
   loading = false
   page = 1
 
@@ -15,10 +14,10 @@ init = ()->
     $.ajax
       data:
         page: page
-        target: '#home-feeds'
+        target: el
       success: (html)->
         $tipLoading.before html
-        VoteButton.init $feeds
+        VoteButton.init el
         if page >= pages
           $tipLoading.hide()
           $tipLoaded.show()
@@ -31,7 +30,7 @@ init = ()->
         $tipLoading.addClass 'has-error'
 
   checkLoad = ()->
-    $last = $feeds.find('.feed-card').last()
+    $last = $feeds.find('.feed').last()
     scrollTop = $(window).scrollTop() + $(window).height()
     if scrollTop < $last.offset().top - $last.height() * 2
       return
@@ -40,11 +39,13 @@ init = ()->
     page += 1
     load()
 
-  VoteButton.init $feeds
-  FollowTopicButton.init $feeds
-  $('.dropdown-toggle').dropdown()
+  if isNaN pages
+    return console.error 'invalid data-pages attribute'
+  VoteButton.init el
   $(window).on 'scroll', checkLoad
-  $btnReload.on 'click', load
+  $btnReload.on 'click', ()->
+    $tipLoading.removeClass 'has-error'
+    load()
   checkLoad()
 
 module.exports = init: init

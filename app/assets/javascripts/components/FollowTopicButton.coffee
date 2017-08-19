@@ -1,6 +1,5 @@
-init = ($container)->
-  $container.find('.btn-follow-topic')
-  .off('click.follow').on 'click.follow', ()->
+init = (el)->
+  $(el + ' .btn-follow-topic').off('click.follow').on 'click.follow', ()->
     $btn = $(this)
     url = $btn.data 'url' 
     from_ = $btn.data 'from'
@@ -27,6 +26,7 @@ init = ($container)->
         $btn.data 'following', following
         $btn.data 'followers-count', count
         $btn.parent().find('.followers-count').text count
+        $('#followers-count').text count
         if from_ is 'feeds'
           if following
             $btn.addClass('btn-outline-secondary')

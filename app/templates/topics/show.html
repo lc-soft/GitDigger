@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{ topic.name }}{% endblock %}
+{% set site_content_class="bg-white" %}
+{% block content_header %}
+<div id="site-content-header" class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h1 class="text-center text-md-left">
+          <a class="link-gray-dark" href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a>
+          <button type="button" class="btn btn-sm btn-follow-topic ml-3{{ ' btn-secondary' if has_following else ' btn-success' }}"
+          data-text-follow="Follow" data-text-following="Following"
+          data-followers-count="{{ topic.followers_count }}" data-following="{{ 1 if has_following else 0 }}"
+          data-url="{{ url_for('api.user_topics', name=topic.name) }}">
+            {% if has_following %}
+            Following
+            {% else %}
+            Follow
+            {% endif %}
+          </button>
+        </h1>
+      </div>
+      <div class="col-12 col-md-6">
+        <ul class="nav justify-content-center justify-content-md-end links-muted">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              Read
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Developers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Repositoires
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-12 col-md-8">
+    <div class="section-header">
+      Feed
+    </div>
+    <div id="topic-feeds" class="feed-list" data-pages="{{ feeds.pages }}">
+    {% if feeds.items | length < 1 %}
+      <p>there was no story.</p>
+    {% else %}
+      {% include "components/_feed_list.html" %}
+      {% if feeds.has_next %}
+      <div id="feeds-loading-tip">
+        {% include "components/_feed_wireframe.html" %}
+      </div>
+      {% endif %}
+      <p id="feeds-loaded-tip" class="text-muted text-center mt-3" style="{{ 'display: none' if feeds.has_next }}">
+        <i class="octicon octicon-stop"></i>
+        You've reached the end of the list
+      </p>
+    {% endif %}
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="section-header">
+      About
+    </div>
+    {% if topic.description %}
+    {{ topic.description }}
+    {% else %}
+    <p class="text-muted">No description.</p>
+    {% endif %}
+    <table class="table table-bordered">
+      <tr>
+        <td class="text-center">
+          <b class="count">{{ topic.issues_count }}</b>
+          <span class="text-muted">Issues</span>
+        </td>
+        <td class="text-center">
+          <b class="count">{{ topic.repositories_count }} </b>
+          <span class="text-muted">Repositoires</span>
+        </td>
+        <td class="text-center">
+          <b id="followers-count" class="count">{{ topic.followers_count }}</b>
+          <span class="text-muted">Followers</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}

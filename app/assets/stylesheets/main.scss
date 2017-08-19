@@ -154,3 +154,27 @@
     display: inline-block;
   }
 }
+.content-header {
+  padding-top: 15px;
+  border-bottom: 1px solid #e1e4e8;
+
+  h1 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 28px;
+  }
+  .nav {
+    margin-top: -15px;
+
+    .nav-link {
+      padding-top: 15px;
+      padding-bottom: 13px;
+      line-height: 30px;
+      border-bottom: 2px solid transparent;
+
+      &.active {
+        border-color: theme-color("primary");
+      }
+    }
+  }
+}

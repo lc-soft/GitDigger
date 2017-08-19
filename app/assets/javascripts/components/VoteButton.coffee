@@ -1,6 +1,5 @@
-init = ($container)->
-  $container.find('.btn-vote')
-  .off('click.vote').on 'click.vote', ()->
+init = (el)->
+  $(el + ' .btn-vote').off('click.vote').on 'click.vote', ()->
     $btn = $(this)
     voted = $btn.data 'voted'
     url = $btn.data 'vote-url' 
