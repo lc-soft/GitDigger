@@ -80,3 +80,61 @@
     }
   }
 }
+
+@keyframes left-to-right {
+  from {
+    left: -240px;
+  }
+  to {
+    left: 100%;
+  }
+}
+.feed.wireframe {
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    top: 0;
+    left: -240px;
+    height: 100%;
+    width: 240px;
+    content: '';
+    position: absolute;
+    transition: left 1s;
+    animation: left-to-right 1s ease-in infinite 1s;
+    background: linear-gradient(100deg, rgba(#fff, 0), rgba(#fff, .4), rgba(#fff, 0));
+  }
+  .wireframe {
+    color: #f0f0f0 !important;
+    background: #f0f0f0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    display: inline-block;
+    user-select: none;
+    cursor: default;
+  }
+  .header {
+    overflow: hidden;
+    white-space: nowrap;
+
+    .wireframe {
+      margin: 0;
+      line-height: 26px;
+    }
+  }
+  .error-cover {
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding-top: 50px;
+    position: absolute;
+    text-align: center;
+    background: rgba(255,255,255,.8);
+  }
+  &.has-error .error-cover {
+    display: block;
+  }
+}

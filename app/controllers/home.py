@@ -11,7 +11,9 @@ from datetime import datetime, timedelta
 def index():
     topic = None
     timeframe = None
+    page = int(request.args.get('page', 1))
     sort = request.args.get('sort', 'top')
+    target = request.args.get('target', 1)
     topic_name = request.args.get('topic')
     if current_user.is_authenticated:
         user_id = current_user.id
@@ -59,7 +61,7 @@ def index():
     else:
         query = query.order_by(Issue.created_at.desc())
     query = query.outerjoin(Voter, terms)
-    feeds = query.all()
+    feeds = query.paginate(page, 15)
     ctx = {
         'feeds': feeds,
         'topics': topics,
@@ -69,4 +71,6 @@ def index():
         'topic': topic,
         'sort': sort
     }
+    if target == '#home-feeds':
+        return render_template('components/_feed_card_list.html', **ctx)
     return render_template('index.html', **ctx)
