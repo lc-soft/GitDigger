@@ -94,39 +94,39 @@
         {% endif %}
       {% endif %}
     </div>
-    {% if feeds.items | length < 1 %}
-    <div class="card">
-      <div class="card-body text-center">
-        <h1 class="text-muted">
-          <i class="octicon octicon-issue-opened"></i>
-        </h1>
-        <p class="card-text">Oops! there was no story in this timeframe.</p>
-      </div>
-    </div>
-    {% else %}
     <div id="home-feeds" class="feed-list" data-pages="{{ feeds.pages }}">
       {% if topic %}
       <div class="feed-card">
         {% include "components/_topic_feed.html" %}
       </div>
       {% endif %}
-      {% include "components/_feed_card_list.html" %}
-      {% if feeds.has_next %}
-      <div id="feeds-loading-tip" class="feed-card">
-      {% include "components/_feed_wireframe.html" %}
+      {% if feeds.items | length < 1 %}
+      <div class="card">
+        <div class="card-body text-center">
+          <h1 class="text-muted">
+            <i class="octicon octicon-stop"></i>
+          </h1>
+          <p class="card-text">Oops! there was no story in this timeframe.</p>
+        </div>
       </div>
-      <p id="feeds-loaded-tip" class="text-muted text-center mt-3" style="display: none">
-        <i class="octicon octicon-stop"></i>
-        You've reached the end of the list
-      </p>
       {% else %}
-      <p id="feeds-loaded-tip" class="text-muted text-center mt-3">
-        <i class="octicon octicon-stop"></i>
-        You've reached the end of the list
-      </p>
+        {% include "components/_feed_card_list.html" %}
+        {% if feeds.has_next %}
+        <div id="feeds-loading-tip" class="feed-card">
+        {% include "components/_feed_wireframe.html" %}
+        </div>
+        <p id="feeds-loaded-tip" class="text-muted text-center mt-3" style="display: none">
+          <i class="octicon octicon-stop"></i>
+          You've reached the end of the list
+        </p>
+        {% else %}
+        <p id="feeds-loaded-tip" class="text-muted text-center mt-3">
+          <i class="octicon octicon-stop"></i>
+          You've reached the end of the list
+        </p>
+        {% endif %}
       {% endif %}
     </div>
-    {% endif %}
   </div>
 </div>
 {% endblock %}
