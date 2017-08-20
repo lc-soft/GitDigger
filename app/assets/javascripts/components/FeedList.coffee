@@ -42,10 +42,11 @@ init = (el)->
   if isNaN pages
     return console.error 'invalid data-pages attribute'
   VoteButton.init el
-  $(window).on 'scroll', checkLoad
+  if pages > 0
+    $(window).on 'scroll', checkLoad
+    checkLoad()
   $btnReload.on 'click', ()->
     $tipLoading.removeClass 'has-error'
     load()
-  checkLoad()
 
 module.exports = init: init
