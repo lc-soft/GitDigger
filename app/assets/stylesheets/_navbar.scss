@@ -21,6 +21,9 @@
   .dropdown-header .user-avatar {
     float: left;
   }
+  .dropdown-toggle:after {
+    vertical-align: middle;
+  }
 }
 .nav-link.text-white {
   &:hover {
