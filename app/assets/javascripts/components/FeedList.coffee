@@ -25,14 +25,14 @@ init = (el)->
           $tipLoaded.hide()
         setTimeout ()->
           loading = false
-        , 1000
+        , 500
       error: (res)->
         $tipLoading.addClass 'has-error'
 
   checkLoad = ()->
     $last = $feeds.find('.feed').last()
     scrollTop = $(window).scrollTop() + $(window).height()
-    if scrollTop < $last.offset().top - $last.height() * 2
+    if scrollTop < $last.offset().top - $last.height()
       return
     if loading or page >= pages
       return
