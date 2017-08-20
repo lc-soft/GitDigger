@@ -1,4 +1,5 @@
 from app import app
+from flask import url_for
 
 @app.template_global()
 def topics_sorted(topics):
@@ -7,4 +8,4 @@ def topics_sorted(topics):
 
 @app.template_global()
 def url_for_topic(topic):
-    return ''
+    return url_for('topics.show', name=topic.name)
