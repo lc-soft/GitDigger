@@ -58,17 +58,13 @@ config 目录下存放着配置文件，其中以下文件需要你按照实际�
 
 ### 数据库
 
-使用 postgres 账户运行 psql：
+以 PostgreSQL 为例，先创建 gitdigger 用户：
 
-    sudo -u postgres psql
+    sudo -u postgres createuser gitdigger -P
 
-之后新建 gitdigger 账号并设置密码：
+之后为 gitdigger 用户创建 gitdigger_development 数据库：
 
-    create user gitdigger with password '123456';
-
-为 gitdigger 账号设置 gitdigger_development 数据库权限：
-
-    grant all privileges on database gitdigger_development to gitdigger;
+    sudo -u postgres createdb -O gitdigger gitdigger_development
 
 创建数据库迁移文件，然后升级数据库：
 
