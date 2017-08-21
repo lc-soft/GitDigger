@@ -80,7 +80,7 @@ def import_issues(repo):
             if data.get('pull_request'):
                 continue
             count += 1
-            issue = issues_service.get(data['id'])
+            issue = issues_service.get_by_origin_id(data['id'])
             if issue is None:
                 issue = issues_service.create(data, repo)
                 if issue is None:
