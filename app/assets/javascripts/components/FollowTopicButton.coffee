@@ -43,6 +43,9 @@ init = (el)->
           $btn.text text
         $btn.prop 'disabled', false
       error: (res)->
+        if res.status is 401
+          window.location.href = '/login'
+          return
         res = res.responseJSON
         $btn.prop 'disabled', false
         alert(res.message) if res and res.message
