@@ -79,6 +79,7 @@ def import_issues(repo):
         for data in issues:
             if data.get('pull_request'):
                 continue
+            count += 1
             issue = issues_service.get(data['id'])
             if issue is None:
                 issue = issues_service.create(data, repo)
@@ -87,7 +88,6 @@ def import_issues(repo):
                 db.session.add(issue)
                 continue
             issues_service.update(issue, data)
-            count += 1
         params['page'] += 1
     try:
         db.session.commit()

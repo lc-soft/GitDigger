@@ -1,6 +1,7 @@
 from app import app, db, csrf
 from app.models.issue import Issue
 from lib.utils import datetime_from_utc
+from lib.markdown import markdown
 from app.services import users_service
 from app.services import topics_service
 from app.services import repositories_service as repos_service
@@ -23,6 +24,7 @@ def create(data, repo):
             return None
     issue = Issue(user, repo, data)
     try:
+        issue.body_html = markdown(issue.body)
         db.session.add(issue)
         db.session.commit()
     except:
@@ -37,5 +39,6 @@ def update(issue, data):
     issue.state = data['state']
     issue.title = data['title']
     issue.body = data['body']
+    issue.body_html = markdown(issue.body)
     issue.comments_count = data['comments']
     issue.updated_at = datetime_from_utc(data['updated_at'])
