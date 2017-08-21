@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
 <head>
   {% block head %}
   <title>{% block full_title %}{% block title %}{% endblock %} - GitDigger{% endblock %}</title>
   {% endblock %}
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#3498db">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/common.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
 </head>
