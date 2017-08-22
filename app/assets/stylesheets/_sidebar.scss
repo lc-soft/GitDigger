@@ -1,0 +1,55 @@
+.home-sidebar {
+  h3 {
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 22px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $hr-border-color;
+  }
+  .nav {
+    margin-bottom: 1rem;
+
+    .nav-link.active {
+      color: #000;
+      background-color: darken($body-bg-color, 7);
+    }
+  }
+  .sidebar-toggler {
+    padding: .25rem .75rem;
+    background: transparent;
+    color: rgba(0,0,0,.5);
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: .25rem;
+  }
+  .sidebar-toggler-right {
+    top: -11px;
+    right: 1rem;
+    position: absolute;
+  }
+  .sidebar-toggler-icon {
+    width: 1.5em;
+    height: 1.5em;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    background: no-repeat center center;
+    background-size: 100% 100%;
+    background-image: $navbar-light-toggler-icon-bg;
+  }
+  @include media-breakpoint-down(sm) {
+    background: #fff;
+    padding: 1rem 15px;
+    margin: -20px -15px 15px -15px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+
+    .sidebar-content {
+      padding-top: 1rem;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .sidebar-content {
+      display: block;
+    }
+  }
+}

@@ -1,8 +1,10 @@
 @import "bootstrap-custom";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 @import "variables";
 @import "navbar";
+@import "sidebar";
 @import "label";;
 @import "link";
 @import "footer";
@@ -58,24 +60,6 @@
     }
   }
 }
-.home-sidebar {
-  h3 {
-    font-size: 1em;
-    font-weight: bold;
-    line-height: 22px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid $hr-border-color;
-  }
-  .nav {
-    margin-bottom: 1rem;
-
-    .nav-link.active {
-      color: #000;
-      background-color: darken($body-bg-color, 7);
-    }
-  }
-}
 .auth-form {
   max-width: 340px;
   margin: 0 auto;
@@ -97,9 +81,15 @@
   color: #fff;
   border-radius: 0;
   background: #34495e;
+  margin: 0;
 
   h1 {
     font-size: 1.86667em;
+  }
+}
+.home-content {
+  .flashes .alert {
+    margin: 0;
   }
 }
 .btn-primary-light {
