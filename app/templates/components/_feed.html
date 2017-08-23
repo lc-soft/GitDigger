@@ -26,20 +26,25 @@
     {% if feed.topics | length > 0 %}
     <div class="topics float-right">
       {% set topics = topics_sorted(feed.topics) %}
-      {% for topic in topics[:2] %}
+      {% set topic = topics[0] %}
       <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>
-      {% endfor %}
-      {% if feed.topics | length > 2 %}
-      <div class="dropdown topics-dropdown">
-        <a data-toggle="dropdown" class="link-muted dropdown-toggle" href="#">
-          +{{ topics | length - 2 }}
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-        {% for topic in topics[2:] %}
-          <a class="dropdown-item" href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
-        {% endfor %}
+      {% if feed.topics | length > 1 %}
+      <div class="d-none d-md-inline-block">
+        {% set topic = topics[1] %}
+        <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>  
+        {% if feed.topics | length > 2 %}
+        <div class="dropdown topics-dropdown">
+          <a data-toggle="dropdown" class="link-muted dropdown-toggle" href="#">
+            +{{ topics | length - 2 }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+          {% for topic in topics[2:] %}
+            <a class="dropdown-item" href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
+          {% endfor %}
+          </div>
         </div>
         {% endif %}
+      {% endif %}
       </div>
     </div>
     {% endif %}
@@ -49,7 +54,7 @@
       <span class="text">{{ 'Upvoted' if has_voted else 'Upvote' }}</span> | <b class="count">{{ feed.points }}</b>
     </button>
     <a class="link-muted ml-3" href="{{ feed.html_url }}">
-      <i class="octicon octicon-comment-discussion"></i> {{ feed.comments_count }} comments
+      <i class="octicon octicon-comment-discussion"></i> {{ feed.comments_count }} <span class="d-none d-md-inline">comments</span>
     </a>
   </div>
 </div>
