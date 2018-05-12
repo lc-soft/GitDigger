@@ -93,16 +93,6 @@
           <a href="{{ url_for('topics.index') }}" class="nav-link">More...</a>
         </ul>
         {% endif %}
-        <div class="d-none d-md-block">
-          <h3>Credits</h3>
-          <div class="card">
-            <div class="card-body">
-              <a href="https://www.vultr.com/?ref=6890184">
-                <img src="https://www.vultr.com/media/badge_onwhite.svg">
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -134,9 +124,7 @@
     </div>
     <div id="home-feeds" class="feed-list" data-pages="{{ feeds.pages }}">
       {% if topic %}
-      <div class="feed-card">
         {% include "components/_topic_feed.html" %}
-      </div>
       {% endif %}
       {% if feeds.items | length < 1 %}
       <div class="card">
@@ -148,9 +136,9 @@
         </div>
       </div>
       {% else %}
-        {% include "components/_feed_card_list.html" %}
+        {% include "components/_feed_list.html" %}
         {% if feeds.has_next %}
-        <div id="feeds-loading-tip" class="feed-card">
+        <div id="feeds-loading-tip">
         {% include "components/_feed_wireframe.html" %}
         </div>
         <p id="feeds-loaded-tip" class="text-muted text-center mt-3" style="display: none">

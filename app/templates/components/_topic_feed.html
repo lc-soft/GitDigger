@@ -1,21 +1,19 @@
-<div class="feed">
-  <div class="meta links-gray-dark clearfix">
-    <div class="source">
-      <b><a href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a></b>
-    </div>
-    <div class="description">
-      {{ topic.issues_count }} issues,
-      {{ topic.repositories_count }} repositories
-    </div>
-  </div>
-  <div class="content">
-    {% if topic.description %}
-    {{ topic.description | striptags | truncate }}
-    {% else %}
-    <span class="text-muted">No description.</span>
-    {% endif %}
-  </div>
-  <div class="extra-content">
+<div class="card mb-4">
+  <div class="card-body">
+    <h3 class="card-title"><a class="link-gray-dark" href="{{ url_for('topics.show', name=topic.name) }}">{{ topic.name }}</a></h3>
+    <p class="card-text">
+      <small class="text-muted">
+        {{ topic.issues_count }} issues,
+        {{ topic.repositories_count }} repositories
+      </small>
+    </p>
+    <p class="card-text">
+      {% if topic.description %}
+      {{ topic.description | striptags | truncate }}
+      {% else %}
+      <span class="text-muted">No description.</span>
+      {% endif %}
+    </p>
     {% set has_following = True %}
     <button type="button" class="btn btn-sm btn-follow-topic{{ ' btn-outline-secondary' if has_following else ' btn-primary-light' }}"
     data-text-follow="Follow Topic" data-text-following="Following Topic"

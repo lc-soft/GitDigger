@@ -72,5 +72,5 @@ def index():
         'sort': sort
     }
     if target == '#home-feeds':
-        return render_template('components/_feed_card_list.html', **ctx)
+        return render_template('components/_feed_list.html', **ctx)
     return render_template('index.html', **ctx)

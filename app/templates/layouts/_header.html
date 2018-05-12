@@ -1,4 +1,4 @@
-<nav id="site-navbar" class="navbar navbar-dark navbar-expand-md">
+<nav id="site-navbar" class="navbar navbar-light bg-light navbar-expand-md">
     <div class="container">
       <a class="navbar-brand" href="/">{{ site_name }}</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#site-navbar-content" aria-controls="site-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +36,9 @@
               </li>
             {% else %}
               <li class="nav-item nav-links-item">
-                <a class="nav-link text-white" href="{{ url_for('users.login') }}">Sign in</a>
+                <a class="nav-link" href="{{ url_for('users.login') }}">Sign in</a>
                 <span class="navbar-text">or</span>
-                <a class="nav-link text-white" href="{{ url_for('users.join') }}">Sign up</a>
+                <a class="nav-link" href="{{ url_for('users.join') }}">Sign up</a>
               </li>
             {% endif %}
           </span>
