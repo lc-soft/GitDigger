@@ -7,14 +7,18 @@ from flask import render_template, request
 from flask_login import current_user
 from datetime import datetime, timedelta
 
-@app.route('/')
-def index():
+def render(sort='top', topic_name=None):
+    days = {
+        'today': 0,
+        'week': 7,
+        'month': 30,
+        'year': 365
+    }
     topic = None
-    timeframe = None
+    sidebar_active = sort
     page = int(request.args.get('page', 1))
-    sort = request.args.get('sort', 'top')
     target = request.args.get('target', 1)
-    topic_name = request.args.get('topic')
+    timeframe = request.args.get('timeframe')
     if current_user.is_authenticated:
         user_id = current_user.id
         topics = current_user.following_topics
@@ -37,6 +41,7 @@ def index():
         else:
             topic = Topic.query.filter_by(name=topic_name).first()
     if topic:
+        sidebar_active = None
         query = query.filter(Issue.topics.any(Topic.name==topic_name))
     elif user_id > 0 and len(current_user.following_topics) > 0:
         topic_terms = []
@@ -44,15 +49,8 @@ def index():
             topic_terms.append(Issue.topics.any(Topic.name==t.name))
         query = query.filter(db.or_(*topic_terms))
     if sort == 'top':
-        days = {
-            'today': 0,
-            'week': 7,
-            'month': 30,
-            'year': 365
-        }
         now = datetime.now()
         time = datetime(now.year, now.month, now.day)
-        timeframe = request.args.get('timeframe')
         if days.get(timeframe) is None:
             timeframe = 'year'
         time -= timedelta(days=days[timeframe])
@@ -66,11 +64,25 @@ def index():
         'feeds': feeds,
         'topics': topics,
         'timeframe': timeframe,
+        'sidebar_active': sidebar_active,
         'navbar_active': 'stories',
         'topic_name': topic_name,
-        'topic': topic,
-        'sort': sort
+        'topic': topic
     }
     if target == '#home-feeds':
         return render_template('components/_feed_list.html', **ctx)
+    if user_id > 0:
+        return render_template('home/index.html', **ctx)
     return render_template('index.html', **ctx)
+
+@app.route('/recent')
+def recent():
+    return render('recent')
+
+@app.route('/pinned/<string:topic_name>')
+def pinned(topic_name):
+    return render('top', topic_name)
+
+@app.route('/')
+def index():
+    return render()

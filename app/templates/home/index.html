@@ -1,18 +1,7 @@
 {% extends "layouts/base.html" %}
 {% set site_content_class = 'home-content' %}
 {% block full_title %}
-  {{ site_name }} - A place to digg open source project stories.
-{% endblock %}
-{% block jumbotron %}
-<div class="jumbotron home-jumbotron">
-  <div class="container">
-    <h1>The community for modern developers.</h1>
-    <p class="lead">Dig interesting stories from open source projects, Share it with other people, Promote community development of open source projects.</p>
-    <p class="lead">
-      <a class="btn btn-success" href="{{ url_for('users.join') }}" role="button">Sign up</a>
-    </p>
-  </div>
-</div>
+  Stories - {{ site_name }}
 {% endblock %}
 {% block content %}
 <div class="row">
@@ -22,16 +11,24 @@
         <button id="home-sidebar-toggler" class="sidebar-toggler sidebar-toggler-right" type="button" data-toggle="collapse" data-target="#home-sidebar-content" aria-controls="home-sidebar-content" aria-expanded="false" aria-label="Toggle navigation">
           <i class="octicon octicon-gear"></i>
         </button>
+        {% if sidebar_active %}
         {% if sidebar_active == 'top' %}
           <span class="label label-sm label-red">
             <i class="octicon octicon-flame"></i>
           </span>
           Top Stories
+          {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+          To Watch
+          {% endif %}
         {% else %}
           <span class="label label-sm label-orange">
             <i class="octicon octicon-clock"></i>
           </span>
           Recent Stories
+          {% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+          To Watch
+          {% endif %}
+        {% endif %}
         {% endif %}
       </div>
       <div class="sidebar-content collapse" id="home-sidebar-content">
@@ -51,39 +48,16 @@
           </nav>
         </div>
         {% endif %}
-        <h3>Topics</h3>
-        <nav class="nav links-gray-dark flex-column">
-          {% for t in topics %}
-          <a href="{{ url_for('pinned', topic_name=t.name) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
-            {{ t.name }}
-          </a>
-          {% endfor %}
-          <a href="{{ url_for('topics.index') }}" class="nav-link">More...</a>
-        </nav>
+        <h3>Bookmarks</h3>
+        {% include "home/_topics.html" %}
       </div>
     </div>
   </div>
   <div class="col-12 col-md-9">
-    {% if not topic %}
-      <div class="section-header d-none d-md-block">
-        {% if sidebar_active == 'top' %}
-          <nav class="nav float-right links-muted">
-            <a class="nav-link{{ ' active' if timeframe == 'today' }}" href="{{ url_for('index', timeframe='today') }}">Today</a>
-            <a class="nav-link{{ ' active' if timeframe == 'week' }}" href="{{ url_for('index', timeframe='week') }}">Week</a>
-            <a class="nav-link{{ ' active' if timeframe == 'month' }}" href="{{ url_for('index', timeframe='month') }}">Month</a>
-            <a class="nav-link{{ ' active' if timeframe == 'year' }}" href="{{ url_for('index', timeframe='year') }}">Year</a>
-          </nav>
-          <span class="label label-sm label-red">
-            <i class="octicon octicon-flame"></i>
-          </span>
-          Top Stories
-        {% else %}
-          <span class="label label-sm label-orange">
-            <i class="octicon octicon-clock"></i>
-          </span>
-          Recent Stories
-        {% endif %}
-      </div>
+    {% if sidebar_active %}
+    <div class="section-header d-none d-md-block">
+      {% include "home/_header.html" %}
+    </div>
     {% endif %}
     {% include "home/_feeds.html" %}
   </div>

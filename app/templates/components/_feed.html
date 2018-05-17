@@ -5,7 +5,7 @@
     </div>
     <div class="feed-meta-content">
       <div class="source">
-        <a href="">{{ feed.user.name }}</a>
+        <a href="{{ url_for('users.show', username=feed.user.username) }}">{{ feed.user.name }}</a>
         <i class="octicon octicon-triangle-right text-faded"></i>
         {{ repo_link_tag(feed.repository) }}
         <abbr class="feed-meta-time text-muted ml-1" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>

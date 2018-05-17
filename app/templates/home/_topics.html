@@ -1,0 +1,18 @@
+{% if current_user.following_topics | length > 0 %}
+<nav class="nav links-gray-dark flex-column">
+  {% for t in topics %}
+  <a href="{{ url_for('pinned', topic_name=t.name) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
+    {{ t.name }}
+  </a>
+  {% endfor %}
+</nav>
+{% else %}
+<div class="card mb-3">
+  <div class="card-body">
+    <p class="card-text">
+      You are not following any topic.
+    </p>
+    <a class="card-link" href="{{ url_for('topics.index') }}">Explore topics</a>
+  </div>
+</div>
+{% endif %}

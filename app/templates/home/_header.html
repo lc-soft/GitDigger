@@ -1,0 +1,24 @@
+
+{% if sidebar_active == 'top' %}
+<nav class="nav float-right links-muted">
+  <a class="nav-link{{ ' active' if timeframe == 'today' }}" href="{{ url_for('index', timeframe='today') }}">Today</a>
+  <a class="nav-link{{ ' active' if timeframe == 'week' }}" href="{{ url_for('index', timeframe='week') }}">Week</a>
+  <a class="nav-link{{ ' active' if timeframe == 'month' }}" href="{{ url_for('index', timeframe='month') }}">Month</a>
+  <a class="nav-link{{ ' active' if timeframe == 'year' }}" href="{{ url_for('index', timeframe='year') }}">Year</a>
+</nav>
+<span class="label label-sm label-red">
+  <i class="octicon octicon-flame"></i>
+</span>
+Top Stories
+{% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+To Watch
+{% endif %}
+{% else %}
+<span class="label label-sm label-orange">
+  <i class="octicon octicon-clock"></i>
+</span>
+Recent Stories
+{% if current_user.is_authenticated and current_user.following_topics | length > 0 %}
+To Watch
+{% endif %}
+{% endif %}
