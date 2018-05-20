@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     vendor: './vendor.js',
     common: './common.js',
-    app: './main.coffee'
+    app: './main.js'
   },
   output: {
     path: path.join(__dirname, '../static/javascripts'),
