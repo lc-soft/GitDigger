@@ -1,6 +1,6 @@
 GITHUB_APP_ID = 12345
-GITHUB_APP_NAME = 'GitHub App Name'
-GITHUB_CLIENT_ID = 'GitHub Client ID'
-GITHUB_CLIENT_SECRET = 'GitHub Client secret'
-GITHUB_WEBHOOK_SECRET = 'Webhook secret (optional)'
-GITHUB_WEBHOOK_URL = 'Webhook URL (default: /api/webhook)'
+GITHUB_APP_NAME = 'gitdigger'
+GITHUB_CLIENT_ID = ''
+GITHUB_CLIENT_SECRET = ''
+GITHUB_WEBHOOK_SECRET = ''
+GITHUB_WEBHOOK_URL = '/api/webhook'
