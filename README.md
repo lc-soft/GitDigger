@@ -57,6 +57,22 @@ config 目录下存放着配置文件，其中以下文件需要你按照实际�
 
 具体示例可参考与它们名称对应的 .example 文件，建议直接复制它们并去掉 .example 后缀名。
 
+### 服务器
+
+如需将此网站部署到线上生产环境中，则需要以下步骤。
+
+修改 `config/nginx/sites-avaliable/gitdigger.com.conf` 文件，将里面的路径改成你的实际路径。之后，复制 config/nginx 目录到 nginx 的配置目录：
+
+    cp -r config/nginx/* /etc/nginx
+
+为配置文件建立软连接，以启动该配置文件：
+
+    ln -s /etc/nginx/sites-available/gitdigger.com.conf /etc/nginx/sites-enabled/gitdigger.com.conf
+
+修改 `config/uwsgi.ini`，将里面的路径改成你的实际路径。之后启动 uwsgi 服务：
+
+    uwsgi --ini config/uwsgi.ini
+
 ### 数据库
 
 以 PostgreSQL 为例，先创建 gitdigger 用户：
@@ -69,8 +85,13 @@ config 目录下存放着配置文件，其中以下文件需要你按照实际�
 
 创建数据库迁移文件，然后升级数据库：
 
-    python manage.py db migrate
-    python manage.py db upgrade
+    pipenv run python manage.py db migrate
+    pipenv run python manage.py db upgrade
+
+### 任务队列
+
+    celery worker -A app.worker -l info
+    celery beat -A app.worker
 
 ## 资源
 
@@ -86,9 +107,4 @@ config 目录下存放着配置文件，其中以下文件需要你按照实际�
 
 先确保 PostgreSQL 和 Redis 服务器已经启动，然后使用以下命令运行网站主程序：
 
-    python main.py
-
-启动任务队列：
-
-    celery worker -A app.worker -l info
-    celery beat -A app.worker
+    pipenv run python main.py
