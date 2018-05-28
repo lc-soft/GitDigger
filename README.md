@@ -1,12 +1,12 @@
 # GitDigger
 
-## GitDigger 是什么？
+## 简述
 
 一个程序员社区，在这里你能从开源项目中挖掘有趣的故事，与其他人分享，让更多人能够知道开源项目、参与改进开源项目，促进开源项目的社区发展。
 
 目前还处于开发阶段，很多功能未完成，如果你是 Python 大佬，可以向此项目提供技术支持，包括但不仅限于：数据库表结构设计、性能优化、代码规范、模块规划、国际化。
 
-## 为何会有 GitDigger？
+## 需求及目标
 
 作为普通开发者，平常无聊的时候会想看看其他人在干什么，长长见识，比如写了什么代码、都在讨论什么问题（Issue）、有哪些有意思的问题和问题评论、哪些项目发布了新版本等等。对于在某些领域有丰富经验的人，可能还会想知道哪些项目正遇到自己擅长领域的问题，看看自己能不能帮上忙。像 GitHub、Bitbucket、GitLab、Coding、码云这类代码平台都专注于源代码托管，用户的认知范围都仅限于自己的项目，没有提供多少途径让用户去发现其它用户和开源项目的动态。
 
@@ -18,13 +18,28 @@
 - 展示开源项目及相关的动态，让用户能够方便的找到活跃度高的项目，也能够通过最近动态了解到大家都在干什么。
 - 支持让开源项目作者将一些问题（Issue）标记为“需要帮助”来获得更多的曝光，吸引更多有经验的人来向作者提供帮助。
 
-## 它是如何运作的？
+## 技术栈
+
+- 后端
+  - 服务器：[Nginx](http://nginx.org/)
+  - 编程语言：[Python](https://www.python.org/)
+  - Web 框架：[Flask](http://flask.pocoo.org/)
+  - 数据库：[PostgreSQL](https://www.postgresql.org/)、[Redis](https://redis.io/)
+  - 任务队列：[Celery](http://www.celeryproject.org/)
+- 前端
+  - 库：[jQuery](http://jquery.com/)
+  - UI 组件库：[Bootstrap](http://getbootstrap.com/)
+  - CSS 预编译器：[Sass](http://sass-lang.com/)
+  - 构建工具：[Webpack](http://webpack.github.io/)
+  - 特性：响应式布局
+
+## 运作方式
 
 开源项目作者从 GitHub 导入项目后，GitDigger 会收集这些项目的相关内容和动态并展示出来，用户如果觉得这些内容有帮助，可以投票，得票数越高的内容排名越靠前，原理和 Hacker News 大致一样，每次投票消耗 1 积分，积分为 0 时不可投票，每日登录奖励 2 积分。
 
 用户可以按话题（Topic）筛选感兴趣的内容，每个话题都有对应的主页，在这个主页可以找到相关的项目、开发者，以及各个项目的动态。
 
-## 运行 GitDigger
+## 安装与配置
 
 ### 依赖
 
@@ -61,11 +76,11 @@ config 目录下存放着配置文件，其中以下文件需要你按照实际�
 
 如需将此网站部署到线上生产环境中，则需要以下步骤。
 
-修改 `config/nginx/sites-avaliable/gitdigger.com.conf` 文件，将里面的路径改成你的实际路径。之后，复制 config/nginx 目录到 nginx 的配置目录：
+修改 `config/nginx/sites-avaliable/gitdigger.com.conf` 文件，将里面的路径改成你的实际路径。之后，复制 `config/nginx` 目录到 nginx 的配置目录：
 
     cp -r config/nginx/* /etc/nginx
 
-为配置文件建立软连接，以启动该配置文件：
+为配置文件建立软连接，以启用该配置文件：
 
     ln -s /etc/nginx/sites-available/gitdigger.com.conf /etc/nginx/sites-enabled/gitdigger.com.conf
 
