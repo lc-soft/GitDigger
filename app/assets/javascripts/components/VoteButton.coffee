@@ -18,8 +18,8 @@ init = (el)->
       success: (res)->
         $btn.find('.text').text text
         $btn.data 'vote-count', ++count
-        $btn.find('.count').text count
-        $btn.addClass('btn-outline-secondary').removeClass('btn-primary-light')
+        $btn.next('.js-social-count').text count
+        $btn.addClass('btn-primary').removeClass('btn-light')
       error: (res)->
         res = res.responseJSON
         $btn.prop 'disabled', false

@@ -70,6 +70,39 @@ $feed-meta-spacing: 8px;
   font-size: 12px;
 }
 
+.social-count {
+  position: relative;
+  min-width: 1.9rem;
+  text-align: center;
+  display: inline-block;
+  margin-left: 6px;
+  border: 1px solid $border-color;
+  border-radius: $btn-border-radius-sm;
+  padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
+  line-height: $input-btn-line-height-sm;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+  }
+  &::before {
+    top: 50%;
+    left: -13px;
+    margin-top: -7px;
+    border: 6px solid transparent;
+    border-right-color: rgba(27,31,35,0.05);
+  }
+  &::after {
+    top: 50%;
+    left: -10px;
+    margin-top: -6px;
+    border: 5px solid transparent;
+    border-right-color: #fff;
+  }
+}
+
 @keyframes left-to-right {
   from {
     left: -240px;
