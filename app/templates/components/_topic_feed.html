@@ -15,12 +15,12 @@
       {% endif %}
     </p>
     {% set has_following = True %}
-    <button type="button" class="btn btn-sm btn-follow-topic{{ ' btn-outline-secondary' if has_following else ' btn-primary-light' }}"
+    <button type="button" class="btn btn-sm btn-follow-topic js-btn-follow-topic{{ ' btn-secondary' if has_following else ' btn-success' }}"
     data-text-follow="Follow Topic" data-text-following="Following Topic"
     data-followers-count="{{ topic.followers_count }}" data-following="{{ 1 if has_following else 0 }}"
     data-url="{{ url_for('api.user_topics', name=topic.name) }}" data-from="feeds">
-      <span class="text">Following Topic</span>
-      | <b class="followers-count">{{ topic.followers_count }}</b>
+      Following Topic
     </button>
+    <span class="social-count js-social-count">{{ topic.followers_count }}</span>
   </div>
 </div>

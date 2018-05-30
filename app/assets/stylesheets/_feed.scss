@@ -76,7 +76,8 @@ $feed-meta-spacing: 8px;
   text-align: center;
   display: inline-block;
   margin-left: 6px;
-  border: 1px solid $border-color;
+  font-size: $font-size-sm;
+  border: 1px solid $gray-200;
   border-radius: $btn-border-radius-sm;
   padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
   line-height: $input-btn-line-height-sm;
@@ -92,7 +93,7 @@ $feed-meta-spacing: 8px;
     left: -13px;
     margin-top: -7px;
     border: 6px solid transparent;
-    border-right-color: rgba(27,31,35,0.05);
+    border-right-color: rgba($gray-200, 0.5);
   }
   &::after {
     top: 50%;

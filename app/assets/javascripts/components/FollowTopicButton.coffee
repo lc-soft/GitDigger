@@ -1,8 +1,7 @@
 init = (el)->
   $(el + ' .btn-follow-topic').off('click.follow').on 'click.follow', ()->
     $btn = $(this)
-    url = $btn.data 'url' 
-    from_ = $btn.data 'from'
+    url = $btn.data 'url'
     following = $btn.data 'following'
     count = $btn.data 'followers-count'
     if !url
@@ -25,22 +24,14 @@ init = (el)->
       success: (res)->
         $btn.data 'following', following
         $btn.data 'followers-count', count
-        $btn.parent().find('.followers-count').text count
+        $btn.next('js-social-count').text count
+        $btn.parent().find('.js-followers-count').text count
         $('#followers-count').text count
-        if from_ is 'feeds'
-          if following
-            $btn.addClass('btn-outline-secondary')
-            $btn.removeClass('btn-primary-light')
-          else
-            $btn.removeClass('btn-outline-secondary')
-            $btn.addClass('btn-primary-light')
-          $btn.find('.text').text text
+        if following
+          $btn.addClass('btn-secondary').removeClass('btn-success')
         else
-          if following
-            $btn.addClass('btn-secondary').removeClass('btn-success')
-          else
-            $btn.removeClass('btn-secondary').addClass('btn-success')
-          $btn.text text
+          $btn.removeClass('btn-secondary').addClass('btn-success')
+        $btn.text text
         $btn.prop 'disabled', false
       error: (res)->
         if res.status is 401

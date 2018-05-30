@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "cb65967bdf3a7372749ce6144be4ee63f412aeeac624342fda3a2b58b1c43c15"
+            "sha256": "2250fe7092ae5d89719e5c61c088f17acee5670e3a218c4d4baee31b317a8d67"
         },
         "requires": {},
         "sources": [
@@ -11,6 +11,104 @@
             }
         ]
     },
-    "default": {},
+    "default": {
+        "alembic": {
+            "version": "==0.9.9"
+        },
+        "aniso8601": {
+            "version": "==3.0.0"
+        },
+        "celery": "*",
+        "certifi": {
+            "version": "==2018.4.16"
+        },
+        "chardet": {
+            "version": "==3.0.4"
+        },
+        "click": {
+            "version": "==6.7"
+        },
+        "flask": {
+            "version": "==1.0.2"
+        },
+        "flask-login": {
+            "version": "==0.4.1"
+        },
+        "flask-migrate": {
+            "version": "==2.1.1"
+        },
+        "flask-restful": {
+            "version": "==0.3.6"
+        },
+        "flask-script": {
+            "version": "==2.0.6"
+        },
+        "flask-sqlalchemy": {
+            "version": "==2.3.2"
+        },
+        "flask-wtf": {
+            "version": "==0.14.2"
+        },
+        "github-flask": {
+            "version": "==3.2.0"
+        },
+        "github-webhook": {
+            "version": "==1.0.2"
+        },
+        "idna": {
+            "version": "==2.6"
+        },
+        "itsdangerous": {
+            "version": "==0.24"
+        },
+        "jinja2": {
+            "version": "==2.10"
+        },
+        "mako": {
+            "version": "==1.0.7"
+        },
+        "markupsafe": {
+            "version": "==1.0"
+        },
+        "misaka": {
+            "version": "==2.1.0"
+        },
+        "psycopg2": {
+            "version": "==2.7.4"
+        },
+        "pygments": {
+            "version": "==2.2.0"
+        },
+        "python-dateutil": {
+            "version": "==2.7.3"
+        },
+        "python-editor": {
+            "version": "==1.0.3"
+        },
+        "pytz": {
+            "version": "==2018.4"
+        },
+        "redis": {
+            "version": "==2.10.6"
+        },
+        "requests": {
+            "version": "==2.18.4"
+        },
+        "six": {
+            "version": "==1.11.0"
+        },
+        "sqlalchemy": {
+            "version": "==1.2.8"
+        },
+        "urllib3": {
+            "version": "==1.22"
+        },
+        "werkzeug": {
+            "version": "==0.14.1"
+        },
+        "wtforms": {
+            "version": "==2.1"
+        }
+    },
     "develop": {}
 }
