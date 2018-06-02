@@ -13,39 +13,47 @@ $feed-meta-spacing: 8px;
 
 .feed {
   word-wrap: break-word;
+}
 
-  .repo-link {
-    color: $green !important;
+.feed-content {
+  margin-bottom: 10px;
+}
 
-    &:hover {
-      color: darken($green, 15%) !important;
-    }
+.feed-extra-content {
+  font-size: small;
+
+  .btn {
+    vertical-align: baseline;
   }
-  .header {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 8px;
+}
 
-    .label {
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      font-size: 1em;  
-      line-height: 24px;
-      text-align: center;
-      border-radius: 4px;
-      display: inline-block;
-    }
-  }
-  > .content {
-    margin-bottom: 10px;
-  }
-  .extra-content {
-    font-size: small;
+.feed-header {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
 
-    .btn {
-      vertical-align: baseline;
-    }
+  .label {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    font-size: 1em;  
+    line-height: 24px;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+  }
+}
+
+.feed-source {
+  color: $green !important;
+
+  .octicon {
+    width: 8px;
+    text-align: center;
+  }
+
+  &:hover {
+    color: darken($green, 15%) !important;
   }
 }
 

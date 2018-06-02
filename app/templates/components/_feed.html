@@ -4,21 +4,21 @@
       {{ user_avatar_tag(feed.user) }}
     </div>
     <div class="feed-meta-content">
-      <div class="source">
-        <a href="{{ url_for('users.show', username=feed.user.username) }}">{{ feed.user.name }}</a>
-        <i class="octicon octicon-triangle-right text-faded"></i>
-        {{ repo_link_tag(feed.repository) }}
-        <abbr class="feed-meta-time text-muted ml-1" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>
-      </div>
+      <a class="feed-author" href="{{ url_for('users.show', username=feed.user.username) }}">{{ feed.user.name }}</a>
+      <a class="feed-source" href="{{ feed.repository.html_url }}">
+        <i class="octicon octicon-triangle-right"></i>
+        {{ feed.repository.owner.username }}/{{ feed.repository.name }}
+      </a>
+      <abbr class="feed-meta-time text-muted ml-1" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>
     </div>
   </div>
-  <div class="header">
+  <div class="feed-header">
     <a class="link-gray-dark" href="{{ feed.html_url }}" target="_blank">{{ feed.title }}</a>
   </div>
-  <div class="content">
+  <div class="feed-content">
     {{ feed.body_html | striptags | truncate }}
   </div>
-  <div class="extra-content">
+  <div class="feed-extra-content">
     {% if feed.topics | length > 0 %}
     <div class="topics float-right">
       {% set topics = topics_sorted(feed.topics) %}
