@@ -83,8 +83,10 @@
   }
 }
 .home-content {
-  .flashes .alert {
-    margin: 0;
+  .flashes {
+    .alert:first-child {
+      margin-top: 1rem;
+    }
   }
 }
 .btn-primary-light {
