@@ -1,6 +1,4 @@
 $font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Liberation Sans", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
-$input-line-height: 1.3;
-$card-border-color: #e4e8e9;
 
 //
 // Color system
@@ -67,3 +65,11 @@ $theme-colors: (
   light: $gray-100,
   dark: $gray-800
 );
+
+// Forms
+
+$input-line-height:                     1.3;
+$input-bg:                              $gray-100;
+$input-focus-bg:                        $white;
+
+$card-border-color: #e4e8e9;
