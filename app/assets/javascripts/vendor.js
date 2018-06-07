@@ -1,6 +1,4 @@
-import Popper from 'popper.js';
-window.Popper = Popper;
-
+require('popper.js');
 require('jquery');
 require('tether');
 require('bootstrap');

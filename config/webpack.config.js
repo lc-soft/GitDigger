@@ -34,6 +34,12 @@ module.exports = {
           options: 'Tether'
         }]
       }, {
+        test: require.resolve('popper.js'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'Popper'
+        }]
+      }, {
         test: /\.coffee$/,
         use: 'coffee-loader'
       }, {
