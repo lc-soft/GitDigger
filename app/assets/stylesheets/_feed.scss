@@ -16,7 +16,9 @@ $feed-meta-spacing: 8px;
 }
 
 .feed-content {
-  margin-bottom: 10px;
+  color: $gray-700;
+  font-size: 0.94em;
+  margin-bottom: 1rem;
 }
 
 .feed-extra-content {
@@ -170,7 +172,6 @@ $feed-meta-spacing: 8px;
   display: block;
 }
 .feed-list > .feed {
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   border-bottom: 1px solid $hr-border-color;
-  margin-bottom: 1rem;
 }
