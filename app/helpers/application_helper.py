@@ -11,6 +11,13 @@ def get_copyright_year():
     return datetime.now().year
 
 @app.template_global()
+def get_body_class():
+    body_class = '-'.join(['page'] + flask.request.endpoint.split('.'))
+    if current_user.is_authenticated:
+        body_class = body_class + ' logged-in'
+    return body_class
+
+@app.template_global()
 def feed_icon(feed):
     label_class = 'label'
     icon_class = 'octicon'

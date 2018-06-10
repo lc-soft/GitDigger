@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/common.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
 </head>
-<body class="{{ body_class }}">
+<body class="{{ get_body_class() }}">
   {% include 'layouts/_app_data.html' %}
   {% block header %}
   <header id="site-header">
