@@ -20,7 +20,7 @@ $feed-meta-spacing: 8px;
 }
 
 .feed-extra-content {
-  font-size: small;
+  font-size: smaller;
 
   .btn {
     vertical-align: baseline;
@@ -171,6 +171,6 @@ $feed-meta-spacing: 8px;
 }
 .feed-list > .feed {
   padding-bottom: 1rem;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $hr-border-color;
   margin-bottom: 1rem;
 }

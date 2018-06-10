@@ -20,29 +20,29 @@
   </div>
   <div class="feed-extra-content">
     {% if feed.topics | length > 0 %}
-    <div class="topics float-right">
-      {% set topics = topics_sorted(feed.topics) %}
-      {% set topic = topics[0] %}
-      <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>
-      {% if feed.topics | length > 1 %}
-      <div class="d-none d-md-inline-block">
-        {% set topic = topics[1] %}
-        <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>  
-        {% if feed.topics | length > 2 %}
-        <div class="dropdown topics-dropdown">
-          <a data-toggle="dropdown" class="link-muted dropdown-toggle" href="#">
-            +{{ topics | length - 2 }}
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-          {% for topic in topics[2:] %}
-            <a class="dropdown-item" href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
-          {% endfor %}
+      <div class="topics float-right">
+        {% set topics = topics_sorted(feed.topics) %}
+        {% set topic = topics[0] %}
+        <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>
+        {% if feed.topics | length > 1 %}
+          {% set topic = topics[1] %}
+          <div class="d-none d-md-inline-block">
+            <a href="{{ url_for_topic(topic) }}" class="label label-basic">{{ topic.name }}</a>  
+            {% if feed.topics | length > 2 %}
+              <div class="dropdown topics-dropdown">
+                <a data-toggle="dropdown" class="link-muted dropdown-toggle" href="#">
+                  +{{ topics | length - 2 }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% for topic in topics[2:] %}
+                    <a class="dropdown-item" href="{{ url_for_topic(topic) }}">{{ topic.name }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
           </div>
-        </div>
         {% endif %}
-      {% endif %}
       </div>
-    </div>
     {% endif %}
     <button type="button" class="btn btn-sm btn-vote js-btn-vote {{ 'btn-primary' if has_voted else 'btn-light' }} "
       data-action="upvote" data-vote-url="{{ url_for_vote(feed) }}"
