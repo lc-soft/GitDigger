@@ -4,7 +4,6 @@ from lib.utils import datetime_from_utc
 from lib.markdown import markdown
 from app.services import users_service
 from app.services import topics_service
-from app.services import repositories_service as repos_service
 
 def get(issue_id):
     return Issue.query.get(issue_id)
@@ -16,23 +15,12 @@ def create(data, repo):
     user = users_service.get(data['user']['id'])
     if user is None:
         user = users_service.create(data['user'])
-        try:
-            db.session.add(user)
-            db.session.commit()
-        except:
-            db.session.rollback()
-            return None
+        db.session.add(user)
     issue = Issue(user, repo, data)
-    try:
-        issue.body_html = markdown(issue.body)
-        db.session.add(issue)
-        db.session.commit()
-    except:
-        db.session.rollback()
-        return None
+    issue.body_html = markdown(issue.body)
+    db.session.add(issue)
     for topic in issue.topics:
         topics_service.update_issues_count(topic)
-    db.session.commit()
     return issue
 
 def update(issue, data):

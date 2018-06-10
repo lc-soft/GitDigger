@@ -14,11 +14,8 @@ def update(data):
     repo = repos_service.get_by_origin_id(data['repository']['id'])
     if repo is None:
         return False
-    issue = issues_service.create(data['issue'], repo)
-    if issue is None:
-        return False
     try:
-        db.session.add(issue)
+        issue = issues_service.create(data['issue'], repo)
         db.session.commit()
     except:
         db.session.rollback()
@@ -34,12 +31,5 @@ def issues(data):
             return 'faild', 500
     except:
         return 'faild', 500
-
-# only for test add issue
-@csrf.exempt
-@app.route('/api/issues', methods=['POST'])
-def new():
-    data = request.get_json()
-    return jsonify({ 'success': update(data) })
 
 app.register_blueprint(views)

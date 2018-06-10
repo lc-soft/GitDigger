@@ -11,7 +11,7 @@ class PointLog(db.Model):
     receiver_type = db.Column(db.String(32))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, reason, points, sender, receiver):
+    def __init__(self, reason, points, sender, receiver=None):
         self.reason = reason
         self.points = points
         if sender:
