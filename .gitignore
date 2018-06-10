@@ -3,6 +3,8 @@ config/*.py
 config/*.ini
 db/database.db
 db/migrate/versions
+tmp
+log
 node_modules
 .sass-cache
 static/stylesheets/
