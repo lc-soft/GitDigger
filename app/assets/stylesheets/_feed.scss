@@ -171,7 +171,7 @@ $feed-meta-spacing: 8px;
 .has-error .feed .error-cover {
   display: block;
 }
-.feed-list > .feed {
+.feed-list .feed {
   padding: 1rem 0;
   border-bottom: 1px solid $hr-border-color;
 }
