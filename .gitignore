@@ -1,5 +1,6 @@
 *.py[cod]
 config/*.py
+config/*.ini
 db/database.db
 db/migrate/versions
 node_modules
