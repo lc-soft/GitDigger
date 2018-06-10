@@ -1,0 +1,8 @@
+<script>
+  window.app = {
+    endpoint: "{{ request.endpoint }}",
+    api: {
+      issues: "{{ url_for('api.issues') }}"
+    }
+  }
+</script>

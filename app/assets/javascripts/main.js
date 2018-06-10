@@ -11,7 +11,7 @@ const routes = {
   'topics.index': TopicsIndex
 }
 
-const view = routes[endpoint]
+const view = routes[app.endpoint]
 
 if (view) {
   view.init()
