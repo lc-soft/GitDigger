@@ -21,6 +21,19 @@ class GitHubHelper(flask_github.GitHub):
             return None
         return repos
 
+    def get_public_repo(self, full_name):
+        if not full_name:
+            return None
+        url = '%srepos/%s' % (self.BASE_URL, full_name)
+        try:
+            response = self.session.request('GET', url, headers={
+                'Accept': 'application/vnd.github.mercy-preview+json'
+            })
+            repo = response.json()
+        except:
+            return None
+        return repo
+
     def get_integration(self):
         try:
             data = self.get('user/installations', headers={

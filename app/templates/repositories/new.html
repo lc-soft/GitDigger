@@ -1,17 +1,37 @@
 {% extends "layouts/base.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% block title %}Import a new repository{% endblock %}
 {% block content %}
-  <h1>Import a new repository</h1>
-  {% if form %}
-    {% from "_formhelpers.html" import render_field %}
-    <form method="post" action="{{ url_for('repos.new') }}">
-      {{ form.csrf_token }} 
-      <dl>
-        {{ render_field(form.full_name) }}
-      </dl>
-      <p><input type="submit" value="Import Repository"></p>
-    </form>
-  {% else %}
-    <p>Please <a href="{{ url_for('users.user_github') }}">connect GitHub account</a> to continue.</p>
-  {% endif %}
+  <h2 class="subhead">Import a new repository</h2>
+  <p class="subhead-description text-muted">After you import a repository of open source project, we will track it activities and collect some data.</p>
+  <ul class="nav nav-tabs mt-4">
+    <li class="nav-item">
+      <a class="nav-link{{ ' active' if source != 'other'}}" id="your-own-repo-tab" data-toggle="tab" href="#your-own-repo" role="tab" aria-controls="your-own-repo" aria-selected="{{ source != 'other' }}">Your own repository</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{{ ' active' if source == 'other'}}" id="repo-tab" data-toggle="tab" href="#repo" role="tab" aria-controls="repo" aria-selected="{{ source == 'other' }}">General repository</a>
+    </li>
+  </ul>
+  <div class="tab-content mt-4">
+    <div class="tab-pane{{ ' show active' if source != 'other'}}" id="your-own-repo" role="tabpanel" aria-labelledby="your-own-repo-tab">
+    {% if current_user.github_username %}
+      <form method="post" action="{{ url_for('repos.new') }}">
+        {{ form_for_self.csrf_token }}
+        {{ render_field(form_for_self.full_name) }}
+        <input type="hidden" name="source" value="self" />
+        <p><input class="btn btn-primary" type="submit" value="Import Repository"></p>
+      </form>
+    {% else %}
+      <p>Please <a href="{{ url_for('users.user_github') }}">connect GitHub account</a> to continue.</p>
+    {% endif %}
+    </div>
+    <div class="tab-pane{{ ' show active' if source == 'other'}}" id="repo" role="tabpanel" aria-labelledby="repo-tab">
+      <form method="post" action="{{ url_for('repos.new') }}">
+        {{ form.csrf_token }}
+        {{ render_field(form.html_url, required=True, placeholder='https://github.com/username/example') }}
+        <input type="hidden" name="source" value="other" />
+        <p><input class="btn btn-primary" type="submit" value="Import Repository"></p>
+      </form>
+    </div>
+  </div>
 {% endblock %}
