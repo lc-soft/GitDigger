@@ -92,10 +92,15 @@
   }
 }
 
-.home-content {
-  .flashes {
-    .alert:first-child {
-      margin-top: 1rem;
+.flashes {
+  .alert {
+    padding: 0;
+    border-radius: 0;
+    border-width: 1px 0;
+
+    > .container {
+      position: relative;
+      padding: $alert-padding-y $alert-padding-x;
     }
   }
 }
@@ -164,3 +169,7 @@
   }
 }
 
+.invalid-feedback::first-letter,
+.valid-feedback::first-letter {
+  text-transform: capitalize;
+}
