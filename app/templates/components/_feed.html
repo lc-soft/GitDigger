@@ -44,7 +44,7 @@
         {% endif %}
       </div>
     {% endif %}
-    <button type="button" class="btn btn-sm btn-vote js-btn-vote {{ 'btn-primary' if has_voted else 'btn-light' }} "
+    <button type="button" class="btn btn-sm btn-vote js-btn-vote btn-light"
       data-action="upvote" data-vote-url="{{ url_for_vote(feed) }}"
       data-vote-count="{{ feed.points }}" data-text-upvoted="Upvoted" data-voted="{{ 1 if has_voted else 0 }}" {{ 'disabled' if has_voted }}>
       {{ 'Upvoted' if has_voted else 'Upvote' }}
