@@ -77,7 +77,8 @@ $feed-meta-spacing: 8px;
   margin-left: $feed-avatar-size + $feed-meta-spacing;
 }
 .feed-meta-time {
-  font-size: 12px;
+  font-size: small;
+  font-weight: normal;
 }
 
 .social-count {
