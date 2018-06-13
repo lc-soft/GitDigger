@@ -1,6 +1,6 @@
-$feed-avatar-size: 24px;
-$feed-avatar-board-radius: 4px;
-$feed-meta-spacing: 8px;
+$feed-avatar-size: 1.6rem;
+$feed-avatar-board-radius: 3px;
+$feed-meta-spacing: .5rem;
 
 .feed-card {
   position: relative;
@@ -16,8 +16,7 @@ $feed-meta-spacing: 8px;
 }
 
 .feed-content {
-  color: $gray-700;
-  font-size: 0.94em;
+  color: $gray-650;
   margin-bottom: 1rem;
 }
 
@@ -30,9 +29,9 @@ $feed-meta-spacing: 8px;
 }
 
 .feed-header {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.36rem;
 
   .label {
     width: 24px;
@@ -60,8 +59,8 @@ $feed-meta-spacing: 8px;
 }
 
 .feed-meta {
-  font-weight: 500;
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 .feed-meta-avatar {
   float: left;
@@ -79,6 +78,7 @@ $feed-meta-spacing: 8px;
 .feed-meta-time {
   font-size: small;
   font-weight: normal;
+  text-decoration: none;
 }
 
 .social-count {

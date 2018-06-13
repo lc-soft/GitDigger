@@ -1,16 +1,5 @@
-@media (min-width: 960px) {
-    #site-footer {
-        text-align: left;
-    }
-}
-@media (min-width: 480px) {
-    #site-footer {
-        padding: 30px;
-    }
-}
 #site-footer {
-    font-size: 14px;
-    padding: 30px 20px;
+    padding: 1rem 0;
     background-color: #fff;
 
     .site-more-links {

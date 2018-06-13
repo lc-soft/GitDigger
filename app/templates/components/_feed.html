@@ -9,7 +9,7 @@
         <i class="octicon octicon-triangle-right"></i>
         {{ feed.repository.owner.username }}/{{ feed.repository.name }}
       </a>
-      <abbr class="feed-meta-time text-muted ml-1" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>
+      <time class="feed-meta-time text-muted ml-1" datetime="{{ feed.created_at }}" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>
     </div>
   </div>
   <div class="feed-header">

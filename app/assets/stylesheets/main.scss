@@ -3,12 +3,14 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "variables";
+@import "utilities";
 @import "navbar";
 @import "sidebar";
 @import "label";;
 @import "link";
 @import "footer";
 @import "feed";
+@import "mobile-reset";
 
 label {
   font-weight: 600;
@@ -126,10 +128,6 @@ label {
     float: right;
     margin: -3.5px 0;
   }
-}
-
-.text-red {
-  color: $red;
 }
 
 @media (min-width: 1200px) {
