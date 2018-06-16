@@ -1,4 +1,4 @@
-<div id="home-feeds" class="feed-list" data-pages="{{ feeds.pages }}">
+<div id="feeds-container" class="feed-list" data-pages="{{ feeds.pages }}">
   {% if topic %}
     {% include "components/_topic_feed.html" %}
   {% endif %}
@@ -12,7 +12,7 @@
     </div>
   </div>
   {% else %}
-    {% include "components/_feed_list.html" %}
+    {% include "components/_feeds.html" %}
     {% if feeds.has_next %}
     <div id="feeds-loading-tip">
     {% include "components/_feed_wireframe.html" %}

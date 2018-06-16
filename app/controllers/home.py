@@ -4,10 +4,10 @@ from app.models.issue import Issue
 from app.models.voter import Voter
 from app.models.user import User
 from flask import render_template, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from datetime import datetime, timedelta
 
-def render(sort='top', topic_name=None):
+def dashboard(sort='top', topic_name=None):
     days = {
         'today': 0,
         'week': 7,
@@ -16,18 +16,11 @@ def render(sort='top', topic_name=None):
     }
     topic = None
     sidebar_active = sort
+    user_id = current_user.id
     page = int(request.args.get('page', 1))
     target = request.args.get('target', 1)
     timeframe = request.args.get('timeframe')
-    if current_user.is_authenticated:
-        user_id = current_user.id
-        topics = current_user.following_topics
-    else:
-        user_id = 0
-        topics = Topic.query.order_by(
-            Topic.group.desc(),
-            Topic.issues_count.desc()
-        ).limit(10).all()
+    topics = current_user.following_topics
     terms = db.and_(Voter.target_id==Issue.id, Voter.user_id==user_id)
     case = db.case([(Voter.user_id==user_id, True)], else_=False)
     query = db.session.query(Issue, case.label('has_voted'))
@@ -43,7 +36,7 @@ def render(sort='top', topic_name=None):
     if topic:
         sidebar_active = None
         query = query.filter(Issue.topics.any(Topic.name==topic_name))
-    elif user_id > 0 and len(current_user.following_topics) > 0:
+    elif len(current_user.following_topics) > 0:
         topic_terms = []
         for t in current_user.following_topics:
             topic_terms.append(Issue.topics.any(Topic.name==t.name))
@@ -65,24 +58,68 @@ def render(sort='top', topic_name=None):
         'topics': topics,
         'timeframe': timeframe,
         'sidebar_active': sidebar_active,
-        'navbar_active': 'stories',
+        'navbar_active': '',
         'topic_name': topic_name,
         'topic': topic
     }
-    if target == '#home-feeds':
-        return render_template('components/_feed_list.html', **ctx)
-    if user_id > 0:
-        return render_template('home/index.html', **ctx)
-    return render_template('index.html', **ctx)
+    if target == '#feeds-container':
+        return render_template('components/_feeds.html', **ctx)
+    return render_template('dashboard/index.html', **ctx)
 
 @app.route('/recent')
+@login_required
 def recent():
-    return render('recent')
+    return dashboard('recent')
 
 @app.route('/pinned/<string:topic_name>')
+@login_required
 def pinned(topic_name):
-    return render('top', topic_name)
+    return dashboard('top', topic_name)
+
+@app.route('/explore')
+def explore():
+    days = {
+        'today': 0,
+        'week': 7,
+        'month': 30,
+        'year': 365
+    }
+    user_id = 0
+    navbar_active = '/'
+    page = int(request.args.get('page', 1))
+    target = request.args.get('target', 1)
+    timeframe = request.args.get('timeframe')
+    topics = Topic.query.order_by(
+        Topic.group.desc(),
+        Topic.issues_count.desc()
+    ).limit(10).all()
+    if current_user.is_authenticated:
+        user_id = current_user.id
+        navbar_active = 'explore'
+    terms = db.and_(Voter.target_id==Issue.id, Voter.user_id==user_id)
+    case = db.case([(Voter.user_id==user_id, True)], else_=False)
+    query = db.session.query(Issue, case.label('has_voted'))
+    now = datetime.now()
+    time = datetime(now.year, now.month, now.day)
+    if days.get(timeframe) is None:
+        timeframe = 'year'
+    time -= timedelta(days=days[timeframe])
+    query = query.filter(Issue.created_at > time)
+    query = query.order_by(Issue.score.desc(), Issue.created_at.desc())
+    query = query.outerjoin(Voter, terms)
+    feeds = query.paginate(page, 10)
+    ctx = {
+        'feeds': feeds,
+        'topics': topics,
+        'timeframe': timeframe,
+        'navbar_active': navbar_active
+    }
+    if target == '#feeds-container':
+        return render_template('components/_feeds.html', **ctx)
+    return render_template('home/index.html', **ctx)
 
 @app.route('/')
 def index():
-    return render()
+    if current_user.is_authenticated:
+        return dashboard()
+    return explore()
