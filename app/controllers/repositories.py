@@ -90,45 +90,6 @@ def delete(ctx):
         flash('Repository deletion failed', 'danger')
         ctx.render('settings/index.html')
 
-def import_issues(repo):
-    count = 0
-    params = { 'state': 'all', 'page': 1 }
-    url = 'https://api.github.com/repos/%s/%s/issues'
-    url = url %(repo.owner.github_username, repo.name)
-    while True:
-        try:
-            result = requests.get(url, params=params, timeout=10)
-            issues = result.json()
-        except:
-            flash('Issues import failed', 'danger')
-            return False
-        if len(issues) < 1:
-            break
-        for data in issues:
-            if data.get('pull_request'):
-                continue
-            count += 1
-            issue = issues_service.get_by_origin_id(data['id'])
-            if issue is None:
-                issue = issues_service.create(data, repo)
-                if issue is None:
-                    return False
-                db.session.add(issue)
-                continue
-            issues_service.update(issue, data)
-        params['page'] += 1
-    try:
-        db.session.commit()
-        flash('%d issues imported successfully' % count, 'success')
-    except:
-        db.session.rollback()
-        flash('Issues import failed', 'danger')
-        return False
-    return True
-
-def import_pull_requests(repo):
-    pass
-
 def handle_form_for_self(form, repos):
     if not form.validate_on_submit():
         return None
@@ -163,12 +124,6 @@ def settings(ctx):
 @repos_helper.route('/settings/github', methods=['GET', 'POST'])
 @login_required
 def github(ctx):
-    if request.method == 'POST':
-        action = request.form.get('action')
-        if action == 'import-issues':
-            import_issues(ctx.repo)
-        elif action == 'import-pulls':
-            import_pull_requests(ctx.repo)
     return ctx.render('settings/github.html')
 
 @github_helper.access_token_getter
