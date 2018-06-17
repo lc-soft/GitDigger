@@ -16,8 +16,8 @@
   {% include 'layouts/_header.html' %}
   </header>
   {% endblock %}
+  {% include 'layouts/_flashes.html' %}
   <div id="site-content">
-    {% include 'layouts/_flashes.html' %}
     {% include 'components/_import_issue_modal.html' %}
     {% block jumbotron %}{% endblock %}
     {% block content_header %}{% endblock %}

@@ -1,6 +1,6 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
-<div class="flashes">
+<div id="site-flashes" class="flashes">
   {% for category, message in messages %}
   <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
     <div class="container">
