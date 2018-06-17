@@ -11,7 +11,9 @@ from datetime import datetime, timedelta
 def recommend_users():
     time = datetime.now() - timedelta(days=365)
     query = User.query.order_by(User.last_login_reward_at.desc())
-    return query.filter(User.last_login_reward_at > time)
+    query = query.filter(User.last_login_reward_at > time)
+    query = query.filter(User.type == 'User')
+    return query
 
 def recommend_repos():
     return Repository.query.order_by(Repository.imported_at.desc())

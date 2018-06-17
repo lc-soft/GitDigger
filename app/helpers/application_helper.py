@@ -7,6 +7,12 @@ def flash(message, category='info'):
     flask.flash(message, category)
 
 @app.template_global()
+def human_number(num):
+    if num > 999:
+        return ('%.1f' % (num / 1000.0)).rstrip('0').rstrip('.') + 'k'
+    return num
+
+@app.template_global()
 def get_copyright_year():
     return datetime.now().year
 
