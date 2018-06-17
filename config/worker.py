@@ -6,6 +6,10 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERYBEAT_SCHEDULE = {
     'update-issue-ranking-score': {
         'task': 'app.workers.issue_worker.update_ranking_score',
-        'schedule': timedelta(minutes=10)
+        'schedule': timedelta(minutes=30)
+    },
+    'update-user-profile': {
+        'task': 'app.workers.user_worker.update_profile',
+        'schedule': timedelta(hours=6)
     }
 }
