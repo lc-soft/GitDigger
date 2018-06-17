@@ -7,6 +7,7 @@ import ImportIssueModal from './components/ImportIssueModal'
 
 const routes = {
   'index': Index,
+  'explore': Index,
   'recent': Dashboard,
   'pinned': Dashboard,
   'topics.show': TopicsShow,

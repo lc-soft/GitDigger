@@ -16,6 +16,7 @@ class Repository(db.Model):
     logo_url = db.Column(db.String(256))
     html_url = db.Column(db.String(256))
     homepage = db.Column(db.String(256))
+    language = db.Column(db.String(32))
     pushed_at = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
@@ -30,6 +31,7 @@ class Repository(db.Model):
         self.name = data['name']
         self.origin_id = data['id']
         self.homepage = data['homepage']
+        self.language = data['language']
         self.html_url = data['html_url']
         self.description = data['description']
         self.created_at = datetime_from_utc(data['created_at'])

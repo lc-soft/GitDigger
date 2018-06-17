@@ -100,9 +100,9 @@ def handle_form_for_self(form, repos):
                 repo = create(repo)
                 break
         else:
-            return repo
-    flash('Repository does not exist', 'warning')
-    return None
+            flash('Repository does not exist', 'warning')
+            return None
+    return repo
 
 def handle_form_for_other(form):
     host = '//github.com/'

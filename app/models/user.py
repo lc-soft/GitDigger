@@ -14,6 +14,7 @@ class User(db.Model):
     name = db.Column(db.String(80))
     bio = db.Column(db.String(180))
     points = db.Column(db.Integer, default=0)
+    site_admin = db.Column(db.Boolean, default=False)
     avatar_url = db.Column(db.String(256))
     owner = db.Column(db.String(32), nullable=False, default='user')
     github_id = db.Column(db.Integer, unique=True)

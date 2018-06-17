@@ -98,6 +98,8 @@ def join():
 @login_manager.user_loader
 def load_user(userid):
     user = User.query.get(int(userid))
+    if not user:
+        return None
     user.last_active_at = datetime.now()
     if user and get_login_reward(user):
         try:

@@ -1,0 +1,17 @@
+<ul class="repo-cards">
+{% for repo in repos %}
+  <li class="repo-card-wrapper">
+    <div class="repo-card">
+      <div class="repo-card-body">
+        <i class="octicon octicon-repo"></i>
+        <a href="{{ repo.html_url }}" target="_blank" class="repo-card-header">
+          <span class="text-normal">{{ repo.owner.name }}</span> / {{ repo.name }}
+        </a>
+        <div class="repo-card-text">
+          {{ repo.description }}
+        </div>
+      </div>
+    </div>
+  </li>
+{% endfor %}
+</ul>

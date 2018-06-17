@@ -175,8 +175,7 @@ $feed-meta-spacing: .5rem;
 .feed-list .feed {
   padding: 1rem 0;
   border-bottom: 1px solid $hr-border-color;
-
-  &:first-child {
-    padding-top: 0;
-  }
+}
+.feed-list > .feed:first-child {
+  padding-top: 0;
 }

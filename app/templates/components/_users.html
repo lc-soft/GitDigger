@@ -1,21 +1,23 @@
-<ul class="user-list links-gray-dark">
+<ul class="user-list">
 {% for user in users %}
   <li class="user-list-item">
     <div class="user-list-item-avatar">
       {{ user_avatar_tag(user) }}
     </div>
     <div class="user-list-item-content">
-      <a href="{{ url_for('users.show', username=user.username) }}" target="_blank" class="user-name">{{ user.name }}</a>
-      {% if user.location %}
-      <div class="user-location">
-        <i class="octicon octicon-location"></i>
-        {{ user.location }}
-      </div>
-      {% endif %}
+      <a href="{{ url_for('users.show', username=user.username) }}" target="_blank" class="user-name">
+        {{ user.name }}
+      </a>
       {% if user.public_repos_count > 0 or user.followers_count > 0 %}
       <div class="user-stats">
         {{ human_number(user.public_repos_count) }} repos,
         {{ human_number(user.followers_count) }} followers
+      </div>
+      {% endif %}
+      {% if user.location %}
+      <div class="user-location">
+        <i class="octicon octicon-location"></i>
+        {{ user.location }}
       </div>
       {% endif %}
     </div>
