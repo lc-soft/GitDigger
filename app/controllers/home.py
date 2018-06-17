@@ -1,11 +1,20 @@
 from app import app, db, login_manager
+from app.models.user import User
 from app.models.topic import Topic
 from app.models.issue import Issue
 from app.models.voter import Voter
-from app.models.user import User
+from app.models.repository import Repository
 from flask import render_template, request
 from flask_login import current_user, login_required
 from datetime import datetime, timedelta
+
+def recommend_users():
+    time = datetime.now() - timedelta(days=365)
+    query = User.query.order_by(User.last_login_reward_at.desc())
+    return query.filter(User.last_login_reward_at > time)
+
+def recommend_repos():
+    return Repository.query.order_by(Repository.imported_at.desc())
 
 def dashboard(sort='top', topic_name=None):
     days = {
@@ -85,10 +94,12 @@ def explore():
         'year': 365
     }
     user_id = 0
-    navbar_active = '/'
+    navbar_active = 'home'
     page = int(request.args.get('page', 1))
     target = request.args.get('target', 1)
     timeframe = request.args.get('timeframe')
+    users = recommend_users().limit(10).all()
+    repos = recommend_repos().limit(6).all()
     topics = Topic.query.order_by(
         Topic.group.desc(),
         Topic.issues_count.desc()
@@ -111,6 +122,8 @@ def explore():
     ctx = {
         'feeds': feeds,
         'topics': topics,
+        'users': users,
+        'repos': repos,
         'timeframe': timeframe,
         'navbar_active': navbar_active
     }

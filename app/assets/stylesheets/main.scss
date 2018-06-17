@@ -10,13 +10,21 @@
 @import "link";
 @import "footer";
 @import "feed";
+@import "users";
 @import "mobile-reset";
 
 label {
   font-weight: 600;
 }
 
-.page-content {
+.page-explore {
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 1.2rem;
+  }
+}
+
+#site-content {
   padding: 20px 0;
 }
 

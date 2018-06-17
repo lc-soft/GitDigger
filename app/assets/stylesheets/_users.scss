@@ -1,0 +1,34 @@
+.user-list {
+  padding: 0;
+}
+.user-list-item {
+  display: flex;
+  list-style: none;
+  margin-bottom: 1em;
+}
+.user-list-item-avatar {
+  flex: 0;
+  display: flex;
+  padding-right: 0.5em;
+  align-items: center;
+
+  .user-avatar {
+    width: 2.5em;
+    height: 2.5em;
+  }
+}
+.user-list-item-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+
+  .user-name {
+    font-weight: 600;
+    margin-top: -0.15em;
+  }
+  .user-bio {
+    margin: 0;
+    color: $gray-600;
+  }
+}

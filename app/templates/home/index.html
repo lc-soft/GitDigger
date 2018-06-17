@@ -18,9 +18,12 @@
 {% block content %}
 <div class="row">
   <div class="col-12 col-md-9">
+    <h2>Trending</h2>
     {% include "components/_feeds_container.html" %}
   </div>
   <div class="col-12 col-md-3">
+    <h2>Developers</h2>
+    {% include 'components/_users.html' %}
   </div>
 </div>
 {% endblock %}
