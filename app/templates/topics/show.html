@@ -53,16 +53,7 @@
     {% if feeds.items | length < 1 %}
       <p>there was no story.</p>
     {% else %}
-      {% include "components/_feed_list.html" %}
-      {% if feeds.has_next %}
-      <div id="feeds-loading-tip">
-        {% include "components/_feed_wireframe.html" %}
-      </div>
-      {% endif %}
-      <p id="feeds-loaded-tip" class="text-muted text-center mt-3" style="{{ 'display: none' if feeds.has_next }}">
-        <i class="octicon octicon-stop"></i>
-        You've reached the end of the list
-      </p>
+      {% include "components/_feeds_container.html" %}
     {% endif %}
     </div>
   </div>

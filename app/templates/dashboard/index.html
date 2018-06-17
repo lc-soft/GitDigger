@@ -59,7 +59,9 @@
       {% include "dashboard/_header.html" %}
     </div>
     {% endif %}
+    {% with show_topic = True %}
     {% include "components/_feeds_container.html" %}
+    {% endwith %}
   </div>
 </div>
 {% endblock %}

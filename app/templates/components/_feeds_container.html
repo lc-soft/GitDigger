@@ -1,5 +1,5 @@
 <div id="feeds-container" class="feed-list" data-pages="{{ feeds.pages }}">
-  {% if topic %}
+  {% if topic and show_topic %}
     {% include "components/_topic_feed.html" %}
   {% endif %}
   {% if feeds.items | length < 1 %}
