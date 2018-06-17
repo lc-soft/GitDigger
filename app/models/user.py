@@ -8,6 +8,7 @@ topics = db.Table('user_topics',
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(32), nullable=False, default='User')
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     name = db.Column(db.String(80))
@@ -19,6 +20,9 @@ class User(db.Model):
     github_username = db.Column(db.String(64), unique=True)
     github_token = db.Column(db.String(300), unique=True)
     password = db.Column(db.String(300))
+    location = db.Column(db.String(255))
+    followers_count = db.Column(db.Integer, default=0)
+    public_repos_count = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_active_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login_reward_at = db.Column(db.DateTime, default=datetime.utcnow)
