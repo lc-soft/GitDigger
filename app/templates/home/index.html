@@ -17,13 +17,17 @@
 {% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-12 col-md-9">
+  <div class="main-content col-12 col-md-9">
+    <div class="mb-4">
+      <h2>Repositories</h2>
+      {% include "components/_repos.html" %}
+    </div>
     <h2>Trending</h2>
     {% include "components/_feeds_container.html" %}
   </div>
-  <div class="col-12 col-md-3">
+  <div class="d-none d-md-block col-12 col-md-3">
     <h2>Developers</h2>
-    {% include 'components/_users.html' %}
+    {% include 'components/_users.html' %}  
   </div>
 </div>
 {% endblock %}

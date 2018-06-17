@@ -1,0 +1,50 @@
+.repo-cards {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0;
+  margin: -$card-spacer-y;
+}
+
+.repo-card {
+  font-size: 1rem;
+  background-color: $card-bg;
+  padding: $card-spacer-y $card-spacer-x;
+  border: $border-width solid $card-border-color;
+  @include border-radius($card-border-radius);
+}
+
+.repo-card-wrapper {
+  width: 50%;
+  list-style: none;
+  padding: $card-spacer-y;
+
+  .repo-card {
+    height: 100%;
+  }
+}
+
+.repo-card-text {
+  color: $gray-600;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.repo-card-header {
+  font-weight: 600;
+}
+
+@include media-breakpoint-down(md) {
+  .repo-cards {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .repo-card-wrapper {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
