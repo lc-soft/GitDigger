@@ -16,15 +16,13 @@
   {% include 'layouts/_header.html' %}
   </header>
   {% endblock %}
-  <div id="site-content" class="{{ site_content_class }}">
+  <div id="site-content">
     {% include 'layouts/_flashes.html' %}
     {% include 'components/_import_issue_modal.html' %}
     {% block jumbotron %}{% endblock %}
     {% block content_header %}{% endblock %}
-    <div class="page-content">
-      <div class="container">
-        {% block content %}{% endblock %}
-      </div>
+    <div class="container">
+      {% block content %}{% endblock %}
     </div>
   </div>
   <script src="{{ url_for('static', filename='javascripts/vendor.js') }}"></script>

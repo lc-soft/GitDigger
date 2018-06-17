@@ -1,21 +1,19 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-  <div class="page-content">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="home-sidebar">
-          <h3>Personal settings</h3>
-          <nav class="nav nav-pills links-muted flex-column">
-            <a href="{{ url_for('users.profile') }}" class="nav-link{{ ' active' if sidebar_active == 'profile' }}">Profile</a>
-            <a href="{{ url_for('users.account') }}" class="nav-link{{ ' active' if sidebar_active == 'account' }}">Account</a>
-            <a href="{{ url_for('users.user_github') }}" class="nav-link{{ ' active' if sidebar_active == 'github' }}">GitHub</a>
-            <a href="{{ url_for('users.repositories') }}" class="nav-link{{ ' active' if sidebar_active == 'repositories' }}">Repositories</a>
-          </nav>
-        </div>
-      </div>
-      <div class="col-md-9">
-        {% block settings_content %}{% endblock %}
-      </div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="home-sidebar">
+      <h3>Personal settings</h3>
+      <nav class="nav nav-pills links-muted flex-column">
+        <a href="{{ url_for('users.profile') }}" class="nav-link{{ ' active' if sidebar_active == 'profile' }}">Profile</a>
+        <a href="{{ url_for('users.account') }}" class="nav-link{{ ' active' if sidebar_active == 'account' }}">Account</a>
+        <a href="{{ url_for('users.user_github') }}" class="nav-link{{ ' active' if sidebar_active == 'github' }}">GitHub</a>
+        <a href="{{ url_for('users.repositories') }}" class="nav-link{{ ' active' if sidebar_active == 'repositories' }}">Repositories</a>
+      </nav>
     </div>
   </div>
+  <div class="col-md-9">
+    {% block settings_content %}{% endblock %}
+  </div>
+</div>
 {% endblock %}

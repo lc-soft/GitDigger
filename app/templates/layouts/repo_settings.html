@@ -1,17 +1,15 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="page-content">
-  <div class="row">
-    <div class="col-md-3">
-      <nav class="list-group">
-        <div class="list-group-item bg-faded">Settings</div>
-        <a href="{{ url_for_repo_settings }}" class="list-group-item list-group-item-action">Options</a>
-        <a href="{{ url_for_repo_settings_github }}" class="list-group-item list-group-item-action">GitHub</a>
-      </nav>
-    </div>
-    <div class="col-md-9">
-    {% block settings_content %}{% endblock %}
-    </div>
+<div class="row">
+  <div class="col-md-3">
+    <nav class="list-group">
+      <div class="list-group-item bg-faded">Settings</div>
+      <a href="{{ url_for_repo_settings }}" class="list-group-item list-group-item-action">Options</a>
+      <a href="{{ url_for_repo_settings_github }}" class="list-group-item list-group-item-action">GitHub</a>
+    </nav>
+  </div>
+  <div class="col-md-9">
+  {% block settings_content %}{% endblock %}
   </div>
 </div>
 {% endblock %}
