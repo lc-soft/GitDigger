@@ -80,17 +80,15 @@
     </div>
     {% endif %}
     {% if current_user.github_username %}
-    <div class="card-body">
-      <form method="post" action="{{ url_for('users.user_github') }}">
-        <input type="hidden" name="action" value="unlink">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <p>
-          <button class="btn btn-danger">Unlink GitHub account</button>
-        </p>
-        <p class="card-text">This action is not recommended when some of your repositories are linked to GitHub repositories.</p>
-      </form>
+    <form method="post" action="{{ url_for('users.user_github') }}">
+      <input type="hidden" name="action" value="unlink">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <p>
+        <button class="btn btn-danger">Unlink GitHub account</button>
+      </p>
+      <p class="card-text">This action is not recommended when some of your repositories are linked to GitHub repositories.</p>
+    </form>
     {% endif %}
-    </div>
   </div>
   {% endif %}
 {% endblock %}
