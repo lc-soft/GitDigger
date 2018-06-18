@@ -103,6 +103,23 @@ label {
   }
 }
 
+.topics {
+  .topic-tag {
+    font-size: small;
+    display: inline-block;
+    padding: 0.3em 0.9em;
+    margin: 0 0.5em 0.5em 0;
+    white-space: nowrap;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: rgba(theme-color("primary"), 0.04);
+
+    &:hover {
+      background-color: rgba(theme-color("primary"), 0.1);
+    }
+  }
+}
+
 .topic-card {
   .card-title {
     font-size: 1em;

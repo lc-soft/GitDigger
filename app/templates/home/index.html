@@ -22,12 +22,27 @@
       <h2>Repositories</h2>
       {% include "components/_repos.html" %}
     </div>
-    <h2>Trending</h2>
-    {% include "components/_feeds_container.html" %}
+    <div class="mb-4">
+      <h2>Trending</h2>
+      {% include "components/_feeds_container.html" %}
+    </div>
   </div>
   <div class="d-none d-md-block col-12 col-md-4 col-lg-3">
-    <h2>Developers</h2>
+    <h2>Topics</h2>
+    <div class="topics mb-2">
+    {% for topic in topics %}
+      <a href="{{ url_for_topic(topic) }}" class="topic-tag">{{ topic.name }}</a>  
+    {% endfor %}
+    </div>
+    <a href="{{ url_for('topics.index') }}">See more topics <i class="octicon octicon-chevron-right"></i></a>
+    <h2 class="mt-4">Developers</h2>
     {% include 'components/_users.html' %}  
+    <h2 class="mt-4">Links</h2>
+    <a class="card" href="https://www.vultr.com/?ref=6890184">
+      <div class="card-body">
+        <img src="https://www.vultr.com/media/badge_onwhite.svg" width="100%">
+      </div>
+    </a>
   </div>
 </div>
 {% endblock %}
