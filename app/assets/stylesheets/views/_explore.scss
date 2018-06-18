@@ -1,4 +1,4 @@
-
+.page-index,
 .page-explore {
   h2 {
     font-size: 1.1rem;
@@ -8,6 +8,7 @@
 }
 
 @include media-breakpoint-down(sm) {
+  .page-index,
   .page-explore {
     .feed-list {
       border-width: 0;
