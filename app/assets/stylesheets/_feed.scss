@@ -1,7 +1,3 @@
-$feed-avatar-size: 1.44em;
-$feed-avatar-board-radius: 3px;
-$feed-meta-spacing: .5em;
-
 .feed-card {
   position: relative;
   background: #fff;
@@ -184,10 +180,10 @@ $feed-meta-spacing: .5em;
 }
 .feed-list .feed {
   padding: 1rem 0;
-  border-bottom: 1px solid $hr-border-color;
+  border-bottom: 1px solid $feed-divider-color;
 }
 .feed-list > .feed:first-child {
-  border-top: 1px solid $hr-border-color;
+  border-top: 1px solid $feed-divider-color;
 }
 
 @include media-breakpoint-down(sm) {

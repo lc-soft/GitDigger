@@ -22,7 +22,11 @@
     }
     .repo-card-wrapper {
       padding: 0;
-      box-shadow: 0 0 1px $card-border-color;
+      border-bottom: 1px solid $feed-divider-color;
+
+      &:first-child {
+        border-top: 1px solid $feed-divider-color;
+      }
     }
     .repo-card {
       border: 0;
