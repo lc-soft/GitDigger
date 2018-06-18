@@ -3,6 +3,9 @@
   position: relative;
   border-bottom: 1px solid $border-color;
 
+  .navbar-text {
+    text-transform: capitalize;
+  }
   .user-avatar {
     width: 38px;
     height: 38px;
