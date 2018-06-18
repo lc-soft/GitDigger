@@ -25,8 +25,8 @@
       {% block content %}{% endblock %}
     </div>
   </div>
-  <script src="{{ url_for('static', filename='javascripts/vendor.js') }}"></script>
-  <script src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='javascripts/vendor.js') }}" defer="defer"></script>
+  <script src="{{ url_for('static', filename='javascripts/app.js') }}" defer="defer"></script>
   {% block footer %}
     {% include 'layouts/_footer.html' %}
   {% endblock %}
