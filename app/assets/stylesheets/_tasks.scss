@@ -1,0 +1,8 @@
+.site-task-list-item {
+  .task-state-stopped {
+    color: $red; 
+  }
+  .task-state-started {
+    color: $green;
+  }
+}

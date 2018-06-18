@@ -1,5 +1,6 @@
 from app import app, db, login_manager
 from app.models.user import User
+from app.models.task import Task
 from app.models.topic import Topic
 from app.models.issue import Issue
 from app.models.voter import Voter
@@ -138,3 +139,12 @@ def index():
     if current_user.is_authenticated:
         return dashboard()
     return explore()
+
+@app.route('/status')
+def status():
+    tasks = Task.query.order_by(Task.updated_at.desc()).all()
+    ctx = {
+        'navbar_active': 'status',
+        'tasks': tasks
+    }
+    return render_template('home/status.html', **ctx)

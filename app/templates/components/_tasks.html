@@ -1,0 +1,20 @@
+<ul class="site-task-list list-group">
+{% for task in tasks %}
+  <li class="site-task-list-item list-group-item">
+    <time class="float-right text-faded" datetime="{{ task.updated_at }}" title="Updated at {{ task.updated_at }}">{{ task.updated_at | timesince }}</time>
+    {% if task.state == 'STOPPED' %}
+    <span class="task-state task-state-stopped" title="task has stopped">
+      <i class="octicon octicon-circle-slash"></i>
+    </span>
+    {% else %}
+    <span class="task-state task-state-started" title="task has started">
+      <i class="octicon octicon-circle-sync"></i>
+    </span>
+    {% endif %}
+    <span class="task-name">
+      {{ task.name }}
+      <span class="text-faded">({{ task.current }}/{{ task.total }})</span>
+    </span>
+  </li>
+{% endfor %}
+</ul>
