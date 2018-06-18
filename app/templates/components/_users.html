@@ -14,12 +14,6 @@
         {{ human_number(user.followers_count) }} followers
       </div>
       {% endif %}
-      {% if user.location %}
-      <div class="user-location">
-        <i class="octicon octicon-location"></i>
-        {{ user.location }}
-      </div>
-      {% endif %}
     </div>
   </li>
 {% endfor %}

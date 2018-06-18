@@ -3,14 +3,12 @@
     font-size: 14px;
   }
   
-  .feed-list .feed {
+  .feed-list {
     margin-left: -$spacer;
     margin-right: -$spacer;
-    padding-left: $spacer;
-    padding-right: $spacer;
   }
   
   .feed-header {
     font-size: 1.143rem;
-  }  
+  }
 }

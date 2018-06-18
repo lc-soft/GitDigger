@@ -1,0 +1,32 @@
+
+.page-explore {
+  h2 {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-bottom: 1em;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .page-explore {
+    .feed-list {
+      border-width: 0;
+
+      .feed {
+        padding-left: $spacer;
+        padding-right: $spacer;
+      }
+    }
+    .repo-cards {
+      margin: 0 (-$spacer);
+    }
+    .repo-card-wrapper {
+      padding: 0;
+      box-shadow: 0 0 1px $card-border-color;
+    }
+    .repo-card {
+      border: 0;
+      border-radius: 0;
+    }
+  }
+}

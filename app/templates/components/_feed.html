@@ -5,8 +5,8 @@
     </div>
     <div class="feed-meta-content">
       <a class="feed-author" href="{{ url_for('users.show', username=feed.user.username) }}">{{ feed.user.name }}</a>
+      <i class="octicon octicon-triangle-right text-faded"></i>
       <a class="feed-source" href="{{ feed.repository.html_url }}">
-        <i class="octicon octicon-triangle-right"></i>
         {{ feed.repository.owner.username }}/{{ feed.repository.name }}
       </a>
       <time class="feed-meta-time text-muted ml-1" datetime="{{ feed.created_at }}" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</abbr>

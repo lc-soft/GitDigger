@@ -45,21 +45,17 @@
 {% block content %}
 <div class="row">
   <div class="col-12 col-md-8">
-    <div class="section-header">
-      Feed
-    </div>
+    <h2>Feed</h2>
     <div id="topic-feeds" class="feed-list" data-pages="{{ feeds.pages }}">
     {% if feeds.items | length < 1 %}
       <p>there was no story.</p>
     {% else %}
-      {% include "components/_feeds_container.html" %}
+      {% include "components/_feeds.html" %}
     {% endif %}
     </div>
   </div>
   <div class="col-12 col-md-4">
-    <div class="section-header">
-      About
-    </div>
+    <h2>About</h2>
     {% if topic.description %}
     {{ topic.description }}
     {% else %}

@@ -39,10 +39,9 @@
     background-image: $navbar-light-toggler-icon-bg;
   }
   @include media-breakpoint-down(sm) {
+    padding: 1rem;
+    margin: -20px (-$spacer) 0 (-$spacer);
     background: #fff;
-    padding: 1rem 15px;
-    margin: -20px -15px 15px -15px;
-    border-bottom: 1px solid rgba(0,0,0,.05);
 
     .sidebar-content {
       padding-top: 1rem;

@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   font-size: 0;
-  margin: -$card-spacer-y;
+  margin: -0.5rem -0.25rem;
 }
 
 .repo-card {
@@ -17,7 +17,7 @@
 .repo-card-wrapper {
   width: 50%;
   list-style: none;
-  padding: $card-spacer-y;
+  padding: 0.5rem 0.25rem;
 
   .repo-card {
     height: 100%;
@@ -25,7 +25,7 @@
 }
 
 .repo-card-text {
-  color: $gray-600;
+  color: $gray-650;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
