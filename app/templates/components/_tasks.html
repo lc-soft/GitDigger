@@ -1,20 +1,33 @@
 <ul class="site-task-list list-group">
 {% for task in tasks %}
-  <li class="site-task-list-item list-group-item">
-    <time class="float-right text-faded" datetime="{{ task.updated_at }}" title="Updated at {{ task.updated_at }}">{{ task.updated_at | timesince }}</time>
+  <li class="site-task-list-item list-group-item mb-2">
+    <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar" style="width: {{ task.progress }}%" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
     {% if task.state == 'STOPPED' %}
-    <span class="task-state task-state-stopped" title="task has stopped">
+    <div class="task-state task-state-stopped" title="task has stopped">
       <i class="octicon octicon-circle-slash"></i>
-    </span>
+    </div>
     {% else %}
-    <span class="task-state task-state-started" title="task has started">
+    <div class="task-state task-state-started" title="task has started">
       <i class="octicon octicon-circle-sync"></i>
-    </span>
+    </div>
     {% endif %}
-    <span class="task-name">
-      {{ task.name }}
-      <span class="text-faded">({{ task.current }}/{{ task.total }})</span>
-    </span>
+    <div class="task-details">
+      <span class="float-right ml-1 text-faded">
+        <i class="octicon octicon-checklist"></i>
+        {{ task.current }}/{{ task.total }}
+      </span>
+      <h3 class="task-name">{{ task.name }}</h3>
+      <div class="task-description">
+        {% if task.description %}
+        {{ task.description }}
+        {% else %}
+        <i class="text-muted">No description.</i>
+        {% endif %}
+      </div>
+      <time class="text-faded" datetime="{{ task.updated_at }}" title="Updated at {{ task.updated_at }}">Last updated at {{ task.updated_at | timesince }}</time>
+    </div>
   </li>
 {% endfor %}
 </ul>

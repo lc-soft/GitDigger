@@ -1,8 +1,27 @@
 .site-task-list-item {
+  position: relative;
+
   .task-state-stopped {
     color: $red; 
   }
   .task-state-started {
     color: $green;
+  }
+  .task-state {
+    float: left;
+  }
+  .task-details {
+    margin-left: 1.5rem;
+  }
+  .task-name {
+    font-size: 1.1rem;
+  }
+  .progress {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    border-radius: 0;
   }
 }
