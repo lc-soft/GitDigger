@@ -1,7 +1,47 @@
 {% extends "layouts/base.html" %}
 {% block title %}Status{% endblock %}
 {% block content %}
+
+<h2>Users</h2>
+<p class="lead">User statistics for this month</p>
+
+<div class="row">
+  <div class="col-sm-6 col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body statistic">
+          <div class="statistic-value">{{ users['count'] }}</div>
+          <div class="statistic-label">Total users</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body statistic">
+          <div class="statistic-value">{{ users['actual_count'] }}</div>
+          <div class="statistic-label">Actual users</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body statistic">
+          <div class="statistic-value">{{ users['active_count'] }}</div>
+          <div class="statistic-label">Active users</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body statistic">
+          <div class="statistic-value">{{ users['new_count'] }}</div>
+          <div class="statistic-label">New users</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h2>Tasks</h2>
 <p class="lead">Task queue processing status</p>
 {% include 'components/_tasks.html' %}
+
 {% endblock %}

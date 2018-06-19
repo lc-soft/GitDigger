@@ -140,11 +140,24 @@ def index():
         return dashboard()
     return explore()
 
+def users_status():
+    q = User.query
+    now = datetime.now()
+    month_start = datetime(now.year, now.month, 1, 0)
+    return {
+        'count': q.count(),
+        'actual_count': q.filter(User.type == 'User').count(),
+        'active_count': q.filter(User.type == 'User')
+            .filter(User.last_active_at > month_start).count(),
+        'new_count': q.filter(User.created_at > month_start).count()
+    }
+
 @app.route('/status')
 def status():
     tasks = Task.query.order_by(Task.updated_at.desc()).all()
     ctx = {
         'navbar_active': 'status',
+        'users': users_status(),
         'tasks': tasks
     }
     return render_template('home/status.html', **ctx)
