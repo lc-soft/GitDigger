@@ -144,11 +144,12 @@ def users_status():
     q = User.query
     now = datetime.now()
     month_start = datetime(now.year, now.month, 1, 0)
+    actual_users = q.filter(User.type == 'User').filter(User.owner == 'user')
+    active_users = actual_users.filter(User.last_active_at > month_start)
     return {
         'count': q.count(),
-        'actual_count': q.filter(User.type == 'User').count(),
-        'active_count': q.filter(User.type == 'User')
-            .filter(User.last_active_at > month_start).count(),
+        'actual_count': actual_users.count(),
+        'active_count': active_users.count(),
         'new_count': q.filter(User.created_at > month_start).count()
     }
 
