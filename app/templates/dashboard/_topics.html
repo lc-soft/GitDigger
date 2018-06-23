@@ -1,7 +1,7 @@
 {% if current_user.following_topics | length > 0 %}
 <nav class="nav links-gray-dark flex-column">
   {% for t in topics %}
-  <a href="{{ url_for('pinned', topic_name=t.name) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
+  <a href="{{ url_for('dashboard.pinned', topic_name=t.name) }}" class="nav-link{{ ' active' if t.name == topic_name }}">
     {{ t.name }}
   </a>
   {% endfor %}

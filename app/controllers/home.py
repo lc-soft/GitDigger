@@ -5,9 +5,11 @@ from app.models.topic import Topic
 from app.models.issue import Issue
 from app.models.voter import Voter
 from app.models.repository import Repository
-from flask import render_template, request
+from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 from datetime import datetime, timedelta
+
+dashboard_view = Blueprint('dashboard', __name__)
 
 def recommend_users():
     time = datetime.now() - timedelta(days=365)
@@ -78,12 +80,12 @@ def dashboard(sort='top', topic_name=None):
         return render_template('components/_feeds.html', **ctx)
     return render_template('dashboard/index.html', **ctx)
 
-@app.route('/recent')
+@dashboard_view.route('/recent')
 @login_required
 def recent():
     return dashboard('recent')
 
-@app.route('/pinned/<string:topic_name>')
+@dashboard_view.route('/pinned/<string:topic_name>')
 @login_required
 def pinned(topic_name):
     return dashboard('top', topic_name)
@@ -162,3 +164,5 @@ def status():
         'tasks': tasks
     }
     return render_template('home/status.html', **ctx)
+
+app.register_blueprint(dashboard_view)

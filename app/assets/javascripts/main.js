@@ -8,8 +8,8 @@ import ImportIssueModal from './components/ImportIssueModal'
 const routes = {
   'index': Index,
   'explore': Index,
-  'recent': Dashboard,
-  'pinned': Dashboard,
+  'dashboard.recent': Dashboard,
+  'dashboard.pinned': Dashboard,
   'topics.show': TopicsShow,
   'topics.index': TopicsIndex
 }

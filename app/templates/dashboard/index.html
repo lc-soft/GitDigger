@@ -34,7 +34,7 @@
         <h3>Feeds</h3>
         <nav class="nav links-gray-dark flex-column">
           <a class="nav-link{{ ' active' if sidebar_active == 'top' }}" href="{{ url_for('index') }}">Top Stories</a>
-          <a class="nav-link{{ ' active' if sidebar_active == 'recent' }}" href="{{ url_for('recent') }}">Recent Stories</a>
+          <a class="nav-link{{ ' active' if sidebar_active == 'recent' }}" href="{{ url_for('dashboard.recent') }}">Recent Stories</a>
         </nav>
         {% if sidebar_active == 'top' %}
         <div class="d-block d-md-none">
