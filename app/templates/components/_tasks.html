@@ -26,7 +26,9 @@
         <i class="text-muted">No description.</i>
         {% endif %}
       </div>
-      <time class="text-faded" datetime="{{ task.updated_at }}" title="Updated at {{ task.updated_at }}">Last updated at {{ task.updated_at | timesince }}</time>
+      <div class="text-faded">
+        Last updated at {{ timeago_tag(task.updated_at, 'text-faded') }}
+      </div>
     </div>
   </li>
 {% endfor %}
