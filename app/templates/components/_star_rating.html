@@ -1,0 +1,17 @@
+<span class="rating rating-{{ (value / 10) | int }}">
+  <span class="rating-stars-cover">
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+  </span>
+  <span class="rating-stars">
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+    <i class="octicon octicon-star"></i>
+  </span>
+</span>
+{{ rating_text_tag(value) }}

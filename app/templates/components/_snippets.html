@@ -1,0 +1,41 @@
+<div class="snippet-list">
+{% for snippet in snippets %}
+  <div class="snippet">
+    <div class="snippet-meta mb-2">
+      <div class="snippet-meta-avatar">
+        {{ user_avatar_tag(snippet.repository.owner) }}
+      </div>
+      <div class="snippet-meta-content">
+        <div class="snippet-source">
+          <a class="snippet-source-repo" href="{{ snippet.repository.html_url }}">
+            {{ snippet.repository.owner.username }}/{{ snippet.repository.name }}
+          </a>
+          -
+          <a class="snippet-source-file" href="" target="_blank">
+            {{ snippet.file }}
+          </a>
+        </div>
+        <div class="extra-info">
+          <span class="snippet-rating mr-1">
+            {% with value = snippet.rating %}
+            {% include 'components/_star_rating.html' %}
+            {% endwith %}
+          </span>
+          ({{ snippet.ratings_count }} ratings)
+          <span class="d-none d-md-inline">
+              &nbsp;•&nbsp;
+            Last indexed on
+            {{ timeago_tag(snippet.created_at) }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="snippet-content">
+      {{ snippet.description | markdown | safe }}
+      <div class="blob-wrapper mt-2">
+        {{ snippet.content | highlight(snippet.language, snippet.content_start_line) | safe }}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>

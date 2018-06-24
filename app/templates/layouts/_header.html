@@ -17,6 +17,9 @@
             {% endif %}
           </li>
           <li class="nav-item">
+            <a class="nav-link {{ 'active' if navbar_active == 'fixme' }}" href="{{ url_for('snippets.index') }}">Fixme</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {{ 'active' if navbar_active == 'topics' }}" href="{{ url_for('topics.index') }}">Topics</a>
           </li>
         </ul>

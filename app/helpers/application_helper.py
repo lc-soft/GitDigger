@@ -4,7 +4,27 @@ from datetime import datetime
 from flask_login import current_user
 
 def flash(message, category='info'):
-    flask.flash(message, category)
+    return flask.flash(message, category)
+
+@app.template_global()
+def rating_text_tag(rating):
+    if rating > 80:
+        level = 4
+        text = 'so difficult'
+    elif rating > 70:
+        level = 3
+        text = 'difficult'
+    elif rating > 40:
+        level = 2
+        text = 'normal'
+    elif rating > 20:
+        level = 1
+        text = 'easy'
+    else:
+        level = 0
+        text = 'so easy'
+    html = '<span class="rating-text rating-text-{0}">{1}</span>'
+    return flask.Markup(html.format(level, text))
 
 @app.template_global()
 def timeago_tag(time, class_=''):

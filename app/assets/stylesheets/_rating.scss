@@ -1,0 +1,43 @@
+.rating {
+  top: 1px;
+  position: relative;
+  white-space: nowrap;
+  display: inline-block;
+
+  .rating-stars-cover {
+    top: 0;
+    left: 0;
+    color: color("yellow");
+    position: absolute;
+    overflow: hidden;
+  }
+  .rating-stars {
+    color: $gray-200;
+  }
+}
+@for $i from 0 through 10 {  
+  .rating-#{$i} {
+    .rating-stars-cover {
+      width: $i * 10%;
+    }
+  }
+}
+.rating-text {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.rating-text-0 {
+  color: $teal;
+}
+.rating-text-1 {
+  color: $green;
+}
+.rating-text-2 {
+  color: $blue;
+}
+.rating-text-3 {
+  color: $red;
+}
+.rating-text-4 {
+  color: #f00;
+}

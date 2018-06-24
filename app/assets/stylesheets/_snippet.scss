@@ -1,0 +1,28 @@
+
+.snippet {
+
+}
+.snippet-meta {
+  display: flex;
+
+  .extra-info {
+    color: $gray-600;
+    font-size: smaller;
+  }
+}
+.snippet-meta-avatar {
+  flex: 0 0;
+
+  .user-avatar {
+    width: $snippet-avatar-size;
+    height: $snippet-avatar-size;
+    border-radius: $snippet-avatar-border-radius;
+  }
+}
+.snippet-meta-content {
+  flex: 1;
+  padding: 0 $snippet-meta-spacing;
+}
+.snippet-source {
+  font-weight: 600;
+}
