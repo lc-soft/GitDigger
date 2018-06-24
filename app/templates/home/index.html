@@ -1,13 +1,13 @@
 {% extends "layouts/base.html" %}
 {% block full_title %}
-  {{ site_name }} - A place to digg open source project stories.
+  {{ site_name }} - The community for open source project.
 {% endblock %}
 {% block jumbotron %}
   {% if not current_user.is_authenticated %}
     <div class="jumbotron home-jumbotron">
       <div class="container">
-        <h1>The community for modern developers.</h1>
-        <p class="lead">Dig interesting stories from open source projects, Share it with other people, Promote community development of open source projects.</p>
+        <h1>The community for open source project.</h1>
+        <p class="lead">GitDigger provides new ways to help developers discover and contributing to open source projects.</p>
         <p class="lead">
           <a class="btn btn-success" href="{{ url_for('users.join') }}" role="button">Sign up</a>
         </p>
