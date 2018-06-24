@@ -9,14 +9,14 @@
       <a class="feed-source" href="{{ feed.repository.html_url }}">
         {{ feed.repository.owner.username }}/{{ feed.repository.name }}
       </a>
-      {{ timeago_tag(feed.created_at, 'feed-meta-time text-muted ml-1') | safe }}
+      {{ timeago_tag(feed.created_at, 'feed-meta-time text-muted ml-1') }}
     </div>
   </div>
   <div class="feed-header">
     <a class="link-gray-dark" href="{{ feed.html_url }}" target="_blank">{{ feed.title }}</a>
   </div>
   <div class="feed-content">
-    {{ feed.body_html | striptags | truncate }}
+    {{ feed.body | markdown | striptags | truncate }}
   </div>
   <div class="feed-extra-content">
     {% if feed.topics | length > 0 %}

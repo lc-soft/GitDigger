@@ -11,7 +11,7 @@ class Renderer(misaka.HtmlRenderer):
         formatter = HtmlFormatter()
         return misaka.SmartyPants(highlight(text, lexer, formatter))
 
-markdown = misaka.Markdown(
+render = misaka.Markdown(
     Renderer(),
     extensions=misaka.EXT_FENCED_CODE | misaka.EXT_NO_INTRA_EMPHASIS |
                 misaka.HTML_ESCAPE

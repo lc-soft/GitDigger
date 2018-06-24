@@ -1,0 +1,19 @@
+.highlight {
+  @import "syntax";
+}
+
+.blob-wrapper {
+  border: 1px solid $border-color;
+  overflow-x: auto;
+
+  pre {
+    margin: 0;
+  }
+  .linenos pre {
+    color: $gray-500;
+    padding: 0 .7em;
+  }
+  .code {
+    padding: 0 .7em;
+  }
+}

@@ -15,7 +15,6 @@ from flask_wtf import FlaskForm as Form
 
 users = Blueprint('users', __name__)
 github_helper = GitHubHelper(app)
-login_manager.login_view = 'users.login'
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=32)])

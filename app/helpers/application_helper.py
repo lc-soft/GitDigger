@@ -7,9 +7,9 @@ def flash(message, category='info'):
     flask.flash(message, category)
 
 @app.template_global()
-def timeago_tag(time, classname=''):
+def timeago_tag(time, class_=''):
     html = '<time class="timeago {0}" datetime="{1}" title="{1}">{2}</time>'
-    return html.format(classname, time.isoformat(), time.ctime())
+    return flask.Markup(html.format(class_, time.isoformat(), time.ctime()))
 
 @app.template_global()
 def human_number(num):

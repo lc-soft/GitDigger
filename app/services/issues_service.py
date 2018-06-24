@@ -1,7 +1,6 @@
 from app import app, db, csrf
 from app.models.issue import Issue
 from lib.utils import datetime_from_utc
-from lib.markdown import markdown
 from app.services import users_service
 from app.services import topics_service
 
@@ -17,7 +16,6 @@ def create(data, repo):
         user = users_service.create(data['user'])
         db.session.add(user)
     issue = Issue(user, repo, data)
-    issue.body_html = markdown(issue.body)
     db.session.add(issue)
     for topic in issue.topics:
         topics_service.update_issues_count(topic)
@@ -27,6 +25,5 @@ def update(issue, data):
     issue.state = data['state']
     issue.title = data['title']
     issue.body = data['body']
-    issue.body_html = markdown(issue.body)
     issue.comments_count = data['comments']
     issue.updated_at = datetime_from_utc(data['updated_at'])
