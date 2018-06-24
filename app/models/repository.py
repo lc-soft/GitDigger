@@ -17,6 +17,7 @@ class Repository(db.Model):
     html_url = db.Column(db.String(256))
     homepage = db.Column(db.String(256))
     language = db.Column(db.String(32))
+    last_snippet_number = db.Column(db.Integer, nullable=False, default=0)
     pushed_at = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
