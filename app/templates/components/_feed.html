@@ -9,7 +9,7 @@
       <a class="feed-source" href="{{ feed.repository.html_url }}">
         {{ feed.repository.owner.username }}/{{ feed.repository.name }}
       </a>
-      <time class="feed-meta-time text-muted ml-1" datetime="{{ feed.created_at }}" title="{{ feed.created_at }}">{{ feed.created_at | timesince }}</time>
+      {{ timeago_tag(feed.created_at, 'feed-meta-time text-muted ml-1') | safe }}
     </div>
   </div>
   <div class="feed-header">
