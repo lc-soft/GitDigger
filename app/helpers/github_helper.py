@@ -8,19 +8,6 @@ class GitHubHelper(flask_github.GitHub):
             user = None
         return user
 
-    def get_public_repos(self, username):
-        if not username:
-            return None
-        url = '%susers/%s/repos' % (self.BASE_URL, username)
-        try:
-            response = self.session.request('GET', url, headers={
-                'Accept': 'application/vnd.github.mercy-preview+json'
-            })
-            repos = response.json()
-        except:
-            return None
-        return repos
-
     def get_public_repo(self, full_name):
         if not full_name:
             return None

@@ -24,11 +24,6 @@ def valid_github_repo_url(form, field):
             return
     raise validators.ValidationError('Field must be a GitHub repository url.')
 
-class SelfRepositoryForm(Form):
-    full_name = SelectField('Repository', [
-        validators.InputRequired()
-    ])
-
 class RepositoryForm(Form):
     html_url = StringField('Repository url', [
         validators.InputRequired(),
@@ -104,15 +99,6 @@ def handle_form_for_self(form, repos):
             return None
     return repo
 
-def handle_form_for_other(form):
-    host = '//github.com/'
-    if not form.validate_on_submit():
-        return None
-    url = form.html_url.data
-    repo_name = url[url.find(host) + len(host):]
-    repo = github_helper.get_public_repo(repo_name)
-    return create(repo)
-
 @repos_helper.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings(ctx):
@@ -134,24 +120,16 @@ def token_getter():
 @repos.route('/new', methods=['GET', 'POST'])
 @login_required
 def new():
-    choices = []
-    source = request.form.get('source', 'self')
+    host = '//github.com/'
     form = RepositoryForm(request.form)
-    form_for_self = SelfRepositoryForm(request.form)
-    repos = github_helper.get_public_repos(current_user.github_username)
-    if repos is not None:
-        for repo in repos:
-            full_name = repo['full_name']
-            choices.append((full_name, full_name))
-    form_for_self.full_name.choices = choices
-    if request.method == 'POST':
-        if source == 'self':
-            handle_form_for_self(form_for_self, repos)
-        else:
-            handle_form_for_other(form)
+    source = request.form.get('source', 'self')
+    if request.method == 'POST' and form.validate_on_submit():
+        url = form.html_url.data
+        repo_name = url[url.find(host) + len(host):]
+        repo = github_helper.get_public_repo(repo_name)
+        repo = create(repo)
     return render_template('repositories/new.html',
                             source=source,
-                            form=form,
-                            form_for_self=form_for_self)
+                            form=form)
 
 app.register_blueprint(repos)

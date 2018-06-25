@@ -16,8 +16,29 @@
     <div class="tab-pane{{ ' show active' if source != 'other'}}" id="your-own-repo" role="tabpanel" aria-labelledby="your-own-repo-tab">
     {% if current_user.github_username %}
       <form method="post" action="{{ url_for('repos.new') }}">
-        {{ form_for_self.csrf_token }}
-        {{ render_field(form_for_self.full_name) }}
+        {{ form.csrf_token }}
+        {% with field = form.html_url %}
+        <div class="form-group">
+          {{ field.label }}
+          {% if field.errors %}
+            <select id="select-user-repo" name="{{ field.name }}" class="form-control is-invalid" data-text-empty="you do not have public repository"></select>
+            <div class="invalid-feedback">
+              {% if field.errors | length > 1 %}
+                {% for message in field.errors %}
+                <ul>
+                  <li>{{ message }}</li>
+                </ul>
+                {%endfor %}
+              {% else %}
+                {{ field.errors[0] }}
+              {% endif %}
+            </div>
+          {% else %}
+            <select id="select-user-repo" class="form-control"></select>
+            <div class="invalid-feedback"></div>
+          {% endif %}
+        </div>
+        {% endwith %}
         <input type="hidden" name="source" value="self" />
         <p><input class="btn btn-primary" type="submit" value="Import Repository"></p>
       </form>
