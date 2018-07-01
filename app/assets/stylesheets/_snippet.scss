@@ -6,7 +6,7 @@
     font-weight: 600;
     margin-bottom: .5rem;
 
-    &:first-child {
+    &::first-letter {
       text-transform: capitalize;
     }
   }
