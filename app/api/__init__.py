@@ -5,3 +5,4 @@ api = Api(app, decorators=[csrf.exempt])
 
 import issues
 import topics
+import snippets

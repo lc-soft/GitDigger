@@ -28,3 +28,19 @@ topic_fields = {
     'followers_count': fields.Integer,
     'repositories_count': fields.Integer
 }
+
+snippet_fields = {
+    'id': fields.Integer,
+    'number': fields.Integer,
+    'description': fields.String,
+    'language': fields.String,
+    'file': fields.String,
+    'line': fields.Integer,
+    'content_start_line': fields.Integer,
+    'content_end_line': fields.Integer,
+    'commit_id': fields.String,
+    'rating': fields.Integer,
+    'ratings_count': fields.Integer,
+    'created_at': fields.DateTime('iso8601'),
+    'updated_at': fields.DateTime('iso8601')
+}
