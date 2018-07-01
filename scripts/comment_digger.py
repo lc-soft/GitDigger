@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import codecs
+import requests
 from comment_fetcher import CommentFetcher
 
 excludes = set([
@@ -56,7 +57,7 @@ class CommentDigger(object):
             }
             self.store.append(data)
 
-def main(repo_dir='./', debug=False):
+def digg(repo_dir='./', debug=False):
     cwd = os.getcwd()
     os.chdir(repo_dir)
     digger = CommentDigger(debug)
@@ -80,6 +81,21 @@ def main(repo_dir='./', debug=False):
     f.close()
     os.chdir(cwd)
 
+def upload(path, repo, username, password):
+    f = open(path, 'rt')
+    if f is None:
+        return
+    snippets = json.loads(f.read())
+    url = 'http://gitdigger.io/api/repos/{}/snippets'.format(repo)
+    r = requests.put(url, json=snippets, auth=(username, password))
+    print 'response', r.status_code
+    print json.dumps(r.json(), sort_keys=True, indent=2)
+
+# FIXME: use command-line options parser to refactor it
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        main(sys.argv[1])
+    argv = sys.argv
+    if len(argv) > 2:
+        if argv[1] == 'digg':
+            digg(sys.argv[2])
+        elif argv[1] == 'upload':
+            upload(argv[2], argv[3], argv[4], argv[5])
