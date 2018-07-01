@@ -1,6 +1,15 @@
-
 .snippet {
+  margin-bottom: 2em;
 
+  .header {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: .5rem;
+
+    &:first-child {
+      text-transform: capitalize;
+    }
+  }
 }
 .snippet-meta {
   display: flex;

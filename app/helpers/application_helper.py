@@ -8,16 +8,16 @@ def flash(message, category='info'):
 
 @app.template_global()
 def rating_text_tag(rating):
-    if rating > 80:
+    if rating > 8:
         level = 4
         text = 'so difficult'
-    elif rating > 70:
+    elif rating > 7:
         level = 3
         text = 'difficult'
-    elif rating > 40:
+    elif rating > 4:
         level = 2
         text = 'normal'
-    elif rating > 20:
+    elif rating > 2:
         level = 1
         text = 'easy'
     else:

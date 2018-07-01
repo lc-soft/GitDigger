@@ -9,7 +9,7 @@ view = Blueprint('snippets', __name__)
 
 @view.route('/fixme')
 def index():
-    snippets = Snippet.query.all()
+    snippets = Snippet.query.limit(40).all()
     return render_template('snippets/index.html', snippets=snippets, navbar_active='fixme')
 
 app.register_blueprint(view)

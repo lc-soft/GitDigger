@@ -11,12 +11,12 @@
             {{ snippet.repository.owner.username }}/{{ snippet.repository.name }}
           </a>
           -
-          <a class="snippet-source-file" href="" target="_blank">
+          <a class="snippet-source-file" href="{{ snippet_file_link(snippet) }}" target="_blank">
             {{ snippet.file }}
           </a>
         </div>
         <div class="extra-info">
-          <span class="snippet-rating mr-1">
+          <span class="snippet-rating mr-1" title="the difficulty level of modification for this code snippet">
             {% with value = snippet.rating %}
             {% include 'components/_star_rating.html' %}
             {% endwith %}
@@ -25,13 +25,13 @@
           <span class="d-none d-md-inline">
               &nbsp;•&nbsp;
             Last indexed on
-            {{ timeago_tag(snippet.created_at) }}
+            {{ timeago_tag(snippet.updated_at) }}
           </span>
         </div>
       </div>
     </div>
     <div class="snippet-content">
-      {{ snippet.description | markdown | safe }}
+      {{ snippet.description | autoheader | markdown | safe }}
       <div class="blob-wrapper mt-2">
         {{ snippet.content | highlight(snippet.language, snippet.content_start_line) | safe }}
       </div>
