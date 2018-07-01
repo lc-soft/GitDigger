@@ -8,6 +8,7 @@ class Topic(db.Model):
     issues_count = db.Column(db.Integer, default=0)
     repositories_count = db.Column(db.Integer, default=0)
     followers_count = db.Column(db.Integer, default=0)
+    snippets_count =  db.Column(db.Integer, default=0)
     description = db.Column(db.String(1024))
 
     def __init__(self, name, group='default'):
