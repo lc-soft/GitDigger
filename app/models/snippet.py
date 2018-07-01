@@ -20,7 +20,7 @@ class Snippet(db.Model):
     content_start_line = db.Column(db.Integer, nullable=False)
     content_end_line = db.Column(db.Integer, nullable=False)
     commit_id = db.Column(db.String(40), nullable=False)
-    rating = db.Column(db.Integer, default=60)
+    rating = db.Column(db.Integer, default=6)
     ratings_count = db.Column(db.Integer, default=0)
     topics = db.relationship('Topic', secondary=topics,
                              backref=db.backref('snippet', lazy='dynamic'))
@@ -38,6 +38,7 @@ class Snippet(db.Model):
         self.content_start_line = data['content_start_line']
         self.content_end_line = data['content_end_line']
         self.content = data['content']
+        self.language = data['language']
         self.description = data['description']
         self.commit_id = data['commit_id']
 
