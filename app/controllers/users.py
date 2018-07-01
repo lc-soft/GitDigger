@@ -54,7 +54,6 @@ class LoginForm(Form):
         else:
             user = User.query.filter_by(username=login).first()
             login_type = 'username'
-        print user, login_type
         if user is None:
             self.login.errors.append('Unknown %s' % login_type)
             return False
