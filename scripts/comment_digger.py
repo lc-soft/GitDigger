@@ -86,7 +86,7 @@ def upload(path, repo, username, password):
     if f is None:
         return
     snippets = json.loads(f.read())
-    url = 'http://gitdigger.io/api/repos/{}/snippets'.format(repo)
+    url = 'https://gitdigger.com/api/repos/{}/snippets'.format(repo)
     r = requests.put(url, json=snippets, auth=(username, password))
     print 'response', r.status_code
     print json.dumps(r.json(), sort_keys=True, indent=2)
