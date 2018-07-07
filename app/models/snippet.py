@@ -9,6 +9,7 @@ topics = db.Table('snippet_topics',
 class Snippet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, nullable=False)
+    state = db.Column(db.String(32), nullable=False, default='open')
     description = db.Column(db.String(512), default='')
     content = db.Column(db.String(4096), default='')
     language = db.Column(db.String(32), nullable=False, default='text')
