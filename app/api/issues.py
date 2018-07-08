@@ -1,6 +1,6 @@
 import requests
 
-from app import db, csrf
+from app import db
 from app.models.voter import Voter
 from app.models.point_log import PointLog
 from app.api import api, resource_fields
@@ -59,6 +59,7 @@ class IssueVoters(Resource):
 
     @marshal_with(resource_fields.voter_fields)
     def put(self, issue_id, username):
+        pt = points.VOTE
         if not current_user.is_authenticated:
             return abort(401, message='permission denied')
         issue = issues_service.get(issue_id)
@@ -73,16 +74,15 @@ class IssueVoters(Resource):
         value = -1 if action == 'downvote' else 1
         voter = voters_service.get(user, issue)
         if voter is None:
-            if current_user.points - points.VOTE < 0:
+            if current_user.points - pt < 0:
                 return abort(403, message='points are not enough')
-            current_user.points -= points.VOTE
-            log = PointLog(action, points.VOTE, user, issue)
+            current_user.points -= pt
+            log = PointLog(action, pt, user, issue)
             voter = Voter(user, issue)
             db.session.add(voter)
             db.session.add(log)
-            issue.points += value
+            issue.points += pt
         elif voter.value != value:
-            issue.points += value
             voter.value = value
         else:
             return voter
