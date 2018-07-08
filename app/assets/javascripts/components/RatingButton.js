@@ -11,7 +11,7 @@ function getRatingLevel(rating) {
           return [i, data[i][1]]
       }
   }
-  return [0, levels[1]]
+  return [0, data[1]]
 }
 
 export default {
