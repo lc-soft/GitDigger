@@ -5,6 +5,8 @@ tmp
 log
 node_modules
 .sass-cache
+celerybeat.pid
+celerybeat-schedule
 static/stylesheets/
 static/javascripts/
 static/fonts/
