@@ -17,4 +17,6 @@ class Voter(db.Model):
         self.target_type = target.__tablename__
 
     def __repr__(self):
-        return '<Voter %r>' % self.user_id
+        return '<Voter user_id="%r" target_type="%s" value="%d">' % (
+            self.user_id, self.target_type, self.value
+        )
