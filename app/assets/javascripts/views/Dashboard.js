@@ -1,4 +1,4 @@
-import FeedList from '../components/FeedList.coffee'
+import FeedList from '../components/FeedList'
 import FollowTopicButton from '../components/FollowTopicButton.coffee'
 
 export default {

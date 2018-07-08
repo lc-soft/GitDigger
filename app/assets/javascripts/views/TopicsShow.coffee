@@ -1,4 +1,4 @@
-FeedList = require '../components/FeedList.coffee'
+FeedList = require '../components/FeedList'
 FollowTopicButton = require '../components/FollowTopicButton.coffee'
 
 init = ()->

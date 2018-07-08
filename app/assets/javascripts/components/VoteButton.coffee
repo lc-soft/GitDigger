@@ -16,7 +16,8 @@ init = (el)->
       url: url
       type: 'PUT'
       success: (res)->
-        $btn.find('.text').text text
+        $btn.text text
+        $btn.data 'voted', true
         $btn.data 'vote-count', ++count
         $btn.next('.js-social-count').text count
       error: (res)->
