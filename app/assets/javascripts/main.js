@@ -4,6 +4,7 @@ import Dashboard from './views/Dashboard'
 import ReposNew from  './views/ReposNew'
 import TopicsShow from './views/TopicsShow.coffee'
 import TopicsIndex from './views/TopicsIndex.coffee'
+import SnippetsIndex from './views/SnippetsIndex'
 import ImportIssueModal from './components/ImportIssueModal'
 
 const routes = {
@@ -13,6 +14,7 @@ const routes = {
   'dashboard.pinned': Dashboard,
   'topics.show': TopicsShow,
   'topics.index': TopicsIndex,
+  'snippets.index': SnippetsIndex,
   'repos.new': ReposNew
 }
 

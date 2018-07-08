@@ -1,41 +1,54 @@
-<div class="snippet-list">
-{% for snippet in snippets %}
-  <div class="snippet">
-    <div class="snippet-meta mb-2">
-      <div class="snippet-meta-avatar">
-        {{ user_avatar_tag(snippet.repository.owner) }}
+{% for snippet in snippets.items %}
+<div class="snippet">
+  <div class="snippet-meta mb-2">
+    <div class="snippet-meta-avatar">
+      {{ user_avatar_tag(snippet.repository.owner) }}
+    </div>
+    <div class="snippet-meta-content">
+      <div class="snippet-source">
+        <a class="snippet-source-repo" href="{{ snippet.repository.html_url }}">
+          {{ snippet.repository.owner.username }}/{{ snippet.repository.name }}
+        </a>
+        -
+        <a class="snippet-source-file" href="{{ snippet_file_link(snippet) }}" target="_blank">
+          {{ snippet.file }}
+        </a>
       </div>
-      <div class="snippet-meta-content">
-        <div class="snippet-source">
-          <a class="snippet-source-repo" href="{{ snippet.repository.html_url }}">
-            {{ snippet.repository.owner.username }}/{{ snippet.repository.name }}
-          </a>
-          -
-          <a class="snippet-source-file" href="{{ snippet_file_link(snippet) }}" target="_blank">
-            {{ snippet.file }}
-          </a>
-        </div>
-        <div class="extra-info">
-          <span class="snippet-rating mr-1" title="the difficulty level of modification for this code snippet">
-            {% with value = snippet.rating %}
-            {% include 'components/_star_rating.html' %}
-            {% endwith %}
-          </span>
-          ({{ snippet.ratings_count }} ratings)
-          <span class="d-none d-md-inline">
-              &nbsp;•&nbsp;
-            Last indexed on
-            {{ timeago_tag(snippet.updated_at) }}
-          </span>
+      <div class="extra-info">
+        <span class="snippet-rating mr-1" title="the difficulty level of modification for this code snippet">
+          {% with value = snippet.rating %}
+          {% include 'components/_star_rating.html' %}
+          {% endwith %}
+        </span>
+        (<span class="js-ratings-count">{{ snippet.ratings_count }}</span> ratings)
+        <span class="d-none d-md-inline">
+            &nbsp;•&nbsp;
+          Last indexed on
+          {{ timeago_tag(snippet.updated_at) }}
+        </span>
+      </div>
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="snippet-actions">
+      <div class="btn-group">
+        <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Rating
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <h6 class="dropdown-header">Difficulty rating</h6>
+          {% for option in rating_options() %}
+          <a class="dropdown-item" href="javascript:void(0)" data-target="snippet" data-target-id="{{ snippet.id }}" data-value="{{ option[1] }}">{{ option[2] }}</a>
+          {% endfor %}
         </div>
       </div>
     </div>
-    <div class="snippet-content">
-      {{ snippet.description | autoheader | markdown | safe }}
-      <div class="blob-wrapper mt-2">
-        {{ snippet.content | highlight(snippet.language, snippet.content_start_line) | safe }}
-      </div>
+    {% endif %}
+  </div>
+  <div class="snippet-content">
+    {{ snippet.description | autoheader | markdown | safe }}
+    <div class="blob-wrapper mt-2">
+      {{ snippet.content | highlight(snippet.language, snippet.content_start_line) | safe }}
     </div>
   </div>
-{% endfor %}
 </div>
+{% endfor %}

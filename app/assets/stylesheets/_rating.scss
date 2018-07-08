@@ -15,29 +15,32 @@
     color: $gray-200;
   }
 }
+
 @for $i from 0 through 10 {  
-  .rating-#{$i} {
+  .rating[data-value="#{$i}"] {
     .rating-stars-cover {
       width: $i * 10%;
     }
   }
 }
+
 .rating-text {
   text-transform: uppercase;
   font-weight: 600;
-}
-.rating-text-0 {
-  color: $teal;
-}
-.rating-text-1 {
-  color: $green;
-}
-.rating-text-2 {
-  color: $blue;
-}
-.rating-text-3 {
-  color: $red;
-}
-.rating-text-4 {
-  color: #f00;
+
+  &[data-value="0"] {
+    color: $teal;
+  }
+  &[data-value="1"] {
+    color: $green;
+  }
+  &[data-value="2"] {
+    color: $blue;
+  }
+  &[data-value="3"] {
+    color: $red;
+  }
+  &[data-value="4"] {
+    color: #f00;
+  }
 }

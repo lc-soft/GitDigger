@@ -1,0 +1,15 @@
+<div id="snippets-container" class="snippet-list" data-pages="{{ snippets.pages }}">
+  {% if snippets.items | length < 1 %}
+  <div class="w-100 card">
+    <div class="card-body text-center">
+      <h1 class="text-muted">
+        <i class="octicon octicon-stop"></i>
+      </h1>
+      <p class="card-text">We couldn’t find any snippets.</p>
+    </div>
+  </div>
+  {% else %}
+    {% include "components/_snippets.html" %}
+    {{ pagination.links }}
+  {% endif %}
+</div>
