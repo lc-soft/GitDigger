@@ -1,0 +1,12 @@
+<h4 class="mb-3">Search Snippets</h4>
+<form class="mb-4" action="{{ url_for('snippets.index') }}" method="get">
+  <input value="" type="text" name="query" placeholder="Description" aria-label="Search by description" class="form-control w-100">
+</form>
+<div class="card text-center mb-4">
+  <div class="card-body">
+    <p class=""><i class="octicon octicon-cloud-upload"></i></p>
+    <h5 class="card-title">Upload Tips</h5>
+    <p class="card-text">We have provided a tool to collect code snippets with FIXME comments and upload them here.</p>
+    <a class="btn btn-outline-primary" target="_blank" href="{{ snippet_help_url }}">See more</a>
+  </div>
+</div>

@@ -1,7 +1,24 @@
 .page-snippets-index {
-  h2 {
+  h4 {
     font-size: 1.1rem;
-    font-weight: normal;
-    margin-bottom: 1em;
+  }
+  .snippets-side-nav {
+    border-right: 1px solid $border-color;
+
+    .octicon {
+      color: theme-color('primary');
+      font-size: 38px;
+    }
+    .card-title {
+      font-size: 1rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .page-snippets-index {
+    .snippets-side-nav {
+      border: 0;
+    }
   }
 }

@@ -35,3 +35,7 @@
 .snippet-source {
   font-weight: 600;
 }
+
+.snippet-actions .dropdown-item::first-letter {
+  text-transform: capitalize;
+}

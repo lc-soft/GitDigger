@@ -3,7 +3,7 @@
   Fixme
 {% endblock %}
 {% block jumbotron %}
-  <div class="jumbotron fixme-jumbotron text-center">
+  <div class="jumbotron fixme-jumbotron text-center mb-0 mb-md-4">
     <div class="container">
       <h1>Fixme</h1>
       <p class="lead">Discover which code snippets in open source project is need to be fixed.</p>
@@ -11,5 +11,11 @@
   </div>
 {% endblock %}
 {% block content %}
-{% include 'components/_snippets_container.html' %}
+<div class="row">
+  <div class="col-md-3 pr-md-4 pt-3 pt-md-2 pb-md-6 snippets-side-nav">
+      {% include 'snippets/_sidenav.html' %}
+  </div>
+  <div class="col-12 col-md-9 pl-md-4 pt-md-2">
+    {% include 'components/_snippets_container.html' %}
+  </div>
 {% endblock %}
