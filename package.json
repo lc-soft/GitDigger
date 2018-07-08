@@ -36,7 +36,7 @@
     "webpack": "^3.4.1"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "^4.1.1",
     "jquery": "^3.2.1",
     "popper.js": "^1.11.1",
     "tether": "^1.4.0",
