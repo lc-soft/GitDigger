@@ -1,4 +1,5 @@
 from app import app, db
+from app.models.topic import Topic
 from app.models.snippet import Snippet
 from app.models.repository import Repository
 from flask import Blueprint, render_template, request
@@ -9,11 +10,19 @@ from datetime import datetime
 view = Blueprint('snippets', __name__)
 
 @view.route('/fixme')
-def index():
+@view.route('/fixme/language/<string:language>')
+def index(language=None):
     page = request.args.get(get_page_parameter(), type=int, default=1)
-    snippets = Snippet.query.order_by(Snippet.updated_at.desc())
+    snippets = Snippet.query.order_by(Snippet.updated_at.desc())\
+        .filter(Snippet.state=='open')
+    languages = Topic.query.filter(Topic.group=='language')\
+        .order_by(Topic.snippets_count.desc()).limit(16).all()
+    if language:
+        snippets = snippets.filter(Snippet.language==language)
     return render_template(
         'snippets/index.html',
+        languages=languages,
+        language=language,
         pagination=Pagination(
             page=page,
             total=snippets.count(),

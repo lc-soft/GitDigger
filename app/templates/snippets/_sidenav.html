@@ -10,3 +10,12 @@
     <a class="btn btn-outline-primary" target="_blank" href="{{ snippet_help_url }}">See more</a>
   </div>
 </div>
+<h4 class="mb-3">Languages</h4>
+<div class="nav flex-md-column nav-pills mb-4">
+{% for topic in languages %}
+  <li class="nav-item">
+    <a class="nav-link{{ ' active' if topic.name == language }}" href="{{ url_for('snippets.index', language=topic.name) }}">{{ topic.name }}</a>
+  </li>
+{% endfor %}
+</div>
+  
