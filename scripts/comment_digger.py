@@ -22,6 +22,13 @@ language_extensions = {
     'js': 'javascript'
 }
 
+language_topics = {
+    'python': 'Python',
+    'c': 'C',
+    'cpp': 'C++',
+    'javascript': 'JavaScript'
+}
+
 class CommentDigger(object):
     FIXME_TAG = 'fixme:'
     LOG_CMD = 'git log --pretty=format:"%H" --max-count=1 -- {}'
@@ -53,7 +60,7 @@ class CommentDigger(object):
                 'content_start_line': snippet_start,
                 'content_end_line': snippet_end,
                 'description': description[len(self.FIXME_TAG):].strip(),
-                'language': language
+                'language': language_topics[language]
             }
             self.store.append(data)
 
@@ -86,7 +93,7 @@ def upload(path, repo, username, password):
     if f is None:
         return
     snippets = json.loads(f.read())
-    url = 'https://gitdigger.com/api/repos/{}/snippets'.format(repo)
+    url = 'http://gitdigger.io/api/repos/{}/snippets'.format(repo)
     r = requests.put(url, json=snippets, auth=(username, password))
     print 'response', r.status_code
     print json.dumps(r.json(), sort_keys=True, indent=2)
