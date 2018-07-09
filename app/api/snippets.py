@@ -24,19 +24,26 @@ class Snippets(Resource):
         if repo is None:
             return abort(400, message='repository not found')
         for s in snippets_service.find(repo.id).all():
+            need_delete = True
             filtered_snippets = []
             for snippet in snippets:
-                if s.file != snippet['file'] \
-                or s.commit_id == snippet['commit_id']:
+                if s.file != snippet['file']:
                     filtered_snippets.append(snippet)
                     picked_snippets.append(s)
                     continue
-                if s.description == snippet['description']:
+                if s.commit_id == snippet['commit_id']:
+                    if s.line == snippet['line']:
+                        picked_snippets.append(s)
+                        need_delete = False
+                    else:
+                        filtered_snippets.append(snippet)
+                    continue
+                if s.content[0:32] == snippet['content'][0:32]:
                     snippets_service.update(s, snippet)
                     picked_snippets.append(s)
                     db.session.add(s)
-                    break
-            else:
+                    need_delete = False
+            if need_delete:
                 s.state = 'closed'
                 db.session.add(s)
             snippets = filtered_snippets
