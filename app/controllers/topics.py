@@ -67,7 +67,7 @@ def show(name):
         'has_following': has_following
     }
     if target == '#topic-feeds':
-        return render_template('components/_feed_list.html', **ctx)
+        return render_template('components/_feeds.html', **ctx)
     return render_template('topics/show.html', **ctx)
 
 app.register_blueprint(topics)

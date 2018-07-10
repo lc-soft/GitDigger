@@ -32,6 +32,7 @@ export default {
           }
           setTimeout(function () {
             loading = false
+            checkLoad()
           }, 500)
       }).fail(function () {
         $tipLoading.addClass('has-error')
@@ -39,7 +40,7 @@ export default {
     }
   
     function checkLoad() {
-      var $last = $list.children().last()
+      var $last = $list.children(':visible').last()
       var scrollTop = $(window).scrollTop() + $(window).height()
 
       if (scrollTop < $last.offset().top - $last.height()) {
