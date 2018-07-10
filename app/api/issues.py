@@ -45,7 +45,7 @@ class Issues(Resource):
         log = PointLog('import_issue', points.IMPORT_ISSUE, current_user)
         current_user.points -= points.IMPORT_ISSUE
         try:
-            issues_service.create(data, repo)
+            issue = issues_service.create(data, repo)
             db.session.add(log)
             db.session.commit()
         except:
