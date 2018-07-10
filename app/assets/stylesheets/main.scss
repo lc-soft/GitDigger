@@ -136,6 +136,18 @@ label {
   }
 }
 
+.filter-item {
+  color: $body-color;
+
+  &:hover {
+    color: $body-color;
+    background-color: $gray-200;
+  }
+  &.active {
+    color: #fff;
+  }
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 960px;

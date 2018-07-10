@@ -2,7 +2,7 @@
 <form class="mb-4" action="{{ url_for('snippets.index') }}" method="get">
   <input value="" type="text" name="query" placeholder="Description" aria-label="Search by description" class="form-control w-100">
 </form>
-<div class="card text-center mb-4">
+<div class="tip card text-center mb-4">
   <div class="card-body">
     <p class=""><i class="octicon octicon-cloud-upload"></i></p>
     <h5 class="card-title">Upload Tips</h5>
@@ -11,10 +11,19 @@
   </div>
 </div>
 <h4 class="mb-3">Languages</h4>
-<div class="nav flex-md-column nav-pills mb-4">
+<div class="filter-list nav flex-md-column nav-pills mb-4">
 {% for topic in languages %}
   <li class="nav-item">
-    <a class="nav-link{{ ' active' if topic.name == language }}" href="{{ url_for('snippets.index', language=topic.name) }}">{{ topic.name }}</a>
+    {% if topic.name == language %}
+    <a class="filter-item nav-link active" href="{{ url_for('snippets.index') }}">
+      <i class="octicon octicon-x float-right mt-1 ml-2"></i>
+      {{ topic.name }}
+    </a>
+    {% else %}
+    <a class="filter-item nav-link" href="{{ url_for('snippets.index', language=topic.name) }}">
+      {{ topic.name }}
+    </a>
+    {% endif %}
   </li>
 {% endfor %}
 </div>
