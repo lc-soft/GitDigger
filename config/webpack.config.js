@@ -17,6 +17,7 @@ module.exports = {
     extensions: ['.js', '.coffee']
   },
   module: {
+    // FIXME: add babel-loader
     rules: [
       {
         test: require.resolve('jquery'),
@@ -77,7 +78,12 @@ module.exports = {
       }
     ]
   },
-
+  /**
+   * FIXME: refactor webpack config
+   * Add configuration for development environment and production environment
+   * respectively. In production environment, the css and js files are 
+   * required to be compressed.
+   */
   plugins: [
     new ExtractTextPlugin('../stylesheets/[name].css')
   ]
