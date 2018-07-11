@@ -30,7 +30,7 @@ class GitHubHelper(flask_github.GitHub):
             return None
         if data['total_count'] < 1:
             return None
-        installations = data.get('integration_installations')
+        installations = data.get('installations')
         if installations is None:
             return None
         app_id = self.app.config['GITHUB_APP_ID']
