@@ -8,16 +8,16 @@
 
 ## 需求及目标
 
-作为普通开发者，平常无聊的时候会想看看其他人在干什么，长长见识，比如写了什么代码、都在讨论什么问题（Issue）、有哪些有意思的问题和问题评论、哪些项目发布了新版本等等。对于在某些领域有丰富经验的人，可能还会想知道哪些项目正遇到自己擅长领域的问题，看看自己能不能帮上忙。像 GitHub、Bitbucket、GitLab、Coding、码云这类代码平台都专注于源代码托管，用户的认知范围都仅限于自己的项目，没有提供多少途径让用户去发现其它用户和开源项目的动态。
+作为普通开发者，平常无聊的时候会想看看其他人在干什么，长长见识，比如写了什么代码、都在讨论什么问题（Issue）、有哪些有意思的问题和问题评论、哪些项目发布了新版本等等。对于在某些领域有丰富经验的人，可能还会想知道哪些项目正遇到自己擅长领域的问题，看看自己能不能帮上忙。像 GitHub 等代码托管平台主要专注于源代码托管，用户的认知范围都仅限于自己的项目，没有提供多少途径让用户去发现其他开发者和开源项目的动态。
 
-作为开源项目作者或维护者，一个人的时间和精力都是有限的，有时会被一些琐碎的问题浪费很多时间，比如：各种小 bug，添加各种小功能。同类型的问题处理多了会很感到枯燥，但又不得不去做，做多了又会耽误主线任务开发进度，还会浪费动力。当遇到一些大点问题时，会希望有在这块领域的大佬来指点一二，比如：
+作为开源项目作者或维护者，一个人的时间和精力都是有限的，有时会被一些琐碎的问题浪费很多时间，例如：各种小 bug，添加各种小功能。同类型的问题处理多了会很感到枯燥，但又不得不去做，做多了又会耽误主线任务开发进度，还会浪费动力。当遇到一些大点问题时，会希望有人能给予技术支持，例如：
 
-- 如何设计目录结构
-- 如何划分模块
-- 如何选择合适的设计模式
+- 这块代码是否有更好的实现
+- 要实现这种功能，有哪些可参考的资料
 - 如何调整数据结构和算法以提升性能
 - 如何更好的重构代码
 - 如何正确命名标识符
+- 如何设计目录结构
 - 如何让代码更简单易读
 - 有哪些需要注意的坑
 - 怎样写好 README.md
@@ -26,8 +26,8 @@
 
 要解决上述问题，需要有个平台能够：
 
-- 挖掘开源项目的各种信息，包括：问题（Issues）、拉取请求（Pull Requests）、评论、发行版（Releases），供用户浏览。
-- 展示开源项目及相关的动态，让用户能够方便的找到活跃度高的项目，也能够通过最近动态了解到大家都在干什么。
+- 挖掘开源项目的各种信息，包括：问题（Issues）、拉取请求（Pull Requests）、评论、发行版新闻（Releases），供用户浏览。
+- 展示开源项目及相关的动态，让用户能够方便的找到近期活跃的项目，也能够从最近动态中了解到大家都在干什么。
 - 支持让开源项目作者将一些问题（Issue）标记为“需要帮助”来获得更多的曝光，吸引更多有经验的人来向作者提供帮助。
 
 ## 技术栈
@@ -45,13 +45,7 @@
   - 构建工具：[Webpack](http://webpack.github.io/)
   - 特性：响应式布局
 
-为减少项目的开发时间和复杂度，网站页面以服务端渲染为主，即便作者是个 Web 前端程序员也不打算浪费时间去折腾前后端分离、单页应用等技术。
-
-## 运作方式
-
-开源项目作者从 GitHub 导入项目后，GitDigger 会收集这些项目的相关内容和动态并展示出来，用户如果觉得这些内容有帮助，可以投票，得票数越高的内容排名越靠前，原理和 Hacker News 大致一样，每次投票消耗 1 积分，积分为 0 时不可投票，每日登录奖励 2 积分。
-
-用户可以按话题（Topic）筛选感兴趣的内容，每个话题都有对应的主页，在这个主页可以找到相关的项目、开发者，以及各个项目的动态。
+为减少项目的开发时间和复杂度，网站页面以服务端渲染为主，即便作者是个 Web 前端程序员也不打算浪费时间去折腾前后端分离、单页应用等技术，除非有人能长期负责全职开发此项目的后端。
 
 ## 安装与配置
 
@@ -64,6 +58,7 @@ GitDigger 依赖于以下软件：
 - [Flask-SQLAlchemy](https://github.com/mitsuhiko/flask-sqlalchemy) - Adds SQLAlchemy support to Flask.
 - [Flask-Migrate](https://github.com/miguelgrinberg/Flask-Migrate) - SQLAlchemy database migrations for Flask applications using Alembic
 - [Flask-Login](https://github.com/maxcountryman/flask-login) - Flask user session management. 
+- [Flask-Paginate](https://github.com/lixxu/flask-paginate) - Pagination support for flask. 
 - [Flask-WTF](https://github.com/lepture/flask-wtf) - Simple integration of Flask and WTForms, including CSRF, file upload and Recaptcha integration.
 - [GitHub-Flask](https://github.com/cenkalti/github-flask) - Flask extension for authenticating users with GitHub and making requests to the API. 
 - [GitHub-Webhook](https://github.com/bloomberg/python-github-webhook) - A framework for writing webhooks for GitHub, in Python.
