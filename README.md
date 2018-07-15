@@ -47,6 +47,10 @@
 
 为减少项目的开发时间和复杂度，网站页面以服务端渲染为主，即便作者是个 Web 前端程序员也不打算浪费时间去折腾前后端分离、单页应用等技术，除非有人能长期负责全职开发此项目的后端。
 
+## 相关网站
+
+- [CodeTriage](https://www.codetriage.com/) - Free community tools for contributing to Open Source projects
+
 ## 安装与配置
 
 ### 依赖
