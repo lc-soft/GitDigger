@@ -1,9 +1,10 @@
-from app import app, migrate
+from app import app, db
 from flask import url_for
 from flask_script import Manager
-from flask_migrate import MigrateCommand
+from flask_migrate import Migrate, MigrateCommand
 
 manager = Manager(app)
+migrate = Migrate(app, db, directory='db/migrate')
 manager.add_command('db', MigrateCommand)
 
 @manager.command
