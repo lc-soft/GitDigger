@@ -16,6 +16,7 @@ def recommend_users():
     query = User.query.order_by(User.last_login_reward_at.desc())
     query = query.filter(User.last_login_reward_at > time)
     query = query.filter(User.type == 'User')
+    query = query.filter(User.github_id > 0)
     return query
 
 def recommend_repos():
